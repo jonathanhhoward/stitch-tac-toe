@@ -54,12 +54,8 @@ export default function () {
               onClick={() => handleClickSquare(i, j)}
               disabled={!!state.winner}
             >
-              {state.board[i][j] ? (
-                <img
-                  className="icon"
-                  src={`${state.board[i][j]}.png`}
-                  alt={state.board[i][j]}
-                />
+              {square ? (
+                <img className="icon" src={`${square}.png`} alt={square} />
               ) : null}
             </button>
           ))}
