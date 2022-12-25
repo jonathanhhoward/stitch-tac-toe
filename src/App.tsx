@@ -11,7 +11,7 @@ const initialState = {
   winner: "",
 };
 
-export default function () {
+export default function App() {
   const [state, setState] = useState(initialState);
 
   function handleClickSquare(i: number, j: number) {
