@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import { checkForWinner } from "./checkForWinner";
+import Board from "./Board";
+import Header from "./Header";
+import { State } from "./types";
 
-const initialState = {
+export const initialState: State = {
   board: [
     ["", "", ""],
     ["", "", ""],
@@ -13,55 +15,12 @@ const initialState = {
 };
 
 export default function App() {
-  const [state, setState] = useState(initialState);
-
-  function handleClickSquare(i: number, j: number) {
-    setState((state) => {
-      const board = state.board.map((row) => row.slice());
-      if (board[i][j]) return state;
-      board[i][j] = state.player;
-      const player = state.player === "Stitch" ? "Lilo" : "Stitch";
-      const winner = checkForWinner(board);
-      return { board, player, winner };
-    });
-  }
-
-  function handleClickReset() {
-    setState(initialState);
-  }
+  const [state, setState] = React.useState(initialState);
 
   return (
     <div className="App">
-      <div className="header">
-        <div className="message">
-          {state.winner
-            ? state.winner === "Tie"
-              ? "Tie!"
-              : `${state.winner} wins!`
-            : `${state.player}'s turn`}
-        </div>
-        {state.winner ? (
-          <button className="reset" onClick={handleClickReset}>
-            Play Again
-          </button>
-        ) : null}
-      </div>
-      {state.board.map((row, i) => (
-        <div className="row" key={`row:${i}`}>
-          {row.map((square, j) => (
-            <button
-              className="square"
-              key={`square:${i}${j}`}
-              onClick={() => handleClickSquare(i, j)}
-              disabled={!!state.winner}
-            >
-              {square ? (
-                <img className="icon" src={`${square}.png`} alt={square} />
-              ) : null}
-            </button>
-          ))}
-        </div>
-      ))}
+      <Header state={state} setState={setState} />
+      <Board state={state} setState={setState} />
     </div>
   );
 }

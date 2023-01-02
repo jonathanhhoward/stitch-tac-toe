@@ -4,7 +4,7 @@
   height: 100vh;
 }
 
-.header {
+.Header {
   height: 33vw;
   padding-left: 1rem;
 }
@@ -27,7 +27,7 @@
   width: 100%;
 }
 
-.square {
+.Square {
   height: 93%;
   width: 30%;
   background-color: white;
@@ -43,7 +43,7 @@
     width: 75vh;
   }
 
-  .header {
+  .Header {
     height: 25vh;
   }
 
