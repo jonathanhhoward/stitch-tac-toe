@@ -7,7 +7,7 @@
 
 .Header {
   height: 33vw;
-  padding-left: 1rem;
+  padding-left: 2.5vw;
 }
 
 .message {
@@ -15,9 +15,8 @@
 }
 
 .reset {
-  padding: 0 1vw;
-  line-height: 1.5;
-  font-size: 4vw;
+  padding: 0.5rem 1rem;
+  font-size: 6vw;
   border: none;
   border-radius: 0.25rem;
   background-color: #4d93ad;
@@ -52,6 +51,7 @@
 
   .Header {
     height: 25vh;
+    padding-left: 2vh;
   }
 
   .row {
@@ -63,8 +63,6 @@
   }
 
   .reset {
-    padding: 0 1vh;
-    line-height: 1.5;
-    font-size: 3vh;
+    font-size: 4vh;
   }
 }
