@@ -8,11 +8,11 @@ const liloPlayer: Player = { name: "Lilo", image: lilo };
 const stitchPlayer: Player = { name: "Stitch", image: stitch };
 const tiePlayer: Player = { name: "Tie", image: "" };
 
-const initialState = (): State => ({
+const initialState: State = {
   board: new Array(3).fill(new Array(3).fill(emptyPlayer)),
   player: stitchPlayer,
   winner: emptyPlayer,
-});
+};
 
 export function useStitchTacToe() {
   const [state, setState] = React.useState(initialState);

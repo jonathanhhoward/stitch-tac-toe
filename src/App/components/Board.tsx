@@ -18,7 +18,9 @@ export default function Board({ state, handleClick }: Props) {
               disabled={!!state.winner.name}
               type="button"
             >
-              <img className="icon" src={square.image} alt={square.name} />
+              {square.name ? (
+                <img className="icon" src={square.image} alt={square.name} />
+              ) : null}
             </button>
           ))}
         </div>
