@@ -1,5 +1,5 @@
-import { emptyPlayer, tiePlayer } from "./players";
-import { Coordinate, Player, PlayerGrid } from "./types";
+import { emptyPlayer, tiePlayer } from "../constants/players";
+import { Coordinate, Player, PlayerGrid } from "../types";
 
 export class Board {
   private constructor(public readonly grid: PlayerGrid) {}

@@ -1,6 +1,6 @@
 import React from "react";
-import { Board } from "../board";
-import { emptyPlayer, liloPlayer, stitchPlayer } from "../players";
+import { emptyPlayer, liloPlayer, stitchPlayer } from "../constants/players";
+import { Board } from "../models/board";
 import { Coordinate, Player, State } from "../types";
 
 const initialState: State = {

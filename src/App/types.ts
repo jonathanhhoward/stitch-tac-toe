@@ -1,4 +1,4 @@
-import { Board } from "./board";
+import { Board } from "./models/board";
 
 export interface Player {
   name: string;

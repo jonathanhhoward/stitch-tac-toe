@@ -1,6 +1,6 @@
-import lilo from "./images/lilo.png";
-import stitch from "./images/stitch.png";
-import { Player } from "./types";
+import lilo from "../images/lilo.png";
+import stitch from "../images/stitch.png";
+import { Player } from "../types";
 
 export const emptyPlayer: Player = { name: "", image: "" };
 export const liloPlayer: Player = { name: "Lilo", image: lilo };
