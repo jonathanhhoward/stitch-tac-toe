@@ -1,9 +1,11 @@
+import { Board } from "./board";
+
 export interface Player {
   name: string;
   image: string;
 }
 
-export type Board = Player[][];
+export type PlayerGrid = Player[][];
 
 export interface State {
   board: Board;
