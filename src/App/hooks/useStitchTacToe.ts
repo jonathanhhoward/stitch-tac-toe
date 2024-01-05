@@ -39,41 +39,47 @@ export function useStitchTacToe() {
 }
 
 function checkForWinner(board: Board): Player {
-  if (isThreeInARow(board[0][0], board[0][1], board[0][2])) {
-    // row:0
-    return board[0][0];
-  } else if (isThreeInARow(board[1][0], board[1][1], board[1][2])) {
-    // row:1
-    return board[1][0];
-  } else if (isThreeInARow(board[2][0], board[2][1], board[2][2])) {
-    // row:2
-    return board[2][0];
-  } else if (isThreeInARow(board[0][0], board[1][0], board[2][0])) {
-    // col:0
-    return board[0][0];
-  } else if (isThreeInARow(board[0][1], board[1][1], board[2][1])) {
-    // col:1
-    return board[0][1];
-  } else if (isThreeInARow(board[0][2], board[1][2], board[2][2])) {
-    // col:2
-    return board[0][2];
-  } else if (isThreeInARow(board[0][0], board[1][1], board[2][2])) {
-    // back diagonal
-    return board[0][0];
-  } else if (isThreeInARow(board[0][2], board[1][1], board[2][0])) {
-    // forward diagonal
-    return board[0][2];
-  } else if (isFull(board)) {
-    // full board
-    return tiePlayer;
-  }
-  return emptyPlayer;
+  return (
+    winnerInRowOrColumn(board) ||
+    winnerInDiagonal(board) ||
+    tieGame(board) ||
+    emptyPlayer
+  );
 }
 
-function isFull(board: Board): boolean {
-  return board
+function winnerInRowOrColumn(board: Board): Player | null {
+  for (let i = 0; i < 3; ++i) {
+    if (isThreeInARow(board[i][0], board[i][1], board[i][2])) {
+      return board[i][0];
+    }
+    if (isThreeInARow(board[0][i], board[1][i], board[2][i])) {
+      return board[0][i];
+    }
+  }
+  return null;
+}
+
+function winnerInDiagonal(board: Board): Player | null {
+  const isWinnerInBackDiagonal = isThreeInARow(
+    board[0][0],
+    board[1][1],
+    board[2][2],
+  );
+  const isWinnerInForwardDiagonal = isThreeInARow(
+    board[0][2],
+    board[1][1],
+    board[2][0],
+  );
+  return isWinnerInBackDiagonal || isWinnerInForwardDiagonal
+    ? board[1][1]
+    : null;
+}
+
+function tieGame(board: Board): Player | null {
+  const isBoardFull = board
     .map((row) => row.map((sqr) => !!sqr.name).reduce((acc, cur) => acc && cur))
     .reduce((acc, cur) => acc && cur);
+  return isBoardFull ? tiePlayer : null;
 }
 
 function isThreeInARow(sq1: Player, sq2: Player, sq3: Player): boolean {
@@ -93,12 +99,12 @@ function isSquareOccupied(board: Board, [row, col]: Coordinate): boolean {
 function addPlayerToBoard(
   board: Board,
   player: Player,
-  [row, col]: Coordinate
+  [row, col]: Coordinate,
 ): Board {
   return board.map((boardRow, iRow) =>
     boardRow.map((square, iCol) =>
-      row === iRow && col === iCol ? player : square
-    )
+      row === iRow && col === iCol ? player : square,
+    ),
   );
 }
 
