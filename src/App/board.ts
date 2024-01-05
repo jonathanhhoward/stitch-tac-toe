@@ -2,83 +2,70 @@ import { emptyPlayer, tiePlayer } from "./players";
 import { Coordinate, Player, PlayerGrid } from "./types";
 
 export class Board {
-  private constructor(private readonly board: PlayerGrid) {}
+  private constructor(public readonly grid: PlayerGrid) {}
 
-  static create(): Board {
-    return new Board(Array(3).fill(Array(3).fill(emptyPlayer)));
-  }
+  static create = (): Board =>
+    new Board(Array(3).fill(Array(3).fill(emptyPlayer)));
 
-  addPlayerToBoard(player: Player, [row, col]: Coordinate): Board {
-    return new Board(
-      this.board.map((boardRow, iRow) =>
+  addPlayerToBoard = (player: Player, [row, col]: Coordinate): Board =>
+    new Board(
+      this.grid.map((boardRow, iRow) =>
         boardRow.map((square, iCol) =>
           row === iRow && col === iCol ? player : square,
         ),
       ),
     );
-  }
 
   checkForWinner(): Player {
-    return (
-      this.winnerInRowOrColumn() ||
-      this.winnerInDiagonal() ||
-      this.tieGame() ||
-      emptyPlayer
-    );
-  }
-
-  isSquareOccupied([row, col]: Coordinate): boolean {
-    return !!this.board[row][col].name;
-  }
-
-  private winnerInRowOrColumn(): Player | null {
-    for (let i = 0; i < 3; ++i) {
-      if (
-        this.isThreeInARow(this.board[i][0], this.board[i][1], this.board[i][2])
-      ) {
-        return this.board[i][0];
-      }
-      if (
-        this.isThreeInARow(this.board[0][i], this.board[1][i], this.board[2][i])
-      ) {
-        return this.board[0][i];
+    for (let row = 0; row < 3; ++row) {
+      if (this.isWinnerInRow(row)) {
+        return this.grid[row][0];
       }
     }
-    return null;
+
+    for (let col = 0; col < 3; ++col) {
+      if (this.isWinnerInColumn(col)) {
+        return this.grid[0][col];
+      }
+    }
+
+    if (this.isWinnerInBackDiagonal() || this.isWinnerInForwardDiagonal()) {
+      return this.grid[1][1];
+    }
+
+    if (this.isBoardFull()) {
+      return tiePlayer;
+    }
+
+    return emptyPlayer;
   }
 
-  private winnerInDiagonal(): Player | null {
-    const isWinnerInBackDiagonal = this.isThreeInARow(
-      this.board[0][0],
-      this.board[1][1],
-      this.board[2][2],
-    );
-    const isWinnerInForwardDiagonal = this.isThreeInARow(
-      this.board[0][2],
-      this.board[1][1],
-      this.board[2][0],
-    );
-    return isWinnerInBackDiagonal || isWinnerInForwardDiagonal
-      ? this.board[1][1]
-      : null;
-  }
+  isSquareOccupied = ([row, col]: Coordinate): boolean =>
+    !!this.grid[row][col].name;
 
-  private tieGame(): Player | null {
-    const isBoardFull = this.board
+  private isWinnerInRow = (row: number) =>
+    this.isThreeInARow(this.grid[row][0], this.grid[row][1], this.grid[row][2]);
+
+  private isWinnerInColumn = (col: number) =>
+    this.isThreeInARow(this.grid[0][col], this.grid[1][col], this.grid[2][col]);
+
+  private isWinnerInBackDiagonal = () =>
+    this.isThreeInARow(this.grid[0][0], this.grid[1][1], this.grid[2][2]);
+
+  private isWinnerInForwardDiagonal = () =>
+    this.isThreeInARow(this.grid[0][2], this.grid[1][1], this.grid[2][0]);
+
+  private isBoardFull = () =>
+    this.grid
       .map((row) =>
         row.map((sqr) => !!sqr.name).reduce((acc, cur) => acc && cur),
       )
       .reduce((acc, cur) => acc && cur);
-    return isBoardFull ? tiePlayer : null;
-  }
 
-  private isThreeInARow(sq1: Player, sq2: Player, sq3: Player): boolean {
-    return (
-      !!sq1.name &&
-      !!sq2.name &&
-      !!sq3.name &&
-      sq1.name === sq2.name &&
-      sq1.name === sq3.name
-    );
-  }
+  private isThreeInARow = (sq1: Player, sq2: Player, sq3: Player) =>
+    !!sq1.name &&
+    !!sq2.name &&
+    !!sq3.name &&
+    sq1.name === sq2.name &&
+    sq1.name === sq3.name;
 }

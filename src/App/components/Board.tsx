@@ -8,7 +8,7 @@ interface Props {
 export default function Board({ state, handleClick }: Props) {
   return (
     <>
-      {state.board.map((row, iRow) => (
+      {state.board.grid.map((row, iRow) => (
         <div className="row" key={`row:${iRow}`}>
           {row.map((square, iCol) => (
             <button
