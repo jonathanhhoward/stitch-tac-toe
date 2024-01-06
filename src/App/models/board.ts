@@ -7,7 +7,7 @@ export class Board {
   static create = (): Board =>
     new Board(Array(3).fill(Array(3).fill(emptyPlayer)));
 
-  addPlayerToBoard = (player: Player, [row, col]: Coordinate): Board =>
+  add = (player: Player, [row, col]: Coordinate): Board =>
     new Board(
       this.grid.map((boardRow, iRow) =>
         boardRow.map((square, iCol) =>
@@ -33,14 +33,14 @@ export class Board {
       return this.grid[1][1];
     }
 
-    if (this.isBoardFull()) {
+    if (this.isFull()) {
       return tiePlayer;
     }
 
     return emptyPlayer;
   }
 
-  isSquareOccupied = ([row, col]: Coordinate): boolean =>
+  isOccupiedAt = ([row, col]: Coordinate): boolean =>
     !!this.grid[row][col].name;
 
   private isWinnerInRow = (row: number) =>
@@ -55,7 +55,7 @@ export class Board {
   private isWinnerInForwardDiagonal = () =>
     this.isThreeInARow(this.grid[0][2], this.grid[1][1], this.grid[2][0]);
 
-  private isBoardFull = () =>
+  private isFull = () =>
     this.grid
       .map((row) =>
         row.map((sqr) => !!sqr.name).reduce((acc, cur) => acc && cur),

@@ -18,14 +18,14 @@ export function useStitchTacToe() {
   const startOver = () => setState(initialState);
 
   const placeToken = (position: Coordinate) =>
-    setState((state) => {
-      if (state.board.isSquareOccupied(position)) return state;
+    setState(({ board: prevBoard, player: prevPlayer }) => {
+      if (prevBoard.isOccupiedAt(position)) return state;
 
-      const board = state.board.addPlayerToBoard(state.player, position);
+      const board = prevBoard.add(prevPlayer, position);
 
       return {
         board,
-        player: getNextPlayer(state.player),
+        player: getNextPlayer(prevPlayer),
         winner: board.checkForWinner(),
       };
     });
