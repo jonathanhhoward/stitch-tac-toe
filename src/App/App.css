@@ -34,6 +34,7 @@
 .Square {
   height: 93%;
   width: 30%;
+  padding: 0.25rem;
   background-color: #4d93ad;
   border: none;
   border-radius: 0.25rem;

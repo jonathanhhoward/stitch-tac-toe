@@ -10,16 +10,13 @@ interface SquareProps {
 export default function Square({ player, position }: SquareProps) {
   const { state, placeToken } = useContext(AppContext);
 
+  const handleClick = () => !state.winner.name && placeToken(position);
+
+  const icon = <img alt={player.name} className="icon" src={player.image} />;
+
   return (
-    <button
-      className="Square"
-      disabled={!!state.winner.name}
-      onClick={() => placeToken(position)}
-      type="button"
-    >
-      {player.name ? (
-        <img alt={player.name} className="icon" src={player.image} />
-      ) : null}
-    </button>
+    <div className="Square" onClick={handleClick}>
+      {player.name ? icon : null}
+    </div>
   );
 }
