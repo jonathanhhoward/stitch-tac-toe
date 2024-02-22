@@ -1,11 +1,9 @@
-import { State } from "../types";
+import { useContext } from "react";
+import { AppContext } from "../AppContext";
 
-interface Props {
-  state: State;
-  handleClick: () => void;
-}
+export default function Header() {
+  const { state, startOver } = useContext(AppContext);
 
-export default function Header({ state, handleClick }: Props) {
   return (
     <div className="Header">
       <div className="message">
@@ -16,7 +14,7 @@ export default function Header({ state, handleClick }: Props) {
           : `${state.player.name}'s turn`}
       </div>
       {state.winner.name ? (
-        <button className="reset" onClick={handleClick} type="button">
+        <button className="reset" onClick={startOver} type="button">
           Play Again
         </button>
       ) : null}
