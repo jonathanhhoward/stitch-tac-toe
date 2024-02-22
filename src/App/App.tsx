@@ -1,5 +1,5 @@
 import "./App.css";
-import Board from "./components/Board";
+import Board from "./components/Board/Board";
 import Header from "./components/Header";
 import { useStitchTacToe } from "./hooks/useStitchTacToe";
 
