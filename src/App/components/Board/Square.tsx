@@ -1,23 +1,20 @@
-import { Coordinate, Player, State } from "../../types";
+import { useContext } from "react";
+import { AppContext } from "../../AppContext";
+import { Coordinate, Player } from "../../types";
 
 interface SquareProps {
-  handleClick: (value: Coordinate) => void;
   player: Player;
   position: Coordinate;
-  state: State;
 }
 
-export default function Square({
-  handleClick,
-  player,
-  position,
-  state,
-}: SquareProps) {
+export default function Square({ player, position }: SquareProps) {
+  const { state, placeToken } = useContext(AppContext);
+
   return (
     <button
       className="Square"
       disabled={!!state.winner.name}
-      onClick={() => handleClick(position)}
+      onClick={() => placeToken(position)}
       type="button"
     >
       {player.name ? (
