@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import React from "react";
 import { AppContext } from "../../AppContext";
 import Row from "./Row";
 
 export default function Board() {
-  const { state } = useContext(AppContext);
+  const { state } = React.useContext(AppContext);
 
   return (
     <>

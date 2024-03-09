@@ -1,8 +1,8 @@
-import { useContext } from "react";
+import React from "react";
 import { AppContext } from "../../AppContext";
 
 export default function Message() {
-  const { state } = useContext(AppContext);
+  const { state } = React.useContext(AppContext);
 
   const winner =
     state.winner.name === "Tie" ? "Tie!" : `${state.winner.name} wins!`;

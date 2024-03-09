@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React from "react";
 import { AppContext } from "../../AppContext";
 import { Coordinate, Player } from "../../types";
 
@@ -8,7 +8,7 @@ interface SquareProps {
 }
 
 export default function Square({ player, position }: SquareProps) {
-  const { state, placeToken } = useContext(AppContext);
+  const { state, placeToken } = React.useContext(AppContext);
 
   const handleClick = () => !state.winner.name && placeToken(position);
 
