@@ -1,5 +1,5 @@
 import React from "react";
-import { AppContext } from "../../AppContext";
+import AppContext from "../../AppContext";
 import { Coordinate, Player } from "../../types";
 
 interface SquareProps {

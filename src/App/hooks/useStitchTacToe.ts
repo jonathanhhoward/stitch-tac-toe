@@ -1,6 +1,6 @@
 import React from "react";
 import { emptyPlayer, liloPlayer, stitchPlayer } from "../constants/players";
-import { Board } from "../models/board";
+import Board from "../models/board";
 import { Coordinate, Player, State } from "../types";
 
 const initialState: State = {
@@ -13,7 +13,7 @@ function getNextPlayer(player: Player): Player {
   return player.name === "Stitch" ? liloPlayer : stitchPlayer;
 }
 
-export function useStitchTacToe() {
+export default function useStitchTacToe() {
   const [state, setState] = React.useState(initialState);
 
   function startOver() {

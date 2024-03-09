@@ -1,8 +1,8 @@
 import "./App.css";
-import { AppContext } from "./AppContext";
+import AppContext from "./AppContext";
 import Board from "./components/Board";
 import Header from "./components/Header";
-import { useStitchTacToe } from "./hooks/useStitchTacToe";
+import useStitchTacToe from "./hooks/useStitchTacToe";
 
 export default function App() {
   const context = useStitchTacToe();

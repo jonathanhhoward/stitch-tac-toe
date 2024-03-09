@@ -1,7 +1,7 @@
 import { emptyPlayer, tiePlayer } from "../constants/players";
 import { Coordinate, Player, PlayerGrid } from "../types";
 
-export class Board {
+export default class Board {
   private constructor(public readonly grid: PlayerGrid) {}
 
   static create(): Board {

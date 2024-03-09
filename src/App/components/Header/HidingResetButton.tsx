@@ -1,5 +1,5 @@
 import React from "react";
-import { AppContext } from "../../AppContext";
+import AppContext from "../../AppContext";
 
 export default function HidingResetButton() {
   const { state, startOver } = React.useContext(AppContext);

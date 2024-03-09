@@ -1,5 +1,5 @@
 import React from "react";
-import { AppContext } from "../../AppContext";
+import AppContext from "../../AppContext";
 import Row from "./Row";
 
 export default function Board() {
