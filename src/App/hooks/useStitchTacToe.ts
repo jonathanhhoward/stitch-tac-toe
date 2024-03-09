@@ -9,26 +9,28 @@ const initialState: State = {
   winner: emptyPlayer,
 };
 
-const getNextPlayer = (player: Player): Player =>
-  player.name === "Stitch" ? liloPlayer : stitchPlayer;
+function getNextPlayer(player: Player): Player {
+  return player.name === "Stitch" ? liloPlayer : stitchPlayer;
+}
 
 export function useStitchTacToe() {
   const [state, setState] = React.useState(initialState);
 
-  const startOver = () => setState(initialState);
+  function startOver() {
+    setState(initialState);
+  }
 
-  const placeToken = (position: Coordinate) =>
+  function placeToken(position: Coordinate) {
     setState(({ board: prevBoard, player: prevPlayer }) => {
       if (prevBoard.isOccupiedAt(position)) return state;
 
       const board = prevBoard.add(prevPlayer, position);
+      const player = getNextPlayer(prevPlayer);
+      const winner = board.checkForWinner();
 
-      return {
-        board,
-        player: getNextPlayer(prevPlayer),
-        winner: board.checkForWinner(),
-      };
+      return { board, player, winner };
     });
+  }
 
   return { state, startOver, placeToken };
 }
