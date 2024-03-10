@@ -1,23 +1,13 @@
 import React from "react";
-import { emptyPlayer, liloPlayer, stitchPlayer } from "../constants/players";
-import Board from "../models/board";
-import { Coordinate, Player, State } from "../types";
+import { initialState } from "../constants/initialState";
+import { liloPlayer, stitchPlayer } from "../constants/players";
+import { Coordinate } from "../types";
 
-const initialState: State = {
-  board: Board.create(),
-  player: stitchPlayer,
-  winner: emptyPlayer,
-};
-
-function getNextPlayer(player: Player): Player {
-  return player.name === "Stitch" ? liloPlayer : stitchPlayer;
-}
-
-export default function useStitchTacToe() {
-  const [state, setState] = React.useState(initialState);
+export default function useStitchTacToe(init = initialState) {
+  const [state, setState] = React.useState(init);
 
   function startOver() {
-    setState(initialState);
+    setState(init);
   }
 
   function placeToken(position: Coordinate) {
@@ -25,7 +15,7 @@ export default function useStitchTacToe() {
       if (prevBoard.isOccupiedAt(position)) return state;
 
       const board = prevBoard.add(prevPlayer, position);
-      const player = getNextPlayer(prevPlayer);
+      const player = prevPlayer.name === "Stitch" ? liloPlayer : stitchPlayer;
       const winner = board.checkForWinner();
 
       return { board, player, winner };
