@@ -6,7 +6,7 @@ export default function Board() {
   const { state } = React.useContext(AppContext);
 
   return (
-    <>
+    <div className="Board">
       {state.board.grid.map((players, row) => (
         <div className="row" key={`row:${row}`}>
           {players.map((player, col) => (
@@ -18,6 +18,6 @@ export default function Board() {
           ))}
         </div>
       ))}
-    </>
+    </div>
   );
 }

@@ -24,6 +24,9 @@
   cursor: pointer;
 }
 
+.Board {
+}
+
 .row {
   display: flex;
   justify-content: space-evenly;
