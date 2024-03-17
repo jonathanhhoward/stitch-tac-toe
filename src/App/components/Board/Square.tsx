@@ -1,21 +1,16 @@
 import React from "react";
-import AppContext from "../../AppContext";
-import { Coordinate, Player } from "../../types";
+import { Player } from "../../types";
 
 interface SquareProps {
+  onClick: () => void;
   player: Player;
-  position: Coordinate;
 }
 
-export default function Square({ player, position }: SquareProps) {
-  const { state, placeToken } = React.useContext(AppContext);
-
-  const handleClick = () => !state.winner.name && placeToken(position);
-
+export default function Square({ onClick, player }: SquareProps) {
   const icon = <img alt={player.name} className="icon" src={player.image} />;
 
   return (
-    <div className="Square" onClick={handleClick}>
+    <div className="Square" onClick={onClick}>
       {player.name ? icon : null}
     </div>
   );

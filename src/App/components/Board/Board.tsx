@@ -3,7 +3,7 @@ import AppContext from "../../AppContext";
 import Square from "./Square";
 
 export default function Board() {
-  const { state } = React.useContext(AppContext);
+  const { state, placeToken } = React.useContext(AppContext);
 
   return (
     <div className="Board">
@@ -12,8 +12,8 @@ export default function Board() {
           {players.map((player, col) => (
             <Square
               key={`square:${row}${col}`}
+              onClick={() => !state.winner.name && placeToken([row, col])}
               player={player}
-              position={[row, col]}
             />
           ))}
         </div>
