@@ -12,7 +12,7 @@ export default function useStitchTacToe(init = initialState) {
 
   function placeToken(position: Coordinate) {
     setState(({ board: prevBoard, player: prevPlayer }) => {
-      if (prevBoard.isOccupiedAt(position)) return state;
+      if (prevBoard.isOccupiedAt(position) || state.winner.name) return state;
 
       const board = prevBoard.add(prevPlayer, position);
       const player = prevPlayer.name === "Stitch" ? liloPlayer : stitchPlayer;

@@ -12,7 +12,7 @@ export default function Board() {
           {players.map((player, col) => (
             <Square
               key={`square:${row}${col}`}
-              onClick={() => !state.winner.name && placeToken([row, col])}
+              onClick={() => placeToken([row, col])}
               player={player}
             />
           ))}

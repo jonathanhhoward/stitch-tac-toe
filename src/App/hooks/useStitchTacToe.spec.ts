@@ -62,6 +62,23 @@ describe("placeToken", () => {
 
     expect(result.current.state).toEqual(init);
   });
+
+  it("should not update state when there is a winner", () => {
+    const init = {
+      board: new BoardFixture([
+        [stitchPlayer, stitchPlayer, stitchPlayer],
+        [emptyPlayer, emptyPlayer, emptyPlayer],
+        [emptyPlayer, emptyPlayer, emptyPlayer],
+      ]),
+      player: stitchPlayer,
+      winner: stitchPlayer,
+    };
+    const { result } = renderHook(() => useStitchTacToe(init));
+
+    act(() => result.current.placeToken([1, 0]));
+
+    expect(result.current.state).toEqual(init);
+  });
 });
 
 describe("startOver", () => {
