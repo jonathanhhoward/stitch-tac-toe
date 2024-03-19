@@ -17,8 +17,13 @@ export default function useStitchTacToe(init = initialState) {
       const board = prevBoard.add(prevPlayer, position);
       const player = prevPlayer.name === "Stitch" ? liloPlayer : stitchPlayer;
       const winner = board.checkForWinner();
+      const gameStatus = winner.name
+        ? winner.name === "Tie"
+          ? "Tie!"
+          : `${winner.name} wins!`
+        : `${player.name}'s turn`;
 
-      return { board, player, winner };
+      return { board, gameStatus, player, winner };
     });
   }
 

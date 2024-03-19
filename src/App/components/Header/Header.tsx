@@ -4,12 +4,6 @@ import AppContext from "../../AppContext";
 export default function Header() {
   const { state, startOver } = React.useContext(AppContext);
 
-  const gameStatus = state.winner.name
-    ? state.winner.name === "Tie"
-      ? "Tie!"
-      : `${state.winner.name} wins!`
-    : `${state.player.name}'s turn`;
-
   const resetButton = (
     <button className="reset" onClick={startOver} type="button">
       Play Again
@@ -18,7 +12,7 @@ export default function Header() {
 
   return (
     <div className="Header">
-      <div className="gameStatus">{gameStatus}</div>
+      <div className="gameStatus">{state.gameStatus}</div>
       {state.winner.name ? resetButton : null}
     </div>
   );

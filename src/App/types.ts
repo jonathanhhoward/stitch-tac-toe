@@ -9,6 +9,7 @@ export type PlayerGrid = Player[][];
 
 export interface State {
   board: Board;
+  gameStatus: string;
   player: Player;
   winner: Player;
 }
