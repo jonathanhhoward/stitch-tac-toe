@@ -1,9 +1,8 @@
 import React from "react";
 import AppContext from "../../AppContext";
-import HidingResetButton from "./HidingResetButton";
 
 export default function Header() {
-  const { state } = React.useContext(AppContext);
+  const { state, startOver } = React.useContext(AppContext);
 
   const gameStatus = state.winner.name
     ? state.winner.name === "Tie"
@@ -11,10 +10,16 @@ export default function Header() {
       : `${state.winner.name} wins!`
     : `${state.player.name}'s turn`;
 
+  const resetButton = (
+    <button className="reset" onClick={startOver} type="button">
+      Play Again
+    </button>
+  );
+
   return (
     <div className="Header">
       <div className="gameStatus">{gameStatus}</div>
-      <HidingResetButton />
+      {state.winner.name ? resetButton : null}
     </div>
   );
 }
