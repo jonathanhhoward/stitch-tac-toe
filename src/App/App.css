@@ -10,7 +10,7 @@
   padding-left: 2.5vw;
 }
 
-.message {
+.gameStatus {
   font-size: 12vw;
 }
 
@@ -62,7 +62,7 @@
     height: 25vh;
   }
 
-  .message {
+  .gameStatus {
     font-size: 9vh;
   }
 
