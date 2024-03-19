@@ -1,19 +1,26 @@
-import React from "react";
-import AppContext from "../../AppContext";
+import { Player } from "../../types";
 
-export default function Header() {
-  const { state, startOver } = React.useContext(AppContext);
+interface HeaderProps {
+  gameStatus: string;
+  onResetClick: () => void;
+  winner: Player;
+}
 
+export default function Header({
+  gameStatus,
+  onResetClick,
+  winner,
+}: HeaderProps) {
   const resetButton = (
-    <button className="reset" onClick={startOver} type="button">
+    <button className="reset" onClick={onResetClick} type="button">
       Play Again
     </button>
   );
 
   return (
     <div className="Header">
-      <div className="gameStatus">{state.gameStatus}</div>
-      {state.winner.name ? resetButton : null}
+      <div className="gameStatus">{gameStatus}</div>
+      {winner.name ? resetButton : null}
     </div>
   );
 }

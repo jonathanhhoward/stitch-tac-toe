@@ -1,18 +1,19 @@
 import "./App.css";
-import AppContext from "./AppContext";
 import Board from "./components/Board";
 import Header from "./components/Header";
 import useStitchTacToe from "./hooks/useStitchTacToe";
 
 export default function App() {
-  const context = useStitchTacToe();
+  const { state, placeToken, startOver } = useStitchTacToe();
 
   return (
-    <AppContext.Provider value={context}>
-      <div className="App">
-        <Header />
-        <Board />
-      </div>
-    </AppContext.Provider>
+    <div className="App">
+      <Header
+        gameStatus={state.gameStatus}
+        onResetClick={startOver}
+        winner={state.winner}
+      />
+      <Board board={state.board} onSquareClick={placeToken} />
+    </div>
   );
 }
