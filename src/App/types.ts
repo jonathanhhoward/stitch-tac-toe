@@ -2,7 +2,7 @@ import Board from "./models/board";
 
 export interface Player {
   name: string;
-  image: string;
+  token: string;
 }
 
 export type PlayerGrid = Player[][];

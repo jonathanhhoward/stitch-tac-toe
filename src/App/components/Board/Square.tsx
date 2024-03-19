@@ -6,11 +6,11 @@ interface SquareProps {
 }
 
 export default function Square({ onClick, player }: SquareProps) {
-  const icon = <img alt={player.name} className="icon" src={player.image} />;
+  const token = <img alt={player.name} className="token" src={player.token} />;
 
   return (
     <div className="Square" onClick={onClick}>
-      {player.name ? icon : null}
+      {player.name ? token : null}
     </div>
   );
 }
