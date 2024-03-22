@@ -79,11 +79,14 @@ export default class Board {
   }
 
   private isFull() {
-    return this.grid
-      .map((row) =>
-        row.map((sqr) => !!sqr.name).reduce((acc, cur) => acc && cur),
-      )
-      .reduce((acc, cur) => acc && cur);
+    // prettier-ignore
+    return this.grid.reduce(
+      (rowAcc, rowCur) => rowAcc && rowCur.reduce(
+        (playerAcc, playerCur) => playerAcc && !!playerCur.name,
+        true,
+      ),
+      true,
+    );
   }
 
   private isThreeInARow(sq1: Player, sq2: Player, sq3: Player) {
