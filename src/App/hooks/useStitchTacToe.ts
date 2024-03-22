@@ -1,13 +1,12 @@
 import React from "react";
-import { initialState } from "../constants/initialState";
 import { liloPlayer, stitchPlayer } from "../constants/players";
-import { Coordinate } from "../types";
+import { Coordinate, State } from "../types";
 
-export default function useStitchTacToe(init = initialState) {
-  const [state, setState] = React.useState(init);
+export default function useStitchTacToe(initialState: State) {
+  const [state, setState] = React.useState(initialState);
 
   function startOver() {
-    setState(init);
+    setState(initialState);
   }
 
   function placeToken(position: Coordinate) {
@@ -27,5 +26,5 @@ export default function useStitchTacToe(init = initialState) {
     });
   }
 
-  return { state, startOver, placeToken };
+  return { state, placeToken, startOver };
 }

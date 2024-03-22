@@ -18,7 +18,7 @@ class BoardFixture extends Board {
 
 describe("state", () => {
   it("should default to initialState", () => {
-    const { result } = renderHook(() => useStitchTacToe());
+    const { result } = renderHook(() => useStitchTacToe(initialState));
 
     expect(result.current.state).toEqual(initialState);
   });
@@ -26,16 +26,6 @@ describe("state", () => {
 
 describe("placeToken", () => {
   it("should alternate players", () => {
-    const init = {
-      board: new BoardFixture([
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-      ]),
-      gameStatus: "Stitch's turn",
-      player: stitchPlayer,
-      winner: emptyPlayer,
-    };
     const expected = {
       board: new BoardFixture([
         [stitchPlayer, emptyPlayer, emptyPlayer],
@@ -46,7 +36,7 @@ describe("placeToken", () => {
       player: liloPlayer,
       winner: emptyPlayer,
     };
-    const { result } = renderHook(() => useStitchTacToe(init));
+    const { result } = renderHook(() => useStitchTacToe(initialState));
 
     act(() => result.current.placeToken([0, 0]));
 
@@ -148,7 +138,7 @@ describe("placeToken", () => {
 
 describe("startOver", () => {
   it("should set state to initialState", () => {
-    const { result } = renderHook(() => useStitchTacToe());
+    const { result } = renderHook(() => useStitchTacToe(initialState));
 
     act(() => {
       result.current.placeToken([0, 0]);
