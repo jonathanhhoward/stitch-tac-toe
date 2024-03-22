@@ -19,15 +19,9 @@ export default class Board {
   }
 
   checkForWinner(): Player {
-    for (let row = 0; row < 3; ++row) {
-      if (this.isWinnerInRow(row)) {
-        return this.grid[row][0];
-      }
-    }
-
-    for (let col = 0; col < 3; ++col) {
-      if (this.isWinnerInColumn(col)) {
-        return this.grid[0][col];
+    for (let i = 0; i < 3; ++i) {
+      if (this.isWinnerInRow(i) || this.isWinnerInColumn(i)) {
+        return this.grid[i][i];
       }
     }
 
