@@ -5,25 +5,35 @@ import { Coordinate, State } from "../types";
 export default function useStitchTacToe(initialState: State) {
   const [state, setState] = React.useState(initialState);
 
-  function startOver() {
-    setState(initialState);
-  }
-
   function placeToken(position: Coordinate) {
-    setState(({ board: prevBoard, player: prevPlayer }) => {
-      if (prevBoard.isOccupiedAt(position) || state.winner.name) return state;
+    setState(({ board: prevBoard, player: prevPlayer, winner: prevWinner }) => {
+      if (prevBoard.isOccupiedAt(position) || prevWinner.name) return state;
 
       const board = prevBoard.add(prevPlayer, position);
-      const player = prevPlayer.name === "Stitch" ? liloPlayer : stitchPlayer;
+      const player = getPlayer();
       const winner = board.checkForWinner();
-      const gameStatus = winner.name
-        ? winner.name === "Tie"
-          ? "Tie!"
-          : `${winner.name} wins!`
-        : `${player.name}'s turn`;
+      const gameStatus = getGameStatus();
 
       return { board, gameStatus, player, winner };
+
+      ///////////////////////////////////////////////////////////////////
+
+      function getPlayer() {
+        return prevPlayer === stitchPlayer ? liloPlayer : stitchPlayer;
+      }
+
+      function getGameStatus() {
+        return winner.name
+          ? winner.name === "Tie"
+            ? "Tie!"
+            : `${winner.name} wins!`
+          : `${player.name}'s turn`;
+      }
     });
+  }
+
+  function startOver() {
+    setState(initialState);
   }
 
   return { state, placeToken, startOver };
