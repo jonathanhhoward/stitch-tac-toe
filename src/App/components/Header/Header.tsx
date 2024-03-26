@@ -1,15 +1,13 @@
-import { Player } from "../../types";
-
 interface HeaderProps {
   gameStatus: string;
   onResetClick: () => void;
-  winner: Player;
+  showReset: boolean;
 }
 
 export default function Header({
   gameStatus,
   onResetClick,
-  winner,
+  showReset,
 }: HeaderProps) {
   const resetButton = (
     <button className="reset" onClick={onResetClick} type="button">
@@ -20,7 +18,7 @@ export default function Header({
   return (
     <div className="Header">
       <div className="gameStatus">{gameStatus}</div>
-      {winner.name ? resetButton : null}
+      {showReset ? resetButton : null}
     </div>
   );
 }

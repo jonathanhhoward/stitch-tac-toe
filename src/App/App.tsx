@@ -12,7 +12,7 @@ export default function App() {
       <Header
         gameStatus={state.gameStatus}
         onResetClick={startOver}
-        winner={state.winner}
+        showReset={!!state.winner.name}
       />
       <Board board={state.board} onSquareClick={placeToken} />
     </div>
