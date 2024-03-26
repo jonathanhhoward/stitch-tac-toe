@@ -11,11 +11,11 @@ export default function useStitchTacToe(initialState: State) {
   const [state, setState] = React.useState(initialState);
 
   function placeToken(position: Coordinate) {
-    setState(({ board: prevBoard, player: prevPlayer, winner: prevWinner }) => {
-      if (prevBoard.isOccupiedAt(position) || prevWinner !== emptyPlayer) {
-        return state;
-      }
+    if (state.board.isOccupiedAt(position) || state.winner !== emptyPlayer) {
+      return;
+    }
 
+    setState(({ board: prevBoard, player: prevPlayer }) => {
       const board = prevBoard.add(prevPlayer, position);
       const player = getPlayer();
       const winner = board.checkForWinner();
