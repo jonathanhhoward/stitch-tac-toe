@@ -1,5 +1,10 @@
 import React from "react";
-import { liloPlayer, stitchPlayer } from "../constants/players";
+import {
+  emptyPlayer,
+  liloPlayer,
+  stitchPlayer,
+  tiePlayer,
+} from "../constants/players";
 import { Coordinate, State } from "../types";
 
 export default function useStitchTacToe(initialState: State) {
@@ -7,7 +12,9 @@ export default function useStitchTacToe(initialState: State) {
 
   function placeToken(position: Coordinate) {
     setState(({ board: prevBoard, player: prevPlayer, winner: prevWinner }) => {
-      if (prevBoard.isOccupiedAt(position) || prevWinner.name) return state;
+      if (prevBoard.isOccupiedAt(position) || prevWinner !== emptyPlayer) {
+        return state;
+      }
 
       const board = prevBoard.add(prevPlayer, position);
       const player = getPlayer();
@@ -23,11 +30,11 @@ export default function useStitchTacToe(initialState: State) {
       }
 
       function getGameStatus() {
-        return winner.name
-          ? winner.name === "Tie"
+        return winner === emptyPlayer
+          ? `${player.name}'s turn`
+          : winner === tiePlayer
             ? "Tie!"
-            : `${winner.name} wins!`
-          : `${player.name}'s turn`;
+            : `${winner.name} wins!`;
       }
     });
   }

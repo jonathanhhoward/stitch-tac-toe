@@ -2,6 +2,7 @@ import "./App.css";
 import Board from "./components/Board";
 import Header from "./components/Header";
 import { initialState } from "./constants/initialState";
+import { emptyPlayer } from "./constants/players";
 import useStitchTacToe from "./hooks/useStitchTacToe";
 
 export default function App() {
@@ -12,7 +13,7 @@ export default function App() {
       <Header
         gameStatus={state.gameStatus}
         onResetClick={startOver}
-        showReset={!!state.winner.name}
+        showReset={state.winner !== emptyPlayer}
       />
       <Board board={state.board} onSquareClick={placeToken} />
     </div>
