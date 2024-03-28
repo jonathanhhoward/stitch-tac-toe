@@ -16,7 +16,7 @@ export default function Board({ board, onSquareClick }: BoardProps) {
             <Square
               key={`square:${row}${col}`}
               onClick={() => onSquareClick([row, col])}
-              player={player}
+              token={player}
             />
           ))}
         </div>

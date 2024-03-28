@@ -1,18 +1,18 @@
-import { emptyPlayer } from "../../constants/players";
-import { Player } from "../../types";
+import { emptyToken } from "../../constants/tokens";
+import { Token } from "../../types";
 
 interface SquareProps {
   onClick: () => void;
-  player: Player;
+  token: Token;
 }
 
-export default function Square({ onClick, player }: SquareProps) {
-  const token = <img alt={player.name} className="token" src={player.token} />;
-  const showToken = player !== emptyPlayer;
+export default function Square({ onClick, token }: SquareProps) {
+  const tokenImg = <img alt={token.name} className="token" src={token.image} />;
+  const showToken = token !== emptyToken;
 
   return (
     <div className="Square" onClick={onClick}>
-      {showToken ? token : null}
+      {showToken ? tokenImg : null}
     </div>
   );
 }

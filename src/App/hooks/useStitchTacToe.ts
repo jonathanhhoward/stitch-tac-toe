@@ -1,38 +1,38 @@
 import React from "react";
 import {
-  emptyPlayer,
-  liloPlayer,
-  stitchPlayer,
-  tiePlayer,
-} from "../constants/players";
+  emptyToken,
+  liloToken,
+  stitchToken,
+  tieToken,
+} from "../constants/tokens";
 import { Coordinate, State } from "../types";
 
 export default function useStitchTacToe(initialState: State) {
   const [state, setState] = React.useState(initialState);
 
   function placeToken(position: Coordinate) {
-    if (state.board.isOccupiedAt(position) || state.winner !== emptyPlayer) {
+    if (state.board.isOccupiedAt(position) || state.winner !== emptyToken) {
       return;
     }
 
-    setState(({ board: prevBoard, player: prevPlayer }) => {
-      const board = prevBoard.add(prevPlayer, position);
-      const player = getPlayer();
+    setState(({ board: prevBoard, token: prevToken }) => {
+      const board = prevBoard.add(prevToken, position);
+      const token = getToken();
       const winner = board.checkForWinner();
       const gameStatus = getGameStatus();
 
-      return { board, gameStatus, player, winner };
+      return { board, gameStatus, token, winner };
 
       ///////////////////////////////////////////////////////////////////
 
-      function getPlayer() {
-        return prevPlayer === stitchPlayer ? liloPlayer : stitchPlayer;
+      function getToken() {
+        return prevToken === stitchToken ? liloToken : stitchToken;
       }
 
       function getGameStatus() {
-        return winner === emptyPlayer
-          ? `${player.name}'s turn`
-          : winner === tiePlayer
+        return winner === emptyToken
+          ? `${token.name}'s turn`
+          : winner === tieToken
             ? "Tie!"
             : `${winner.name} wins!`;
       }

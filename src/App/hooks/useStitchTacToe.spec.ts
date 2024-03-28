@@ -1,17 +1,17 @@
 import { act, renderHook } from "@testing-library/react";
 import { initialState } from "../constants/initialState";
 import {
-  emptyPlayer,
-  liloPlayer,
-  stitchPlayer,
-  tiePlayer,
-} from "../constants/players";
+  emptyToken,
+  liloToken,
+  stitchToken,
+  tieToken,
+} from "../constants/tokens";
 import Board from "../models/board";
-import { Player } from "../types";
+import { State, Token } from "../types";
 import useStitchTacToe from "./useStitchTacToe";
 
 class BoardFixture extends Board {
-  public constructor(grid: Player[][]) {
+  public constructor(grid: Token[][]) {
     super(grid);
   }
 }
@@ -26,15 +26,15 @@ describe("state", () => {
 
 describe("placeToken", () => {
   it("should alternate players", () => {
-    const expected = {
+    const expected: State = {
       board: new BoardFixture([
-        [stitchPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
+        [stitchToken, emptyToken, emptyToken],
+        [emptyToken, emptyToken, emptyToken],
+        [emptyToken, emptyToken, emptyToken],
       ]),
       gameStatus: "Lilo's turn",
-      player: liloPlayer,
-      winner: emptyPlayer,
+      token: liloToken,
+      winner: emptyToken,
     };
     const { result } = renderHook(() => useStitchTacToe(initialState));
 
@@ -44,25 +44,25 @@ describe("placeToken", () => {
   });
 
   it("should determine when there is a winner", () => {
-    const init = {
+    const init: State = {
       board: new BoardFixture([
-        [stitchPlayer, stitchPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
+        [stitchToken, stitchToken, emptyToken],
+        [emptyToken, emptyToken, emptyToken],
+        [emptyToken, emptyToken, emptyToken],
       ]),
       gameStatus: "Stitch's turn",
-      player: stitchPlayer,
-      winner: emptyPlayer,
+      token: stitchToken,
+      winner: emptyToken,
     };
-    const expected = {
+    const expected: State = {
       board: new BoardFixture([
-        [stitchPlayer, stitchPlayer, stitchPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
+        [stitchToken, stitchToken, stitchToken],
+        [emptyToken, emptyToken, emptyToken],
+        [emptyToken, emptyToken, emptyToken],
       ]),
       gameStatus: "Stitch wins!",
-      player: liloPlayer,
-      winner: stitchPlayer,
+      token: liloToken,
+      winner: stitchToken,
     };
     const { result } = renderHook(() => useStitchTacToe(init));
 
@@ -72,25 +72,25 @@ describe("placeToken", () => {
   });
 
   it("should determine when there is a tie", () => {
-    const init = {
+    const init: State = {
       board: new BoardFixture([
-        [liloPlayer, stitchPlayer, stitchPlayer],
-        [stitchPlayer, stitchPlayer, liloPlayer],
-        [liloPlayer, liloPlayer, emptyPlayer],
+        [liloToken, stitchToken, stitchToken],
+        [stitchToken, stitchToken, liloToken],
+        [liloToken, liloToken, emptyToken],
       ]),
       gameStatus: "Stitch's turn",
-      player: stitchPlayer,
-      winner: emptyPlayer,
+      token: stitchToken,
+      winner: emptyToken,
     };
-    const expected = {
+    const expected: State = {
       board: new BoardFixture([
-        [liloPlayer, stitchPlayer, stitchPlayer],
-        [stitchPlayer, stitchPlayer, liloPlayer],
-        [liloPlayer, liloPlayer, stitchPlayer],
+        [liloToken, stitchToken, stitchToken],
+        [stitchToken, stitchToken, liloToken],
+        [liloToken, liloToken, stitchToken],
       ]),
       gameStatus: "Tie!",
-      player: liloPlayer,
-      winner: tiePlayer,
+      token: liloToken,
+      winner: tieToken,
     };
     const { result } = renderHook(() => useStitchTacToe(init));
 
@@ -100,15 +100,15 @@ describe("placeToken", () => {
   });
 
   it("should not update state when a position is occupied", () => {
-    const init = {
+    const init: State = {
       board: new BoardFixture([
-        [stitchPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
+        [stitchToken, emptyToken, emptyToken],
+        [emptyToken, emptyToken, emptyToken],
+        [emptyToken, emptyToken, emptyToken],
       ]),
       gameStatus: "Stitch's turn",
-      player: stitchPlayer,
-      winner: emptyPlayer,
+      token: stitchToken,
+      winner: emptyToken,
     };
     const { result } = renderHook(() => useStitchTacToe(init));
 
@@ -118,15 +118,15 @@ describe("placeToken", () => {
   });
 
   it("should not update state when there is a winner", () => {
-    const init = {
+    const init: State = {
       board: new BoardFixture([
-        [stitchPlayer, stitchPlayer, stitchPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
+        [stitchToken, stitchToken, stitchToken],
+        [emptyToken, emptyToken, emptyToken],
+        [emptyToken, emptyToken, emptyToken],
       ]),
       gameStatus: "Stitch wins!",
-      player: stitchPlayer,
-      winner: stitchPlayer,
+      token: stitchToken,
+      winner: stitchToken,
     };
     const { result } = renderHook(() => useStitchTacToe(init));
 

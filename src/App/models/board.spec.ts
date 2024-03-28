@@ -1,14 +1,14 @@
 import {
-  emptyPlayer,
-  liloPlayer,
-  stitchPlayer,
-  tiePlayer,
-} from "../constants/players";
-import { Player } from "../types";
+  emptyToken,
+  liloToken,
+  stitchToken,
+  tieToken,
+} from "../constants/tokens";
+import { Token } from "../types";
 import Board from "./board";
 
 class BoardFixture extends Board {
-  public constructor(grid: Player[][]) {
+  public constructor(grid: Token[][]) {
     super(grid);
   }
 }
@@ -19,21 +19,21 @@ describe("create", () => {
 
     board.grid.forEach((row) => {
       row.forEach((square) => {
-        expect(square).toEqual(emptyPlayer);
+        expect(square).toEqual(emptyToken);
       });
     });
   });
 });
 
 describe("add", () => {
-  it("should return a new board with the player added", () => {
-    const expected: Player[][] = [
-      [stitchPlayer, emptyPlayer, emptyPlayer],
-      [emptyPlayer, emptyPlayer, emptyPlayer],
-      [emptyPlayer, emptyPlayer, emptyPlayer],
+  it("should return a new board with the token added", () => {
+    const expected: Token[][] = [
+      [stitchToken, emptyToken, emptyToken],
+      [emptyToken, emptyToken, emptyToken],
+      [emptyToken, emptyToken, emptyToken],
     ];
 
-    const board = Board.create().add(stitchPlayer, [0, 0]);
+    const board = Board.create().add(stitchToken, [0, 0]);
 
     expect(board.grid).toEqual(expected);
   });
@@ -43,58 +43,58 @@ describe("checkForWinner", () => {
   it.each([
     {
       grid: [
-        [stitchPlayer, stitchPlayer, stitchPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
+        [stitchToken, stitchToken, stitchToken],
+        [emptyToken, emptyToken, emptyToken],
+        [emptyToken, emptyToken, emptyToken],
       ],
     },
     {
       grid: [
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-        [stitchPlayer, stitchPlayer, stitchPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
+        [emptyToken, emptyToken, emptyToken],
+        [stitchToken, stitchToken, stitchToken],
+        [emptyToken, emptyToken, emptyToken],
       ],
     },
     {
       grid: [
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, emptyPlayer],
-        [stitchPlayer, stitchPlayer, stitchPlayer],
+        [emptyToken, emptyToken, emptyToken],
+        [emptyToken, emptyToken, emptyToken],
+        [stitchToken, stitchToken, stitchToken],
       ],
     },
     {
       grid: [
-        [stitchPlayer, emptyPlayer, emptyPlayer],
-        [stitchPlayer, emptyPlayer, emptyPlayer],
-        [stitchPlayer, emptyPlayer, emptyPlayer],
+        [stitchToken, emptyToken, emptyToken],
+        [stitchToken, emptyToken, emptyToken],
+        [stitchToken, emptyToken, emptyToken],
       ],
     },
     {
       grid: [
-        [emptyPlayer, stitchPlayer, emptyPlayer],
-        [emptyPlayer, stitchPlayer, emptyPlayer],
-        [emptyPlayer, stitchPlayer, emptyPlayer],
+        [emptyToken, stitchToken, emptyToken],
+        [emptyToken, stitchToken, emptyToken],
+        [emptyToken, stitchToken, emptyToken],
       ],
     },
     {
       grid: [
-        [emptyPlayer, emptyPlayer, stitchPlayer],
-        [emptyPlayer, emptyPlayer, stitchPlayer],
-        [emptyPlayer, emptyPlayer, stitchPlayer],
+        [emptyToken, emptyToken, stitchToken],
+        [emptyToken, emptyToken, stitchToken],
+        [emptyToken, emptyToken, stitchToken],
       ],
     },
     {
       grid: [
-        [stitchPlayer, emptyPlayer, emptyPlayer],
-        [emptyPlayer, stitchPlayer, emptyPlayer],
-        [emptyPlayer, emptyPlayer, stitchPlayer],
+        [stitchToken, emptyToken, emptyToken],
+        [emptyToken, stitchToken, emptyToken],
+        [emptyToken, emptyToken, stitchToken],
       ],
     },
     {
       grid: [
-        [emptyPlayer, emptyPlayer, stitchPlayer],
-        [emptyPlayer, stitchPlayer, emptyPlayer],
-        [stitchPlayer, emptyPlayer, emptyPlayer],
+        [emptyToken, emptyToken, stitchToken],
+        [emptyToken, stitchToken, emptyToken],
+        [stitchToken, emptyToken, emptyToken],
       ],
     },
   ])("should return a winner for three in a row", (b) => {
@@ -102,31 +102,31 @@ describe("checkForWinner", () => {
 
     const winner = board.checkForWinner();
 
-    expect(winner).toEqual(stitchPlayer);
+    expect(winner).toEqual(stitchToken);
   });
 
   it("should return empty for no winner", () => {
     const board = new BoardFixture([
-      [stitchPlayer, emptyPlayer, emptyPlayer],
-      [emptyPlayer, emptyPlayer, stitchPlayer],
-      [emptyPlayer, stitchPlayer, emptyPlayer],
+      [stitchToken, emptyToken, emptyToken],
+      [emptyToken, emptyToken, stitchToken],
+      [emptyToken, stitchToken, emptyToken],
     ]);
 
     const winner = board.checkForWinner();
 
-    expect(winner).toEqual(emptyPlayer);
+    expect(winner).toEqual(emptyToken);
   });
 
   it("should return tie when the board is full with no winner", () => {
     const board = new BoardFixture([
-      [liloPlayer, stitchPlayer, liloPlayer],
-      [stitchPlayer, stitchPlayer, liloPlayer],
-      [stitchPlayer, liloPlayer, stitchPlayer],
+      [liloToken, stitchToken, liloToken],
+      [stitchToken, stitchToken, liloToken],
+      [stitchToken, liloToken, stitchToken],
     ]);
 
     const winner = board.checkForWinner();
 
-    expect(winner).toEqual(tiePlayer);
+    expect(winner).toEqual(tieToken);
   });
 });
 
@@ -134,9 +134,9 @@ describe("isOccupiedAt", () => {
   let board: BoardFixture;
   beforeEach(() => {
     board = new BoardFixture([
-      [emptyPlayer, emptyPlayer, emptyPlayer],
-      [emptyPlayer, stitchPlayer, emptyPlayer],
-      [emptyPlayer, emptyPlayer, emptyPlayer],
+      [emptyToken, emptyToken, emptyToken],
+      [emptyToken, stitchToken, emptyToken],
+      [emptyToken, emptyToken, emptyToken],
     ]);
   });
 

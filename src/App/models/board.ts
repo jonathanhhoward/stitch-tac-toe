@@ -1,24 +1,24 @@
-import { emptyPlayer, tiePlayer } from "../constants/players";
-import { Coordinate, Player, PlayerGrid } from "../types";
+import { emptyToken, tieToken } from "../constants/tokens";
+import { Coordinate, Token } from "../types";
 
 export default class Board {
-  protected constructor(public readonly grid: PlayerGrid) {}
+  protected constructor(public readonly grid: Token[][]) {}
 
   static create(): Board {
-    return new Board(Array(3).fill(Array(3).fill(emptyPlayer)));
+    return new Board(Array(3).fill(Array(3).fill(emptyToken)));
   }
 
-  add(player: Player, [row, col]: Coordinate): Board {
+  add(token: Token, [row, col]: Coordinate): Board {
     return new Board(
       this.grid.map((boardRow, iRow) =>
         boardRow.map((square, iCol) =>
-          row === iRow && col === iCol ? player : square,
+          row === iRow && col === iCol ? token : square,
         ),
       ),
     );
   }
 
-  checkForWinner(): Player {
+  checkForWinner(): Token {
     for (let i = 0; i < 3; ++i) {
       if (this.isWinnerInRow(i) || this.isWinnerInColumn(i)) {
         return this.grid[i][i];
@@ -30,10 +30,10 @@ export default class Board {
     }
 
     if (this.isFull()) {
-      return tiePlayer;
+      return tieToken;
     }
 
-    return emptyPlayer;
+    return emptyToken;
   }
 
   isOccupiedAt([row, col]: Coordinate): boolean {
@@ -76,14 +76,14 @@ export default class Board {
     // prettier-ignore
     return this.grid.reduce(
       (rowAcc, rowCur) => rowAcc && rowCur.reduce(
-        (playerAcc, playerCur) => playerAcc && !!playerCur.name,
+        (tokenAcc, tokenCur) => tokenAcc && !!tokenCur.name,
         true,
       ),
       true,
     );
   }
 
-  private isThreeInARow(sq1: Player, sq2: Player, sq3: Player) {
+  private isThreeInARow(sq1: Token, sq2: Token, sq3: Token) {
     return (
       !!sq1.name &&
       !!sq2.name &&

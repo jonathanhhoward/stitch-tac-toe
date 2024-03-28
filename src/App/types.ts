@@ -1,17 +1,15 @@
 import Board from "./models/board";
 
-export interface Player {
+export interface Token {
   name: string;
-  token: string;
+  image: string;
 }
-
-export type PlayerGrid = Player[][];
 
 export interface State {
   board: Board;
   gameStatus: string;
-  player: Player;
-  winner: Player;
+  token: Token;
+  winner: Token;
 }
 
 type Row = number;
