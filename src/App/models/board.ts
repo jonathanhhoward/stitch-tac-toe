@@ -76,7 +76,7 @@ export default class Board {
     // prettier-ignore
     return this.grid.reduce(
       (rowAcc, rowCur) => rowAcc && rowCur.reduce(
-        (tokenAcc, tokenCur) => tokenAcc && !!tokenCur.name,
+        (tokenAcc, tokenCur) => tokenAcc && tokenCur !== emptyToken,
         true,
       ),
       true,
@@ -85,11 +85,11 @@ export default class Board {
 
   private isThreeInARow(sq1: Token, sq2: Token, sq3: Token) {
     return (
-      !!sq1.name &&
-      !!sq2.name &&
-      !!sq3.name &&
-      sq1.name === sq2.name &&
-      sq1.name === sq3.name
+      sq1 !== emptyToken &&
+      sq2 !== emptyToken &&
+      sq3 !== emptyToken &&
+      sq1 === sq2 &&
+      sq1 === sq3
     );
   }
 }
