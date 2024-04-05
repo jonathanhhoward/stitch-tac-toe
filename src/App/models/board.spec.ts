@@ -1,9 +1,4 @@
-import {
-  emptyToken,
-  liloToken,
-  stitchToken,
-  tieToken,
-} from "../constants/tokens";
+import { liloToken, stitchToken, tieToken } from "../constants/tokens";
 import { Token } from "../types";
 import Board from "./board";
 
@@ -135,19 +130,19 @@ describe("isOccupiedAt", () => {
   let board: BoardFixture;
   beforeEach(() => {
     board = new BoardFixture([
-      [emptyToken, emptyToken, emptyToken],
-      [emptyToken, stitchToken, emptyToken],
-      [emptyToken, emptyToken, emptyToken],
+      [null, null, null],
+      [null, stitchToken, null],
+      [null, null, null],
     ]);
   });
 
-  it("should return true when a square is not empty", () => {
+  it("should return true when a square contains a Token", () => {
     const isOccupied = board.isOccupiedAt([1, 1]);
 
     expect(isOccupied).toBe(true);
   });
 
-  it("should return false when a square is empty", () => {
+  it("should return false when a square contains null", () => {
     const isOccupied = board.isOccupiedAt([0, 0]);
 
     expect(isOccupied).toBe(false);
