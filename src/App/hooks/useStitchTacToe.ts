@@ -1,17 +1,12 @@
 import React from "react";
-import {
-  emptyToken,
-  liloToken,
-  stitchToken,
-  tieToken,
-} from "../constants/tokens";
+import { liloToken, stitchToken, tieToken } from "../constants/tokens";
 import { Coordinate, State } from "../types";
 
 export default function useStitchTacToe(initialState: () => State) {
   const [state, setState] = React.useState(initialState);
 
   function placeToken(position: Coordinate) {
-    if (state.board.isOccupiedAt(position) || state.winner !== emptyToken) {
+    if (state.board.isOccupiedAt(position) || state.winner) {
       return;
     }
 
@@ -30,11 +25,11 @@ export default function useStitchTacToe(initialState: () => State) {
       }
 
       function getGameStatus() {
-        return winner === emptyToken
-          ? `${token.name}'s turn`
-          : winner === tieToken
+        return winner
+          ? winner === tieToken
             ? "Tie!"
-            : `${winner.name} wins!`;
+            : `${winner.name} wins!`
+          : `${token.name}'s turn`;
       }
     });
   }

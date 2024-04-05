@@ -12,7 +12,7 @@ export interface State {
   board: Board;
   gameStatus: string;
   token: Token;
-  winner: Token;
+  winner: Square;
 }
 
 type Row = number;
