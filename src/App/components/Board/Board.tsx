@@ -1,8 +1,8 @@
-import { Coordinate, Token } from "../../types";
+import { Coordinate, Grid } from "../../types";
 import Square from "./Square";
 
 interface BoardProps {
-  grid: Token[][];
+  grid: Grid;
   onSquareClick: (position: Coordinate) => void;
 }
 
