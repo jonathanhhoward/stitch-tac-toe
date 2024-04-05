@@ -8,7 +8,7 @@ import { Token } from "../types";
 import Board from "./board";
 
 class BoardFixture extends Board {
-  public constructor(grid: Token[][]) {
+  public constructor(grid: (Token | null)[][]) {
     super(grid);
   }
 }
@@ -45,57 +45,57 @@ describe("checkForWinner", () => {
     {
       grid: [
         [stitchToken, stitchToken, stitchToken],
-        [emptyToken, emptyToken, emptyToken],
-        [emptyToken, emptyToken, emptyToken],
+        [null, null, null],
+        [null, null, null],
       ],
     },
     {
       grid: [
-        [emptyToken, emptyToken, emptyToken],
+        [null, null, null],
         [stitchToken, stitchToken, stitchToken],
-        [emptyToken, emptyToken, emptyToken],
+        [null, null, null],
       ],
     },
     {
       grid: [
-        [emptyToken, emptyToken, emptyToken],
-        [emptyToken, emptyToken, emptyToken],
+        [null, null, null],
+        [null, null, null],
         [stitchToken, stitchToken, stitchToken],
       ],
     },
     {
       grid: [
-        [stitchToken, emptyToken, emptyToken],
-        [stitchToken, emptyToken, emptyToken],
-        [stitchToken, emptyToken, emptyToken],
+        [stitchToken, null, null],
+        [stitchToken, null, null],
+        [stitchToken, null, null],
       ],
     },
     {
       grid: [
-        [emptyToken, stitchToken, emptyToken],
-        [emptyToken, stitchToken, emptyToken],
-        [emptyToken, stitchToken, emptyToken],
+        [null, stitchToken, null],
+        [null, stitchToken, null],
+        [null, stitchToken, null],
       ],
     },
     {
       grid: [
-        [emptyToken, emptyToken, stitchToken],
-        [emptyToken, emptyToken, stitchToken],
-        [emptyToken, emptyToken, stitchToken],
+        [null, null, stitchToken],
+        [null, null, stitchToken],
+        [null, null, stitchToken],
       ],
     },
     {
       grid: [
-        [stitchToken, emptyToken, emptyToken],
-        [emptyToken, stitchToken, emptyToken],
-        [emptyToken, emptyToken, stitchToken],
+        [stitchToken, null, null],
+        [null, stitchToken, null],
+        [null, null, stitchToken],
       ],
     },
     {
       grid: [
-        [emptyToken, emptyToken, stitchToken],
-        [emptyToken, stitchToken, emptyToken],
-        [stitchToken, emptyToken, emptyToken],
+        [null, null, stitchToken],
+        [null, stitchToken, null],
+        [stitchToken, null, null],
       ],
     },
   ])("should return a winner for three in a row", (b) => {
@@ -106,16 +106,16 @@ describe("checkForWinner", () => {
     expect(winner).toEqual(stitchToken);
   });
 
-  it("should return empty for no winner", () => {
+  it("should return null for no winner", () => {
     const board = new BoardFixture([
-      [stitchToken, emptyToken, emptyToken],
-      [emptyToken, emptyToken, stitchToken],
-      [emptyToken, stitchToken, emptyToken],
+      [stitchToken, null, null],
+      [null, null, stitchToken],
+      [null, stitchToken, null],
     ]);
 
     const winner = board.checkForWinner();
 
-    expect(winner).toEqual(emptyToken);
+    expect(winner).toBeNull();
   });
 
   it("should return tie when the board is full with no winner", () => {

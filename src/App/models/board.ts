@@ -1,4 +1,4 @@
-import { emptyToken, tieToken } from "../constants/tokens";
+import { tieToken } from "../constants/tokens";
 import { Coordinate, Token } from "../types";
 
 export default class Board {
@@ -39,7 +39,7 @@ export default class Board {
       return tieToken;
     }
 
-    return emptyToken;
+    return null;
   }
 
   isOccupiedAt([row, col]: Coordinate): boolean {
@@ -82,7 +82,7 @@ export default class Board {
     // prettier-ignore
     return this.grid.reduce(
       (rowAcc, rowCur) => rowAcc && rowCur.reduce(
-        (tokenAcc, tokenCur) => tokenAcc && tokenCur !== emptyToken,
+        (tokenAcc, tokenCur) => tokenAcc && !!tokenCur,
         true,
       ),
       true,
@@ -94,12 +94,6 @@ export default class Board {
     sq2: Token | null,
     sq3: Token | null,
   ) {
-    return (
-      sq1 !== emptyToken &&
-      sq2 !== emptyToken &&
-      sq3 !== emptyToken &&
-      sq1 === sq2 &&
-      sq1 === sq3
-    );
+    return !!sq1 && !!sq2 && !!sq3 && sq1 === sq2 && sq1 === sq3;
   }
 }
