@@ -5,6 +5,8 @@ export interface Token {
   image: string;
 }
 
+export type Grid = (Token | null)[][];
+
 export interface State {
   board: Board;
   gameStatus: string;

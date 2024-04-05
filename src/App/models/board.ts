@@ -1,8 +1,8 @@
 import { tieToken } from "../constants/tokens";
-import { Coordinate, Token } from "../types";
+import { Coordinate, Grid, Token } from "../types";
 
 export default class Board {
-  protected constructor(private _grid: (Token | null)[][]) {}
+  protected constructor(private _grid: Grid) {}
 
   get grid() {
     return this._grid;

@@ -1,9 +1,9 @@
 import { liloToken, stitchToken, tieToken } from "../constants/tokens";
-import { Token } from "../types";
+import { Grid } from "../types";
 import Board from "./board";
 
 class BoardFixture extends Board {
-  public constructor(grid: (Token | null)[][]) {
+  public constructor(grid: Grid) {
     super(grid);
   }
 }
@@ -22,7 +22,7 @@ describe("create", () => {
 
 describe("add", () => {
   it("should add a token to the board grid", () => {
-    const expected: (Token | null)[][] = [
+    const expected: Grid = [
       [stitchToken, null, null],
       [null, null, null],
       [null, null, null],
