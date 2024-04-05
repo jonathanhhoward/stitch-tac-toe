@@ -9,13 +9,13 @@ interface BoardProps {
 export default function Board({ grid, onSquareClick }: BoardProps) {
   return (
     <div className="Board">
-      {grid.map((tokens, row) => (
+      {grid.map((squares, row) => (
         <div className="row" key={`row:${row}`}>
-          {tokens.map((token, col) => (
+          {squares.map((square, col) => (
             <Square
               key={`square:${row}${col}`}
               onClick={() => onSquareClick([row, col])}
-              token={token}
+              token={square}
             />
           ))}
         </div>
