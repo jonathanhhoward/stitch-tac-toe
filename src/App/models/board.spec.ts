@@ -27,10 +27,10 @@ describe("create", () => {
 
 describe("add", () => {
   it("should add a token to the board grid", () => {
-    const expected: Token[][] = [
-      [stitchToken, emptyToken, emptyToken],
-      [emptyToken, emptyToken, emptyToken],
-      [emptyToken, emptyToken, emptyToken],
+    const expected: (Token | null)[][] = [
+      [stitchToken, null, null],
+      [null, null, null],
+      [null, null, null],
     ];
     const board = Board.create();
 
