@@ -2,14 +2,18 @@ import { emptyToken, tieToken } from "../constants/tokens";
 import { Coordinate, Token } from "../types";
 
 export default class Board {
-  protected constructor(private _grid: Token[][]) {}
+  protected constructor(private _grid: (Token | null)[][]) {}
 
   get grid() {
     return this._grid;
   }
 
   static create(): Board {
-    return new Board(Array(3).fill(Array(3).fill(emptyToken)));
+    return new Board([
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ]);
   }
 
   add(token: Token, [row, col]: Coordinate): void {
@@ -20,7 +24,7 @@ export default class Board {
     );
   }
 
-  checkForWinner(): Token {
+  checkForWinner(): Token | null {
     for (let i = 0; i < 3; ++i) {
       if (this.isWinnerInRow(i) || this.isWinnerInColumn(i)) {
         return this.grid[i][i];
@@ -39,7 +43,7 @@ export default class Board {
   }
 
   isOccupiedAt([row, col]: Coordinate): boolean {
-    return !!this.grid[row][col].name;
+    return !!this.grid[row][col];
   }
 
   private isWinnerInRow(row: number) {
@@ -85,7 +89,11 @@ export default class Board {
     );
   }
 
-  private isThreeInARow(sq1: Token, sq2: Token, sq3: Token) {
+  private isThreeInARow(
+    sq1: Token | null,
+    sq2: Token | null,
+    sq3: Token | null,
+  ) {
     return (
       sq1 !== emptyToken &&
       sq2 !== emptyToken &&

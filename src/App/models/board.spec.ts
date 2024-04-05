@@ -14,12 +14,12 @@ class BoardFixture extends Board {
 }
 
 describe("create", () => {
-  it("should return a Board filled with empty players", () => {
+  it("should return a Board with a null grid", () => {
     const board = Board.create();
 
     board.grid.forEach((row) => {
       row.forEach((square) => {
-        expect(square).toEqual(emptyToken);
+        expect(square).toBeNull();
       });
     });
   });
