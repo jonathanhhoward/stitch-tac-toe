@@ -1,5 +1,5 @@
 import { tieToken } from "../constants/tokens";
-import { Coordinate, Grid, Token } from "../types";
+import { Coordinate, Grid, Square, Token } from "../types";
 
 export default class Board {
   protected constructor(private _grid: Grid) {}
@@ -24,7 +24,7 @@ export default class Board {
     );
   }
 
-  checkForWinner(): Token | null {
+  checkForWinner(): Square {
     for (let i = 0; i < 3; ++i) {
       if (this.isWinnerInRow(i) || this.isWinnerInColumn(i)) {
         return this.grid[i][i];
@@ -89,11 +89,7 @@ export default class Board {
     );
   }
 
-  private isThreeInARow(
-    sq1: Token | null,
-    sq2: Token | null,
-    sq3: Token | null,
-  ) {
+  private isThreeInARow(sq1: Square, sq2: Square, sq3: Square) {
     return !!sq1 && !!sq2 && !!sq3 && sq1 === sq2 && sq1 === sq3;
   }
 }

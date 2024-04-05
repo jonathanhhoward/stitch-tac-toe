@@ -5,7 +5,8 @@ export interface Token {
   image: string;
 }
 
-export type Grid = (Token | null)[][];
+export type Square = Token | null;
+export type Grid = Square[][];
 
 export interface State {
   board: Board;
