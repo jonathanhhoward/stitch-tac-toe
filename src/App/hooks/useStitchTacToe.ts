@@ -7,7 +7,7 @@ import {
 } from "../constants/tokens";
 import { Coordinate, State } from "../types";
 
-export default function useStitchTacToe(initialState: State) {
+export default function useStitchTacToe(initialState: () => State) {
   const [state, setState] = React.useState(initialState);
 
   function placeToken(position: Coordinate) {
@@ -15,8 +15,8 @@ export default function useStitchTacToe(initialState: State) {
       return;
     }
 
-    setState(({ board: prevBoard, token: prevToken }) => {
-      const board = prevBoard.add(prevToken, position);
+    setState(({ board, token: prevToken }) => {
+      board.add(prevToken, position);
       const token = getToken();
       const winner = board.checkForWinner();
       const gameStatus = getGameStatus();

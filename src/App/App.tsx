@@ -15,7 +15,7 @@ export default function App() {
         onResetClick={startOver}
         showReset={state.winner !== emptyToken}
       />
-      <Board board={state.board} onSquareClick={placeToken} />
+      <Board grid={state.board.grid} onSquareClick={placeToken} />
     </div>
   );
 }

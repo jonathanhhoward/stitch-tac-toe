@@ -2,18 +2,20 @@ import { emptyToken, tieToken } from "../constants/tokens";
 import { Coordinate, Token } from "../types";
 
 export default class Board {
-  protected constructor(public readonly grid: Token[][]) {}
+  protected constructor(private _grid: Token[][]) {}
+
+  get grid() {
+    return this._grid;
+  }
 
   static create(): Board {
     return new Board(Array(3).fill(Array(3).fill(emptyToken)));
   }
 
-  add(token: Token, [row, col]: Coordinate): Board {
-    return new Board(
-      this.grid.map((boardRow, iRow) =>
-        boardRow.map((square, iCol) =>
-          row === iRow && col === iCol ? token : square,
-        ),
+  add(token: Token, [row, col]: Coordinate): void {
+    this._grid = this._grid.map((boardRow, iRow) =>
+      boardRow.map((square, iCol) =>
+        row === iRow && col === iCol ? token : square,
       ),
     );
   }

@@ -26,14 +26,15 @@ describe("create", () => {
 });
 
 describe("add", () => {
-  it("should return a new board with the token added", () => {
+  it("should add a token to the board grid", () => {
     const expected: Token[][] = [
       [stitchToken, emptyToken, emptyToken],
       [emptyToken, emptyToken, emptyToken],
       [emptyToken, emptyToken, emptyToken],
     ];
+    const board = Board.create();
 
-    const board = Board.create().add(stitchToken, [0, 0]);
+    board.add(stitchToken, [0, 0]);
 
     expect(board.grid).toEqual(expected);
   });
