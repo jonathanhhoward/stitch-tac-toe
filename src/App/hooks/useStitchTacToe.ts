@@ -22,11 +22,9 @@ export default function useStitchTacToe(initialState: () => State) {
       ///////////////////////////////////////////////////////////////////
 
       function getPlayer() {
-        return new Player(getToken());
-      }
-
-      function getToken() {
-        return prevPlayer.token === stitchToken ? liloToken : stitchToken;
+        const token =
+          prevPlayer.token === stitchToken ? liloToken : stitchToken;
+        return new Player(token);
       }
 
       function getGameStatus() {
