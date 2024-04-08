@@ -19,7 +19,7 @@ describe("state", () => {
   });
 });
 
-describe("placeToken", () => {
+describe("executeTurn", () => {
   it("should alternate players", () => {
     const expected: State = {
       board: new BoardFixture([
@@ -33,7 +33,7 @@ describe("placeToken", () => {
     };
     const { result } = renderHook(() => useStitchTacToe(initialState));
 
-    act(() => result.current.placeToken([0, 0]));
+    act(() => result.current.executeTurn([0, 0]));
 
     expect(result.current.state).toEqual(expected);
   });
@@ -61,7 +61,7 @@ describe("placeToken", () => {
     };
     const { result } = renderHook(() => useStitchTacToe(init));
 
-    act(() => result.current.placeToken([0, 2]));
+    act(() => result.current.executeTurn([0, 2]));
 
     expect(result.current.state).toEqual(expected);
   });
@@ -89,7 +89,7 @@ describe("placeToken", () => {
     };
     const { result } = renderHook(() => useStitchTacToe(init));
 
-    act(() => result.current.placeToken([2, 2]));
+    act(() => result.current.executeTurn([2, 2]));
 
     expect(result.current.state).toEqual(expected);
   });
@@ -107,7 +107,7 @@ describe("placeToken", () => {
     });
     const { result } = renderHook(() => useStitchTacToe(init));
 
-    act(() => result.current.placeToken([0, 0]));
+    act(() => result.current.executeTurn([0, 0]));
 
     expect(result.current.state).toEqual(init());
   });
@@ -125,7 +125,7 @@ describe("placeToken", () => {
     });
     const { result } = renderHook(() => useStitchTacToe(init));
 
-    act(() => result.current.placeToken([1, 0]));
+    act(() => result.current.executeTurn([1, 0]));
 
     expect(result.current.state).toEqual(init());
   });
@@ -136,7 +136,7 @@ describe("startOver", () => {
     const { result } = renderHook(() => useStitchTacToe(initialState));
 
     act(() => {
-      result.current.placeToken([0, 0]);
+      result.current.executeTurn([0, 0]);
       result.current.startOver();
     });
 

@@ -5,7 +5,7 @@ import { Coordinate, State } from "../types";
 export default function useStitchTacToe(initialState: () => State) {
   const [state, setState] = React.useState(initialState);
 
-  function placeToken(position: Coordinate) {
+  function executeTurn(position: Coordinate) {
     if (state.board.isOccupiedAt(position) || state.winner) {
       return;
     }
@@ -38,5 +38,5 @@ export default function useStitchTacToe(initialState: () => State) {
     setState(initialState);
   }
 
-  return { state, placeToken, startOver };
+  return { state, executeTurn, startOver };
 }

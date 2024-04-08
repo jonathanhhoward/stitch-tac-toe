@@ -5,7 +5,7 @@ import { initialState } from "./constants/initialState";
 import useStitchTacToe from "./hooks/useStitchTacToe";
 
 export default function App() {
-  const { state, placeToken, startOver } = useStitchTacToe(initialState);
+  const { state, executeTurn, startOver } = useStitchTacToe(initialState);
 
   return (
     <div className="App">
@@ -14,7 +14,7 @@ export default function App() {
         onResetClick={startOver}
         showReset={!!state.winner}
       />
-      <Board grid={state.board.grid} onSquareClick={placeToken} />
+      <Board grid={state.board.grid} onSquareClick={executeTurn} />
     </div>
   );
 }
