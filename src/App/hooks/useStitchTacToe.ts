@@ -1,5 +1,6 @@
 import React from "react";
 import { liloToken, stitchToken, tieToken } from "../constants/tokens";
+import { Player } from "../models/player";
 import { Coordinate, State } from "../types";
 
 export default function useStitchTacToe(initialState: () => State) {
@@ -13,10 +14,11 @@ export default function useStitchTacToe(initialState: () => State) {
     setState(({ board, token: prevToken }) => {
       board.add(prevToken, position);
       const token = getToken();
+      const player = new Player(token);
       const winner = board.checkForWinner();
       const gameStatus = getGameStatus();
 
-      return { board, gameStatus, token, winner };
+      return { board, gameStatus, player, token, winner };
 
       ///////////////////////////////////////////////////////////////////
 

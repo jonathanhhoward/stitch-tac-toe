@@ -1,4 +1,5 @@
 import Board from "./models/board";
+import { Player } from "./models/player";
 
 export interface Token {
   name: string;
@@ -11,6 +12,7 @@ export type Grid = Square[][];
 export interface State {
   board: Board;
   gameStatus: string;
+  player: Player;
   token: Token;
   winner: Square;
 }

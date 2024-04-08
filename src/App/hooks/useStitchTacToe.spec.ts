@@ -2,6 +2,7 @@ import { act, renderHook } from "@testing-library/react";
 import { initialState } from "../constants/initialState";
 import { liloToken, stitchToken, tieToken } from "../constants/tokens";
 import Board from "../models/board";
+import { Player } from "../models/player";
 import { Grid, State } from "../types";
 import useStitchTacToe from "./useStitchTacToe";
 
@@ -10,6 +11,9 @@ class BoardFixture extends Board {
     super(grid);
   }
 }
+
+const lilo = new Player(liloToken);
+const stitch = new Player(stitchToken);
 
 describe("state", () => {
   it("should start with the state passed in", () => {
@@ -28,6 +32,7 @@ describe("executeTurn", () => {
         [null, null, null],
       ]),
       gameStatus: "Lilo's turn",
+      player: lilo,
       token: liloToken,
       winner: null,
     };
@@ -46,6 +51,7 @@ describe("executeTurn", () => {
         [null, null, null],
       ]),
       gameStatus: "Stitch's turn",
+      player: stitch,
       token: stitchToken,
       winner: null,
     });
@@ -56,6 +62,7 @@ describe("executeTurn", () => {
         [null, null, null],
       ]),
       gameStatus: "Stitch wins!",
+      player: lilo,
       token: liloToken,
       winner: stitchToken,
     };
@@ -74,6 +81,7 @@ describe("executeTurn", () => {
         [liloToken, liloToken, null],
       ]),
       gameStatus: "Stitch's turn",
+      player: stitch,
       token: stitchToken,
       winner: null,
     });
@@ -84,6 +92,7 @@ describe("executeTurn", () => {
         [liloToken, liloToken, stitchToken],
       ]),
       gameStatus: "Tie!",
+      player: lilo,
       token: liloToken,
       winner: tieToken,
     };
@@ -102,6 +111,7 @@ describe("executeTurn", () => {
         [null, null, null],
       ]),
       gameStatus: "Stitch's turn",
+      player: stitch,
       token: stitchToken,
       winner: null,
     });
@@ -120,6 +130,7 @@ describe("executeTurn", () => {
         [null, null, null],
       ]),
       gameStatus: "Stitch wins!",
+      player: stitch,
       token: stitchToken,
       winner: stitchToken,
     });
