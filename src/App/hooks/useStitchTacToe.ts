@@ -11,10 +11,10 @@ export default function useStitchTacToe(initialState: () => State) {
       return;
     }
 
-    setState(({ board, token: prevToken }) => {
-      board.add(prevToken, position);
+    setState(({ board, player: prevPlayer }) => {
+      prevPlayer.placeToken(board, position);
       const token = getToken();
-      const player = new Player(token);
+      const player = getPlayer();
       const winner = board.checkForWinner();
       const gameStatus = getGameStatus();
 
@@ -22,8 +22,12 @@ export default function useStitchTacToe(initialState: () => State) {
 
       ///////////////////////////////////////////////////////////////////
 
+      function getPlayer() {
+        return new Player(getToken());
+      }
+
       function getToken() {
-        return prevToken === stitchToken ? liloToken : stitchToken;
+        return prevPlayer.token === stitchToken ? liloToken : stitchToken;
       }
 
       function getGameStatus() {
