@@ -13,7 +13,6 @@ export default function useStitchTacToe(initialState: () => State) {
 
     setState(({ board, player: prevPlayer }): State => {
       prevPlayer.placeToken(board, position);
-      const token = getToken();
       const player = getPlayer();
       const winner = board.checkForWinner();
       const gameStatus = getGameStatus();
@@ -35,7 +34,7 @@ export default function useStitchTacToe(initialState: () => State) {
           ? winner.token === tieToken
             ? "Tie!"
             : `${winner.token.name} wins!`
-          : `${token.name}'s turn`;
+          : `${player.token.name}'s turn`;
       }
     });
   }
