@@ -11,14 +11,14 @@ export default function useStitchTacToe(initialState: () => State) {
       return;
     }
 
-    setState(({ board, player: prevPlayer }) => {
+    setState(({ board, player: prevPlayer }): State => {
       prevPlayer.placeToken(board, position);
       const token = getToken();
       const player = getPlayer();
       const winner = board.checkForWinner();
       const gameStatus = getGameStatus();
 
-      return { board, gameStatus, player, token, winner };
+      return { board, gameStatus, player, winner };
 
       ///////////////////////////////////////////////////////////////////
 

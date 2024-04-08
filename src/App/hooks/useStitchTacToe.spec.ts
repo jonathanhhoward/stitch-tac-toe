@@ -34,7 +34,6 @@ describe("executeTurn", () => {
       ]),
       gameStatus: "Lilo's turn",
       player: lilo,
-      token: liloToken,
       winner: null,
     };
     const { result } = renderHook(() => useStitchTacToe(initialState));
@@ -53,7 +52,6 @@ describe("executeTurn", () => {
       ]),
       gameStatus: "Stitch's turn",
       player: stitch,
-      token: stitchToken,
       winner: null,
     });
     const expected: State = {
@@ -64,7 +62,6 @@ describe("executeTurn", () => {
       ]),
       gameStatus: "Stitch wins!",
       player: lilo,
-      token: liloToken,
       winner: stitch,
     };
     const { result } = renderHook(() => useStitchTacToe(init));
@@ -83,7 +80,6 @@ describe("executeTurn", () => {
       ]),
       gameStatus: "Stitch's turn",
       player: stitch,
-      token: stitchToken,
       winner: null,
     });
     const expected: State = {
@@ -94,7 +90,6 @@ describe("executeTurn", () => {
       ]),
       gameStatus: "Tie!",
       player: lilo,
-      token: liloToken,
       winner: tie,
     };
     const { result } = renderHook(() => useStitchTacToe(init));
@@ -113,7 +108,6 @@ describe("executeTurn", () => {
       ]),
       gameStatus: "Stitch's turn",
       player: stitch,
-      token: stitchToken,
       winner: null,
     });
     const { result } = renderHook(() => useStitchTacToe(init));
@@ -132,7 +126,6 @@ describe("executeTurn", () => {
       ]),
       gameStatus: "Stitch wins!",
       player: stitch,
-      token: stitchToken,
       winner: stitch,
     });
     const { result } = renderHook(() => useStitchTacToe(init));

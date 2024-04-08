@@ -7,6 +7,5 @@ export const initialState = (): State => ({
   board: Board.create(),
   gameStatus: "Stitch's turn",
   player: new Player(stitchToken),
-  token: stitchToken,
   winner: null,
 });

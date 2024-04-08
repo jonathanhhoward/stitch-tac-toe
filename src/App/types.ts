@@ -13,7 +13,6 @@ export interface State {
   board: Board;
   gameStatus: string;
   player: Player;
-  token: Token;
   winner: Player | null;
 }
 
