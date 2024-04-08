@@ -1,7 +1,6 @@
-import { liloToken, stitchToken, tieToken } from "../constants/tokens";
+import { lilo, stitch, tie } from "../constants/players";
 import { Grid } from "../types";
 import Board from "./board";
-import { Player } from "./player";
 
 class BoardFixture extends Board {
   public constructor(grid: Grid) {
@@ -24,13 +23,13 @@ describe("create", () => {
 describe("add", () => {
   it("should add a token to the board grid", () => {
     const expected: Grid = [
-      [stitchToken, null, null],
+      [stitch.token, null, null],
       [null, null, null],
       [null, null, null],
     ];
     const board = Board.create();
 
-    board.add(stitchToken, [0, 0]);
+    board.add(stitch.token, [0, 0]);
 
     expect(board.grid).toEqual(expected);
   });
@@ -40,7 +39,7 @@ describe("checkForWinner", () => {
   it.each([
     {
       grid: [
-        [stitchToken, stitchToken, stitchToken],
+        [stitch.token, stitch.token, stitch.token],
         [null, null, null],
         [null, null, null],
       ],
@@ -48,7 +47,7 @@ describe("checkForWinner", () => {
     {
       grid: [
         [null, null, null],
-        [stitchToken, stitchToken, stitchToken],
+        [stitch.token, stitch.token, stitch.token],
         [null, null, null],
       ],
     },
@@ -56,47 +55,46 @@ describe("checkForWinner", () => {
       grid: [
         [null, null, null],
         [null, null, null],
-        [stitchToken, stitchToken, stitchToken],
+        [stitch.token, stitch.token, stitch.token],
       ],
     },
     {
       grid: [
-        [stitchToken, null, null],
-        [stitchToken, null, null],
-        [stitchToken, null, null],
+        [stitch.token, null, null],
+        [stitch.token, null, null],
+        [stitch.token, null, null],
       ],
     },
     {
       grid: [
-        [null, stitchToken, null],
-        [null, stitchToken, null],
-        [null, stitchToken, null],
+        [null, stitch.token, null],
+        [null, stitch.token, null],
+        [null, stitch.token, null],
       ],
     },
     {
       grid: [
-        [null, null, stitchToken],
-        [null, null, stitchToken],
-        [null, null, stitchToken],
+        [null, null, stitch.token],
+        [null, null, stitch.token],
+        [null, null, stitch.token],
       ],
     },
     {
       grid: [
-        [stitchToken, null, null],
-        [null, stitchToken, null],
-        [null, null, stitchToken],
+        [stitch.token, null, null],
+        [null, stitch.token, null],
+        [null, null, stitch.token],
       ],
     },
     {
       grid: [
-        [null, null, stitchToken],
-        [null, stitchToken, null],
-        [stitchToken, null, null],
+        [null, null, stitch.token],
+        [null, stitch.token, null],
+        [stitch.token, null, null],
       ],
     },
   ])("should return a winner for three in a row", (b) => {
     const board = new BoardFixture(b.grid);
-    const stitch = new Player(stitchToken);
 
     const winner = board.checkForWinner();
 
@@ -105,9 +103,9 @@ describe("checkForWinner", () => {
 
   it("should return null for no winner", () => {
     const board = new BoardFixture([
-      [stitchToken, null, null],
-      [null, null, stitchToken],
-      [null, stitchToken, null],
+      [stitch.token, null, null],
+      [null, null, stitch.token],
+      [null, stitch.token, null],
     ]);
 
     const winner = board.checkForWinner();
@@ -117,11 +115,10 @@ describe("checkForWinner", () => {
 
   it("should return tie when the board is full with no winner", () => {
     const board = new BoardFixture([
-      [liloToken, stitchToken, liloToken],
-      [stitchToken, stitchToken, liloToken],
-      [stitchToken, liloToken, stitchToken],
+      [lilo.token, stitch.token, lilo.token],
+      [stitch.token, stitch.token, lilo.token],
+      [stitch.token, lilo.token, stitch.token],
     ]);
-    const tie = new Player(tieToken);
 
     const winner = board.checkForWinner();
 
@@ -134,7 +131,7 @@ describe("isOccupiedAt", () => {
   beforeEach(() => {
     board = new BoardFixture([
       [null, null, null],
-      [null, stitchToken, null],
+      [null, stitch.token, null],
       [null, null, null],
     ]);
   });

@@ -1,4 +1,4 @@
-import { tieToken } from "../constants/tokens";
+import { tie } from "../constants/players";
 import { Coordinate, Grid, Square, Token } from "../types";
 import { Player } from "./player";
 
@@ -37,7 +37,7 @@ export default class Board {
     }
 
     if (this.isFull()) {
-      return new Player(tieToken);
+      return tie;
     }
 
     return null;
