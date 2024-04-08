@@ -14,7 +14,7 @@ export interface State {
   gameStatus: string;
   player: Player;
   token: Token;
-  winner: Square;
+  winner: Player | null;
 }
 
 type Row = number;

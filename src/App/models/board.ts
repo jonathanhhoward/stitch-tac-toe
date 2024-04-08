@@ -1,5 +1,6 @@
 import { tieToken } from "../constants/tokens";
 import { Coordinate, Grid, Square, Token } from "../types";
+import { Player } from "./player";
 
 export default class Board {
   protected constructor(private _grid: Grid) {}
@@ -24,19 +25,19 @@ export default class Board {
     );
   }
 
-  checkForWinner(): Square {
+  checkForWinner(): Player | null {
     for (let i = 0; i < 3; ++i) {
       if (this.isWinnerInRow(i) || this.isWinnerInColumn(i)) {
-        return this.grid[i][i];
+        return new Player(this.grid[i][i]!);
       }
     }
 
     if (this.isWinnerInBackDiagonal() || this.isWinnerInForwardDiagonal()) {
-      return this.grid[1][1];
+      return new Player(this.grid[1][1]!);
     }
 
     if (this.isFull()) {
-      return tieToken;
+      return new Player(tieToken);
     }
 
     return null;

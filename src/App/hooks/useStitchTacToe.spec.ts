@@ -14,6 +14,7 @@ class BoardFixture extends Board {
 
 const lilo = new Player(liloToken);
 const stitch = new Player(stitchToken);
+const tie = new Player(tieToken);
 
 describe("state", () => {
   it("should start with the state passed in", () => {
@@ -64,7 +65,7 @@ describe("executeTurn", () => {
       gameStatus: "Stitch wins!",
       player: lilo,
       token: liloToken,
-      winner: stitchToken,
+      winner: stitch,
     };
     const { result } = renderHook(() => useStitchTacToe(init));
 
@@ -94,7 +95,7 @@ describe("executeTurn", () => {
       gameStatus: "Tie!",
       player: lilo,
       token: liloToken,
-      winner: tieToken,
+      winner: tie,
     };
     const { result } = renderHook(() => useStitchTacToe(init));
 
@@ -132,7 +133,7 @@ describe("executeTurn", () => {
       gameStatus: "Stitch wins!",
       player: stitch,
       token: stitchToken,
-      winner: stitchToken,
+      winner: stitch,
     });
     const { result } = renderHook(() => useStitchTacToe(init));
 

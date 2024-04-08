@@ -1,6 +1,7 @@
 import { liloToken, stitchToken, tieToken } from "../constants/tokens";
 import { Grid } from "../types";
 import Board from "./board";
+import { Player } from "./player";
 
 class BoardFixture extends Board {
   public constructor(grid: Grid) {
@@ -95,10 +96,11 @@ describe("checkForWinner", () => {
     },
   ])("should return a winner for three in a row", (b) => {
     const board = new BoardFixture(b.grid);
+    const stitch = new Player(stitchToken);
 
     const winner = board.checkForWinner();
 
-    expect(winner).toEqual(stitchToken);
+    expect(winner).toEqual(stitch);
   });
 
   it("should return null for no winner", () => {
@@ -119,10 +121,11 @@ describe("checkForWinner", () => {
       [stitchToken, stitchToken, liloToken],
       [stitchToken, liloToken, stitchToken],
     ]);
+    const tie = new Player(tieToken);
 
     const winner = board.checkForWinner();
 
-    expect(winner).toEqual(tieToken);
+    expect(winner).toEqual(tie);
   });
 });
 

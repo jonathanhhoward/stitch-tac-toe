@@ -28,9 +28,9 @@ export default function useStitchTacToe(initialState: () => State) {
 
       function getGameStatus() {
         return winner
-          ? winner === tieToken
+          ? winner.token === tieToken
             ? "Tie!"
-            : `${winner.name} wins!`
+            : `${winner.token.name} wins!`
           : `${token.name}'s turn`;
       }
     });
