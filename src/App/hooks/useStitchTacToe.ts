@@ -10,28 +10,30 @@ export default function useStitchTacToe(initialState: () => State) {
       return;
     }
 
-    setState(({ board, player: prevPlayer }): State => {
-      prevPlayer.placeToken(board, position);
-      const player = getPlayer();
-      const winner = board.checkForWinner();
-      const gameStatus = getGameStatus();
+    state.player.placeToken(state.board, position);
+    const player = getPlayer();
+    const winner = state.board.checkForWinner();
 
-      return { board, gameStatus, player, winner };
-
-      ///////////////////////////////////////////////////////////////////
-
-      function getPlayer() {
-        return prevPlayer === stitch ? lilo : stitch;
-      }
-
-      function getGameStatus() {
-        return winner
-          ? winner === tie
-            ? "Tie!"
-            : `${winner.token.name} wins!`
-          : `${player.token.name}'s turn`;
-      }
+    setState({
+      board: state.board,
+      gameStatus: getGameStatus(),
+      player,
+      winner,
     });
+
+    ///////////////////////////////////////////////////////////////////
+
+    function getPlayer() {
+      return state.player === stitch ? lilo : stitch;
+    }
+
+    function getGameStatus() {
+      return winner
+        ? winner === tie
+          ? "Tie!"
+          : `${winner.token.name} wins!`
+        : `${player.token.name}'s turn`;
+    }
   }
 
   function startOver() {
