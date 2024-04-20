@@ -1,11 +1,12 @@
 import React from "react";
 import { lilo, stitch, tie } from "../constants/players";
+import { Player } from "../models/player";
 import { Coordinate, State } from "../types";
 
 export default function useStitchTacToe(initialState: () => State) {
   const [state, setState] = React.useState(initialState);
 
-  function executeTurn(position: Coordinate) {
+  function executeTurn(position: Coordinate): void {
     if (state.board.isOccupiedAt(position) || state.winner) {
       return;
     }
@@ -16,27 +17,25 @@ export default function useStitchTacToe(initialState: () => State) {
 
     setState({
       board: state.board,
-      gameStatus: getGameStatus(),
+      gameStatus: getGameStatus(player, winner),
       player,
       winner,
     });
-
-    ///////////////////////////////////////////////////////////////////
-
-    function getPlayer() {
-      return state.player === stitch ? lilo : stitch;
-    }
-
-    function getGameStatus() {
-      return winner
-        ? winner === tie
-          ? "Tie!"
-          : `${winner.token.name} wins!`
-        : `${player.token.name}'s turn`;
-    }
   }
 
-  function startOver() {
+  function getPlayer(): Player {
+    return state.player === stitch ? lilo : stitch;
+  }
+
+  function getGameStatus(player: Player, winner: Player | null): string {
+    return winner
+      ? winner === tie
+        ? "Tie!"
+        : `${winner.token.name} wins!`
+      : `${player.token.name}'s turn`;
+  }
+
+  function startOver(): void {
     setState(initialState);
   }
 
