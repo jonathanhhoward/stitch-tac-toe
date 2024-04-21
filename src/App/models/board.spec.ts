@@ -21,15 +21,15 @@ describe("create", () => {
 });
 
 describe("add", () => {
-  it("should add a token to the board grid", () => {
+  it("should add a player to the board grid", () => {
     const expected: Grid = [
-      [stitch.token, null, null],
+      [stitch, null, null],
       [null, null, null],
       [null, null, null],
     ];
     const board = Board.create();
 
-    board.add(stitch.token, [0, 0]);
+    board.add(stitch, [0, 0]);
 
     expect(board.grid).toEqual(expected);
   });
@@ -39,7 +39,7 @@ describe("checkForWinner", () => {
   it.each([
     {
       grid: [
-        [stitch.token, stitch.token, stitch.token],
+        [stitch, stitch, stitch],
         [null, null, null],
         [null, null, null],
       ],
@@ -47,7 +47,7 @@ describe("checkForWinner", () => {
     {
       grid: [
         [null, null, null],
-        [stitch.token, stitch.token, stitch.token],
+        [stitch, stitch, stitch],
         [null, null, null],
       ],
     },
@@ -55,42 +55,42 @@ describe("checkForWinner", () => {
       grid: [
         [null, null, null],
         [null, null, null],
-        [stitch.token, stitch.token, stitch.token],
+        [stitch, stitch, stitch],
       ],
     },
     {
       grid: [
-        [stitch.token, null, null],
-        [stitch.token, null, null],
-        [stitch.token, null, null],
+        [stitch, null, null],
+        [stitch, null, null],
+        [stitch, null, null],
       ],
     },
     {
       grid: [
-        [null, stitch.token, null],
-        [null, stitch.token, null],
-        [null, stitch.token, null],
+        [null, stitch, null],
+        [null, stitch, null],
+        [null, stitch, null],
       ],
     },
     {
       grid: [
-        [null, null, stitch.token],
-        [null, null, stitch.token],
-        [null, null, stitch.token],
+        [null, null, stitch],
+        [null, null, stitch],
+        [null, null, stitch],
       ],
     },
     {
       grid: [
-        [stitch.token, null, null],
-        [null, stitch.token, null],
-        [null, null, stitch.token],
+        [stitch, null, null],
+        [null, stitch, null],
+        [null, null, stitch],
       ],
     },
     {
       grid: [
-        [null, null, stitch.token],
-        [null, stitch.token, null],
-        [stitch.token, null, null],
+        [null, null, stitch],
+        [null, stitch, null],
+        [stitch, null, null],
       ],
     },
   ])("should return a winner for three in a row", (b) => {
@@ -103,9 +103,9 @@ describe("checkForWinner", () => {
 
   it("should return null for no winner", () => {
     const board = new BoardFixture([
-      [stitch.token, null, null],
-      [null, null, stitch.token],
-      [null, stitch.token, null],
+      [stitch, null, null],
+      [null, null, stitch],
+      [null, stitch, null],
     ]);
 
     const winner = board.checkForWinner();
@@ -115,9 +115,9 @@ describe("checkForWinner", () => {
 
   it("should return tie when the board is full with no winner", () => {
     const board = new BoardFixture([
-      [lilo.token, stitch.token, lilo.token],
-      [stitch.token, stitch.token, lilo.token],
-      [stitch.token, lilo.token, stitch.token],
+      [lilo, stitch, lilo],
+      [stitch, stitch, lilo],
+      [stitch, lilo, stitch],
     ]);
 
     const winner = board.checkForWinner();
@@ -131,7 +131,7 @@ describe("isOccupiedAt", () => {
   beforeEach(() => {
     board = new BoardFixture([
       [null, null, null],
-      [null, stitch.token, null],
+      [null, stitch, null],
       [null, null, null],
     ]);
   });

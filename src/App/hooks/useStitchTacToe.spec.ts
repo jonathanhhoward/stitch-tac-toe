@@ -23,7 +23,7 @@ describe("executeTurn", () => {
   it("should alternate players", () => {
     const expected: State = {
       board: new BoardFixture([
-        [stitch.token, null, null],
+        [stitch, null, null],
         [null, null, null],
         [null, null, null],
       ]),
@@ -41,7 +41,7 @@ describe("executeTurn", () => {
   it("should determine when there is a winner", () => {
     const init = (): State => ({
       board: new BoardFixture([
-        [stitch.token, stitch.token, null],
+        [stitch, stitch, null],
         [null, null, null],
         [null, null, null],
       ]),
@@ -51,7 +51,7 @@ describe("executeTurn", () => {
     });
     const expected: State = {
       board: new BoardFixture([
-        [stitch.token, stitch.token, stitch.token],
+        [stitch, stitch, stitch],
         [null, null, null],
         [null, null, null],
       ]),
@@ -69,9 +69,9 @@ describe("executeTurn", () => {
   it("should determine when there is a tie", () => {
     const init = (): State => ({
       board: new BoardFixture([
-        [lilo.token, stitch.token, stitch.token],
-        [stitch.token, stitch.token, lilo.token],
-        [lilo.token, lilo.token, null],
+        [lilo, stitch, stitch],
+        [stitch, stitch, lilo],
+        [lilo, lilo, null],
       ]),
       gameStatus: "Stitch's turn",
       player: stitch,
@@ -79,9 +79,9 @@ describe("executeTurn", () => {
     });
     const expected: State = {
       board: new BoardFixture([
-        [lilo.token, stitch.token, stitch.token],
-        [stitch.token, stitch.token, lilo.token],
-        [lilo.token, lilo.token, stitch.token],
+        [lilo, stitch, stitch],
+        [stitch, stitch, lilo],
+        [lilo, lilo, stitch],
       ]),
       gameStatus: "Tie!",
       player: lilo,
@@ -97,7 +97,7 @@ describe("executeTurn", () => {
   it("should not update state when a position is occupied", () => {
     const init = (): State => ({
       board: new BoardFixture([
-        [stitch.token, null, null],
+        [stitch, null, null],
         [null, null, null],
         [null, null, null],
       ]),
@@ -115,7 +115,7 @@ describe("executeTurn", () => {
   it("should not update state when there is a winner", () => {
     const init = (): State => ({
       board: new BoardFixture([
-        [stitch.token, stitch.token, stitch.token],
+        [stitch, stitch, stitch],
         [null, null, null],
         [null, null, null],
       ]),

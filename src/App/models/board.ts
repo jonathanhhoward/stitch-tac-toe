@@ -1,5 +1,5 @@
 import { tie } from "../constants/players";
-import { Coordinate, Grid, Square, Token } from "../types";
+import { Coordinate, Grid, Square } from "../types";
 import { Player } from "./player";
 
 export default class Board {
@@ -17,10 +17,10 @@ export default class Board {
     ]);
   }
 
-  add(token: Token, [row, col]: Coordinate): void {
+  add(player: Player, [row, col]: Coordinate): void {
     this._grid = this._grid.map((boardRow, iRow) =>
       boardRow.map((square, iCol) =>
-        row === iRow && col === iCol ? token : square,
+        row === iRow && col === iCol ? player : square,
       ),
     );
   }
@@ -28,12 +28,12 @@ export default class Board {
   checkForWinner(): Player | null {
     for (let i = 0; i < 3; ++i) {
       if (this.isWinnerInRow(i) || this.isWinnerInColumn(i)) {
-        return new Player(this.grid[i][i]!);
+        return this.grid[i][i];
       }
     }
 
     if (this.isWinnerInBackDiagonal() || this.isWinnerInForwardDiagonal()) {
-      return new Player(this.grid[1][1]!);
+      return this.grid[1][1];
     }
 
     if (this.isFull()) {

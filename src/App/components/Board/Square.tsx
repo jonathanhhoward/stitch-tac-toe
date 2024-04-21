@@ -1,14 +1,20 @@
-import { Token } from "../../types";
+import { Player } from "../../models/player";
 
 interface SquareProps {
   onClick: () => void;
-  token: Token | null;
+  player: Player | null;
 }
 
-export default function Square({ onClick, token }: SquareProps) {
+export default function Square({ onClick, player }: SquareProps) {
   return (
     <div className="Square" onClick={onClick}>
-      {token && <img alt={token.name} className="token" src={token.image} />}
+      {player && (
+        <img
+          alt={player.token.name}
+          className="token"
+          src={player.token.image}
+        />
+      )}
     </div>
   );
 }

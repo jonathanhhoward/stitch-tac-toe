@@ -3,7 +3,7 @@ import Board from "./board";
 import { Player } from "./player";
 
 describe("placeToken", () => {
-  it("should place the player's token on the board", () => {
+  it("should place the player's player on the board", () => {
     const player = new Player({ name: "", image: "" });
     const board = {
       add: jest.fn() as jest.Mocked<typeof Board.prototype.add>,
@@ -12,6 +12,6 @@ describe("placeToken", () => {
 
     player.placeToken(board, position);
 
-    expect(board.add).toHaveBeenCalledWith(player.token, position);
+    expect(board.add).toHaveBeenCalledWith(player, position);
   });
 });
