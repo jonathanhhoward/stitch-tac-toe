@@ -31,8 +31,8 @@ export default function useStitchTacToe(initialState: () => State) {
     return winner
       ? winner === tie
         ? "Tie!"
-        : `${winner.token.name} wins!`
-      : `${player.token.name}'s turn`;
+        : `${winner.name} wins!`
+      : `${player.name}'s turn`;
   }
 
   function startOver(): void {

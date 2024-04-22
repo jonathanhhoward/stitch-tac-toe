@@ -8,13 +8,7 @@ interface SquareProps {
 export default function Square({ onClick, player }: SquareProps) {
   return (
     <div className="Square" onClick={onClick}>
-      {player && (
-        <img
-          alt={player.token.name}
-          className="token"
-          src={player.token.image}
-        />
-      )}
+      {player && <img alt={player.name} className="image" src={player.image} />}
     </div>
   );
 }

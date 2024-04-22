@@ -4,7 +4,7 @@ import { Player } from "./player";
 
 describe("placeToken", () => {
   it("should place the player's player on the board", () => {
-    const player = new Player({ name: "", image: "" });
+    const player = new Player("name", "image");
     const board = {
       add: jest.fn() as jest.Mocked<typeof Board.prototype.add>,
     } as Board;
