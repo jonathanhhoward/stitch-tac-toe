@@ -1,8 +1,7 @@
 import Board from "./models/board";
 import { Player } from "./models/player";
 
-export type Square = Player | null;
-export type Grid = Square[][];
+export type Grid = (Player | null)[][];
 
 export interface State {
   board: Board;

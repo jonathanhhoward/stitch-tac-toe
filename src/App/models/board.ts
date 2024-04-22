@@ -1,5 +1,5 @@
 import { tie } from "../constants/players";
-import { Coordinate, Grid, Square } from "../types";
+import { Coordinate, Grid } from "../types";
 import { Player } from "./player";
 
 export default class Board {
@@ -90,7 +90,11 @@ export default class Board {
     );
   }
 
-  private isThreeInARow(sq1: Square, sq2: Square, sq3: Square) {
+  private isThreeInARow(
+    sq1: Player | null,
+    sq2: Player | null,
+    sq3: Player | null,
+  ) {
     return !!sq1 && !!sq2 && !!sq3 && sq1 === sq2 && sq1 === sq3;
   }
 }
