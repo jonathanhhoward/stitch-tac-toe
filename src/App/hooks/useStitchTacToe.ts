@@ -16,7 +16,7 @@ export default function useStitchTacToe(initialState: () => State) {
     const winner = state.board.checkForWinner();
 
     setState({
-      board: state.board,
+      ...state,
       gameStatus: getGameStatus(player, winner),
       player,
       winner,
