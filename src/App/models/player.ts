@@ -7,7 +7,7 @@ export class Player {
     public readonly image: string,
   ) {}
 
-  placeToken(board: Board, position: Coordinate): void {
+  selectSquare(board: Board, position: Coordinate): void {
     board.add(this, position);
   }
 }

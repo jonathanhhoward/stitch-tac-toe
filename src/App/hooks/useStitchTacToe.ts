@@ -11,7 +11,7 @@ export default function useStitchTacToe(initialState: () => State) {
       return;
     }
 
-    state.player.placeToken(state.board, position);
+    state.player.selectSquare(state.board, position);
     const player = getPlayer();
     const winner = state.board.checkForWinner();
 
