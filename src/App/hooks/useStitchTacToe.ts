@@ -12,7 +12,7 @@ export default function useStitchTacToe(initialState: () => State) {
     }
 
     state.player.selectSquare(state.board, position);
-    const player = getPlayer();
+    const player = getNextPlayer(state.player);
     const winner = state.board.checkForWinner();
 
     setState({
@@ -23,8 +23,8 @@ export default function useStitchTacToe(initialState: () => State) {
     });
   }
 
-  function getPlayer(): Player {
-    return state.player === stitch ? lilo : stitch;
+  function getNextPlayer(currentPlayer: Player): Player {
+    return currentPlayer === stitch ? lilo : stitch;
   }
 
   function getGameStatus(player: Player, winner: Player | null): string {
