@@ -12,7 +12,7 @@ export default class Board {
     return this.#grid;
   }
 
-  static create(): Board {
+  static empty(): Board {
     return new Board([
       [null, null, null],
       [null, null, null],

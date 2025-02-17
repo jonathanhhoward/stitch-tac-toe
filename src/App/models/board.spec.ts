@@ -2,9 +2,9 @@ import { stitch } from "../constants/players";
 import { Grid } from "../types";
 import Board from "./board";
 
-describe("create", () => {
+describe("empty", () => {
   it("should return a Board with a null grid", () => {
-    const board = Board.create();
+    const board = Board.empty();
 
     board.grid.forEach((row) => {
       row.forEach((square) => {
@@ -21,7 +21,7 @@ describe("add", () => {
       [null, null, null],
       [null, null, null],
     ];
-    const board = Board.create();
+    const board = Board.empty();
 
     board.add(stitch, [0, 0]);
 
