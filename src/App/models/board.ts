@@ -2,7 +2,11 @@ import { Coordinate, Grid } from "../types";
 import { Player } from "./player";
 
 export default class Board {
-  constructor(private _grid: Grid) {}
+  constructor(grid: Grid) {
+    this._grid = grid;
+  }
+
+  private _grid: Grid;
 
   get grid() {
     return this._grid;
