@@ -17,56 +17,56 @@ export class Game {
 
   static checkForWinner(board: Board): Player | null {
     for (let i = 0; i < 3; ++i) {
-      if (this.isWinnerInRow(board, i) || this.isWinnerInColumn(board, i)) {
+      if (this.#isWinnerInRow(board, i) || this.#isWinnerInColumn(board, i)) {
         return board.grid[i][i];
       }
     }
 
     // prettier-ignore
-    if (this.isWinnerInBackDiagonal(board) || this.isWinnerInForwardDiagonal(board)) {
+    if (this.#isWinnerInBackDiagonal(board) || this.#isWinnerInForwardDiagonal(board)) {
       return board.grid[1][1];
     }
 
-    if (this.isFull(board)) {
+    if (this.#isFull(board)) {
       return tie;
     }
 
     return null;
   }
 
-  private static isWinnerInRow(board: Board, row: number) {
-    return this.isThreeInARow(
+  static #isWinnerInRow(board: Board, row: number) {
+    return this.#isThreeInARow(
       board.grid[row][0],
       board.grid[row][1],
       board.grid[row][2],
     );
   }
 
-  private static isWinnerInColumn(board: Board, col: number) {
-    return this.isThreeInARow(
+  static #isWinnerInColumn(board: Board, col: number) {
+    return this.#isThreeInARow(
       board.grid[0][col],
       board.grid[1][col],
       board.grid[2][col],
     );
   }
 
-  private static isWinnerInBackDiagonal(board: Board) {
-    return this.isThreeInARow(
+  static #isWinnerInBackDiagonal(board: Board) {
+    return this.#isThreeInARow(
       board.grid[0][0],
       board.grid[1][1],
       board.grid[2][2],
     );
   }
 
-  private static isWinnerInForwardDiagonal(board: Board) {
-    return this.isThreeInARow(
+  static #isWinnerInForwardDiagonal(board: Board) {
+    return this.#isThreeInARow(
       board.grid[0][2],
       board.grid[1][1],
       board.grid[2][0],
     );
   }
 
-  private static isFull(board: Board) {
+  static #isFull(board: Board) {
     // prettier-ignore
     return board.grid.reduce(
       (rowAcc, rowCur) => rowAcc && rowCur.reduce(
@@ -77,7 +77,7 @@ export class Game {
     );
   }
 
-  private static isThreeInARow(
+  static #isThreeInARow(
     sq1: Player | null,
     sq2: Player | null,
     sq3: Player | null,

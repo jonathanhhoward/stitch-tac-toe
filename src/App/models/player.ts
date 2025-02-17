@@ -2,8 +2,8 @@ import { Coordinate } from "../types";
 import Board from "./board";
 
 export class Player {
-  public readonly name: string;
-  public readonly image: string;
+  readonly name: string;
+  readonly image: string;
 
   constructor(name: string, image: string) {
     this.image = image;

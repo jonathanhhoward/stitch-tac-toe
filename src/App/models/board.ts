@@ -2,14 +2,14 @@ import { Coordinate, Grid } from "../types";
 import { Player } from "./player";
 
 export default class Board {
+  #grid: Grid;
+
   constructor(grid: Grid) {
-    this._grid = grid;
+    this.#grid = grid;
   }
 
-  private _grid: Grid;
-
   get grid() {
-    return this._grid;
+    return this.#grid;
   }
 
   static create(): Board {
@@ -21,7 +21,7 @@ export default class Board {
   }
 
   add(player: Player, [row, col]: Coordinate): void {
-    this._grid = this._grid.map((boardRow, iRow) =>
+    this.#grid = this.#grid.map((boardRow, iRow) =>
       boardRow.map((square, iCol) =>
         row === iRow && col === iCol ? player : square,
       ),
