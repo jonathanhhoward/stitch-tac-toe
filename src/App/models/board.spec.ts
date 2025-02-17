@@ -1,12 +1,6 @@
-import { lilo, stitch, tie } from "../constants/players";
+import { stitch } from "../constants/players";
 import { Grid } from "../types";
 import Board from "./board";
-
-class BoardFixture extends Board {
-  public constructor(grid: Grid) {
-    super(grid);
-  }
-}
 
 describe("create", () => {
   it("should return a Board with a null grid", () => {
@@ -35,101 +29,10 @@ describe("add", () => {
   });
 });
 
-describe("checkForWinner", () => {
-  it.each([
-    {
-      grid: [
-        [stitch, stitch, stitch],
-        [null, null, null],
-        [null, null, null],
-      ],
-    },
-    {
-      grid: [
-        [null, null, null],
-        [stitch, stitch, stitch],
-        [null, null, null],
-      ],
-    },
-    {
-      grid: [
-        [null, null, null],
-        [null, null, null],
-        [stitch, stitch, stitch],
-      ],
-    },
-    {
-      grid: [
-        [stitch, null, null],
-        [stitch, null, null],
-        [stitch, null, null],
-      ],
-    },
-    {
-      grid: [
-        [null, stitch, null],
-        [null, stitch, null],
-        [null, stitch, null],
-      ],
-    },
-    {
-      grid: [
-        [null, null, stitch],
-        [null, null, stitch],
-        [null, null, stitch],
-      ],
-    },
-    {
-      grid: [
-        [stitch, null, null],
-        [null, stitch, null],
-        [null, null, stitch],
-      ],
-    },
-    {
-      grid: [
-        [null, null, stitch],
-        [null, stitch, null],
-        [stitch, null, null],
-      ],
-    },
-  ])("should return a winner for three in a row", (b) => {
-    const board = new BoardFixture(b.grid);
-
-    const winner = board.checkForWinner();
-
-    expect(winner).toEqual(stitch);
-  });
-
-  it("should return null for no winner", () => {
-    const board = new BoardFixture([
-      [stitch, null, null],
-      [null, null, stitch],
-      [null, stitch, null],
-    ]);
-
-    const winner = board.checkForWinner();
-
-    expect(winner).toBeNull();
-  });
-
-  it("should return tie when the board is full with no winner", () => {
-    const board = new BoardFixture([
-      [lilo, stitch, lilo],
-      [stitch, stitch, lilo],
-      [stitch, lilo, stitch],
-    ]);
-
-    const winner = board.checkForWinner();
-
-    expect(winner).toEqual(tie);
-  });
-});
-
 describe("isOccupiedAt", () => {
-  let board: BoardFixture;
+  let board: Board;
   beforeEach(() => {
-    board = new BoardFixture([
+    board = new Board([
       [null, null, null],
       [null, stitch, null],
       [null, null, null],

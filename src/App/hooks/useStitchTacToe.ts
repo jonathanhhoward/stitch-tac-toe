@@ -1,6 +1,5 @@
 import React from "react";
-import { lilo, stitch, tie } from "../constants/players";
-import { Player } from "../models/player";
+import { Game } from "../models/game";
 import { Coordinate, State } from "../types";
 
 export default function useStitchTacToe(initialState: () => State) {
@@ -12,27 +11,15 @@ export default function useStitchTacToe(initialState: () => State) {
     }
 
     state.player.selectSquare(state.board, position);
-    const player = getNextPlayer(state.player);
-    const winner = state.board.checkForWinner();
+    const player = Game.nextPlayer(state.player);
+    const winner = Game.checkForWinner(state.board);
 
     setState({
       ...state,
-      gameStatus: getGameStatus(player, winner),
+      gameStatus: Game.status(player, winner),
       player,
       winner,
     });
-  }
-
-  function getNextPlayer(currentPlayer: Player): Player {
-    return currentPlayer === stitch ? lilo : stitch;
-  }
-
-  function getGameStatus(player: Player, winner: Player | null): string {
-    return winner
-      ? winner === tie
-        ? "Tie!"
-        : `${winner.name} wins!`
-      : `${player.name}'s turn`;
   }
 
   function startOver(): void {
