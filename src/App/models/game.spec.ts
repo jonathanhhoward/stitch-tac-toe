@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { lilo, stitch, tie } from "../constants/players";
 import Board from "./board";
 import { Game } from "./game";
