@@ -2,7 +2,7 @@ import React from "react";
 import { Game } from "../models/game";
 import { Coordinate, State } from "../types";
 
-export default function useStitchTacToe(initialState: () => State) {
+export default function useGame(initialState: () => State) {
   const [state, setState] = React.useState(initialState);
 
   function executeTurn(position: Coordinate): void {

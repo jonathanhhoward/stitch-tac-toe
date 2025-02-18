@@ -4,11 +4,11 @@ import { initialState } from "../constants/initialState";
 import { lilo, stitch } from "../constants/players";
 import Board from "../models/board";
 import { State } from "../types";
-import useStitchTacToe from "./useStitchTacToe";
+import useGame from "./useGame.ts";
 
 describe("state", () => {
   it("should start with the state passed in", () => {
-    const { result } = renderHook(() => useStitchTacToe(initialState));
+    const { result } = renderHook(() => useGame(initialState));
 
     expect(result.current.state).toEqual(initialState());
   });
@@ -16,7 +16,7 @@ describe("state", () => {
 
 describe("executeTurn", () => {
   it("should alternate players", () => {
-    const { result } = renderHook(() => useStitchTacToe(initialState));
+    const { result } = renderHook(() => useGame(initialState));
 
     act(() => result.current.executeTurn([0, 0]));
 
@@ -25,7 +25,7 @@ describe("executeTurn", () => {
 
   it("should determine when there is a winner", () => {
     const { result } = renderHook(() =>
-      useStitchTacToe(() => ({
+      useGame(() => ({
         board: new Board([
           [stitch, stitch, null],
           [null, null, null],
@@ -44,7 +44,7 @@ describe("executeTurn", () => {
 
   it("should determine when there is a tie", () => {
     const { result } = renderHook(() =>
-      useStitchTacToe(() => ({
+      useGame(() => ({
         board: new Board([
           [lilo, stitch, stitch],
           [stitch, stitch, lilo],
@@ -72,7 +72,7 @@ describe("executeTurn", () => {
       player: stitch,
       winner: null,
     });
-    const { result } = renderHook(() => useStitchTacToe(init));
+    const { result } = renderHook(() => useGame(init));
 
     act(() => result.current.executeTurn([0, 0]));
 
@@ -90,7 +90,7 @@ describe("executeTurn", () => {
       player: stitch,
       winner: stitch,
     });
-    const { result } = renderHook(() => useStitchTacToe(init));
+    const { result } = renderHook(() => useGame(init));
 
     act(() => result.current.executeTurn([1, 0]));
 
@@ -100,7 +100,7 @@ describe("executeTurn", () => {
 
 describe("startOver", () => {
   it("should set state to initialState", () => {
-    const { result } = renderHook(() => useStitchTacToe(initialState));
+    const { result } = renderHook(() => useGame(initialState));
 
     act(() => {
       result.current.executeTurn([0, 0]);
