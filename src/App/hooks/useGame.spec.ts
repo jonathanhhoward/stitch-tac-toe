@@ -2,9 +2,9 @@ import { act, renderHook } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { initialState } from "../constants/initialState";
 import { lilo, stitch } from "../constants/players";
-import Board from "../models/board";
+import { Board } from "../models/board";
 import { State } from "../types";
-import useGame from "./useGame.ts";
+import { useGame } from "./useGame.ts";
 
 describe("state", () => {
   it("should start with the state passed in", () => {

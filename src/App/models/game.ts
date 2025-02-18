@@ -1,5 +1,5 @@
 import { lilo, stitch, tie } from "../constants/players";
-import Board from "./board";
+import { Board } from "./board";
 import { Player } from "./player";
 
 export class Game {

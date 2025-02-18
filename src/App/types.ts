@@ -1,4 +1,4 @@
-import Board from "./models/board";
+import { Board } from "./models/board";
 import { Player } from "./models/player";
 
 export type Grid = (Player | null)[][];

@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { stitch } from "../constants/players";
 import { Grid } from "../types";
-import Board from "./board";
+import { Board } from "./board";
 
 describe("empty", () => {
   it("should return a Board with a null grid", () => {

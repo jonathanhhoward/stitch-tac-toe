@@ -1,4 +1,4 @@
-import Board from "../models/board";
+import { Board } from "../models/board";
 import { State } from "../types";
 import { stitch } from "./players";
 

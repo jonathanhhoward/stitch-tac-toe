@@ -1,5 +1,5 @@
 import { Coordinate } from "../types";
-import Board from "./board";
+import { Board } from "./board";
 
 export class Player {
   readonly name: string;

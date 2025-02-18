@@ -1,9 +1,9 @@
-import React from "react";
+import { useState } from "react";
 import { Game } from "../models/game";
 import { Coordinate, State } from "../types";
 
-export default function useGame(initialState: () => State) {
-  const [state, setState] = React.useState(initialState);
+export function useGame(initialState: () => State) {
+  const [state, setState] = useState(initialState);
 
   function executeTurn(position: Coordinate): void {
     if (state.board.isOccupiedAt(position) || state.winner) {

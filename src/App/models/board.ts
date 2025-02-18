@@ -1,7 +1,7 @@
 import { Coordinate, Grid } from "../types";
 import { Player } from "./player";
 
-export default class Board {
+export class Board {
   #grid: Grid;
 
   constructor(grid: Grid) {

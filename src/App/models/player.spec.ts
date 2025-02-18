@@ -1,6 +1,6 @@
 import { describe, expect, it, Mocked, vi } from "vitest";
 import { Coordinate } from "../types";
-import Board from "./board";
+import { Board } from "./board";
 import { Player } from "./player";
 
 describe("placeToken", () => {
