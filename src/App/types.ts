@@ -5,7 +5,7 @@ export type Grid = (Player | null)[][];
 
 export interface State {
   board: Board;
-  gameStatus: string;
+  status: string;
   player: Player;
   winner: Player | null;
 }

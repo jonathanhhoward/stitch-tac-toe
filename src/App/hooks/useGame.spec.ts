@@ -20,7 +20,7 @@ describe("executeTurn", () => {
 
     act(() => result.current.executeTurn([0, 0]));
 
-    expect(result.current.state.gameStatus).toEqual("Lilo's turn");
+    expect(result.current.state.status).toEqual("Lilo's turn");
   });
 
   it("should determine when there is a winner", () => {
@@ -31,7 +31,7 @@ describe("executeTurn", () => {
           [null, null, null],
           [null, null, null],
         ]),
-        gameStatus: "Stitch's turn",
+        status: "Stitch's turn",
         player: stitch,
         winner: null,
       })),
@@ -39,7 +39,7 @@ describe("executeTurn", () => {
 
     act(() => result.current.executeTurn([0, 2]));
 
-    expect(result.current.state.gameStatus).toEqual("Stitch wins!");
+    expect(result.current.state.status).toEqual("Stitch wins!");
   });
 
   it("should determine when there is a tie", () => {
@@ -50,7 +50,7 @@ describe("executeTurn", () => {
           [stitch, stitch, lilo],
           [lilo, lilo, null],
         ]),
-        gameStatus: "Stitch's turn",
+        status: "Stitch's turn",
         player: stitch,
         winner: null,
       })),
@@ -58,7 +58,7 @@ describe("executeTurn", () => {
 
     act(() => result.current.executeTurn([2, 2]));
 
-    expect(result.current.state.gameStatus).toEqual("Tie!");
+    expect(result.current.state.status).toEqual("Tie!");
   });
 
   it("should not update state when a position is occupied", () => {
@@ -68,7 +68,7 @@ describe("executeTurn", () => {
         [null, null, null],
         [null, null, null],
       ]),
-      gameStatus: "Stitch's turn",
+      status: "Stitch's turn",
       player: stitch,
       winner: null,
     });
@@ -86,7 +86,7 @@ describe("executeTurn", () => {
         [null, null, null],
         [null, null, null],
       ]),
-      gameStatus: "Stitch wins!",
+      status: "Stitch wins!",
       player: stitch,
       winner: stitch,
     });

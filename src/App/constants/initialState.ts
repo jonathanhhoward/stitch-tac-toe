@@ -4,7 +4,7 @@ import { stitch } from "./players";
 
 export const initialState = (): State => ({
   board: Board.empty(),
-  gameStatus: "Stitch's turn",
+  status: "Stitch's turn",
   player: stitch,
   winner: null,
 });

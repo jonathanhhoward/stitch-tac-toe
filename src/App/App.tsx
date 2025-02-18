@@ -10,7 +10,7 @@ export default function App() {
   return (
     <div className="App">
       <Header
-        gameStatus={state.gameStatus}
+        gameStatus={state.status}
         onResetClick={startOver}
         showReset={!!state.winner}
       />

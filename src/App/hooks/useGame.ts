@@ -16,7 +16,7 @@ export function useGame(initialState: () => State) {
 
     setState({
       ...state,
-      gameStatus: Game.status(player, winner),
+      status: Game.status(player, winner),
       player,
       winner,
     });
