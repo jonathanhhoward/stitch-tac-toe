@@ -67,14 +67,7 @@ export class Game {
   }
 
   static #isFull(board: Board) {
-    // prettier-ignore
-    return board.grid.reduce(
-      (rowAcc, rowCur) => rowAcc && rowCur.reduce(
-        (tokenAcc, tokenCur) => tokenAcc && !!tokenCur,
-        true
-      ),
-      true
-    );
+    return board.grid.flat().every((square) => !!square);
   }
 
   static #isThreeInARow(
@@ -82,6 +75,6 @@ export class Game {
     sq2: Player | null,
     sq3: Player | null,
   ) {
-    return !!sq1 && !!sq2 && !!sq3 && sq1 === sq2 && sq1 === sq3;
+    return !!sq1 && sq1 === sq2 && sq1 === sq3;
   }
 }
