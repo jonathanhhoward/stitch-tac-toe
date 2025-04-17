@@ -1,4 +1,4 @@
-import { Coordinate, Grid } from "../../types";
+import { Coordinate, Grid } from "../types.ts";
 import Square from "./Square";
 
 interface BoardProps {
