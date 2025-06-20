@@ -24,9 +24,9 @@ describe("add", () => {
     ];
     const board = new Board();
 
-    board.add(stitch, [0, 0]);
+    const result = board.add(stitch, [0, 0]);
 
-    expect(board.grid).toEqual(expected);
+    expect(result.grid).toEqual(expected);
   });
 });
 

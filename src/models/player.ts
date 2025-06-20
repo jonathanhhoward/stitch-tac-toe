@@ -10,7 +10,7 @@ export class Player {
     this.name = name;
   }
 
-  selectSquare(board: Board, position: Coordinate): void {
-    board.add(this, position);
+  selectSquare(board: Board, position: Coordinate): Board {
+    return board.add(this, position);
   }
 }

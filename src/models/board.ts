@@ -2,10 +2,10 @@ import { Coordinate, Grid } from "../types";
 import { Player } from "./player";
 
 export class Board {
-  #grid: Grid;
+  readonly #grid: Grid;
 
   constructor(grid?: Grid) {
-    this.#grid = grid?.slice() ?? [
+    this.#grid = grid ?? [
       [null, null, null],
       [null, null, null],
       [null, null, null],
@@ -16,10 +16,12 @@ export class Board {
     return this.#grid;
   }
 
-  add(player: Player, [row, col]: Coordinate): void {
-    this.#grid = this.#grid.map((boardRow, iRow) =>
-      boardRow.map((square, iCol) =>
-        row === iRow && col === iCol ? player : square,
+  add(player: Player, [row, col]: Coordinate): Board {
+    return new Board(
+      this.#grid.map((boardRow, iRow) =>
+        boardRow.map((square, iCol) =>
+          row === iRow && col === iCol ? player : square,
+        ),
       ),
     );
   }
