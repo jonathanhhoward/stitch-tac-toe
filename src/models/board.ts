@@ -4,20 +4,16 @@ import { Player } from "./player";
 export class Board {
   #grid: Grid;
 
-  constructor(grid: Grid) {
-    this.#grid = grid;
+  constructor(grid?: Grid) {
+    this.#grid = grid?.slice() ?? [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ];
   }
 
   get grid() {
     return this.#grid;
-  }
-
-  static empty(): Board {
-    return new Board([
-      [null, null, null],
-      [null, null, null],
-      [null, null, null],
-    ]);
   }
 
   add(player: Player, [row, col]: Coordinate): void {

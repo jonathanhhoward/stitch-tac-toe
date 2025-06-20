@@ -5,7 +5,7 @@ import { Board } from "./board";
 
 describe("empty", () => {
   it("should return a Board with a null grid", () => {
-    const board = Board.empty();
+    const board = new Board();
 
     board.grid.forEach((row) => {
       row.forEach((square) => {
@@ -22,7 +22,7 @@ describe("add", () => {
       [null, null, null],
       [null, null, null],
     ];
-    const board = Board.empty();
+    const board = new Board();
 
     board.add(stitch, [0, 0]);
 
