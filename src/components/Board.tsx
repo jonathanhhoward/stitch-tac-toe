@@ -1,15 +1,16 @@
-import { Coordinate, Grid } from "../types.ts";
+import { Coordinate } from "../types.ts";
 import Square from "./Square";
+import { Board as GameBoard } from "../models/board.ts";
 
 interface BoardProps {
-  grid: Grid;
+  board: GameBoard;
   onSquareClick: (position: Coordinate) => void;
 }
 
-export default function Board({ grid, onSquareClick }: BoardProps) {
+export default function Board({ board, onSquareClick }: BoardProps) {
   return (
     <div className="Board">
-      {grid.map((squares, row) => (
+      {board.grid.map((squares, row) => (
         <div className="row" key={`row:${row}`}>
           {squares.map((square, col) => (
             <Square

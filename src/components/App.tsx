@@ -14,7 +14,7 @@ export default function App() {
         onResetClick={startOver}
         showReset={!!state.winner}
       />
-      <Board grid={state.board.grid} onSquareClick={executeTurn} />
+      <Board board={state.board} onSquareClick={executeTurn} />
     </div>
   );
 }
