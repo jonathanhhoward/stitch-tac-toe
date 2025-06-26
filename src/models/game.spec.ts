@@ -8,7 +8,9 @@ describe("nextPlayer", () => {
     [stitch, lilo],
     [lilo, stitch],
   ])("should alternate players", (player1, player2) => {
-    const next = Game.nextPlayer(player1);
+    const game = new Game();
+
+    const next = game.nextPlayer(player1);
 
     expect(next).toEqual(player2);
   });
@@ -21,7 +23,9 @@ describe("status", () => {
     [lilo, tie, "Tie!"],
     [stitch, null, "Stitch's turn"],
   ])("should return the correct status", (player, winner, status) => {
-    const result = Game.status(player, winner);
+    const game = new Game();
+
+    const result = game.status(player, winner);
 
     expect(result).toEqual(status);
   });
@@ -86,33 +90,36 @@ describe("checkForWinner", () => {
       ],
     },
   ])("should return a winner for three in a row", (b) => {
+    const game = new Game();
     const board = new Board(b.grid);
 
-    const winner = Game.checkForWinner(board);
+    const winner = game.checkForWinner(board);
 
     expect(winner).toEqual(stitch);
   });
 
   it("should return null for no winner", () => {
+    const game = new Game();
     const board = new Board([
       [stitch, null, null],
       [null, null, stitch],
       [null, stitch, null],
     ]);
 
-    const winner = Game.checkForWinner(board);
+    const winner = game.checkForWinner(board);
 
     expect(winner).toBeNull();
   });
 
   it("should return tie when the board is full with no winner", () => {
+    const game = new Game();
     const board = new Board([
       [lilo, stitch, lilo],
       [stitch, stitch, lilo],
       [stitch, lilo, stitch],
     ]);
 
-    const winner = Game.checkForWinner(board);
+    const winner = game.checkForWinner(board);
 
     expect(winner).toEqual(tie);
   });

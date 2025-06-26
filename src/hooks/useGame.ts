@@ -11,9 +11,10 @@ export function useGame(initialState: () => State) {
     }
 
     const board = state.player.selectSquare(state.board, position);
-    const player = Game.nextPlayer(state.player);
-    const winner = Game.checkForWinner(board);
-    const status = Game.status(player, winner);
+    const game = new Game();
+    const player = game.nextPlayer(state.player);
+    const winner = game.checkForWinner(board);
+    const status = game.status(player, winner);
 
     setState({ board, status, player, winner });
   }

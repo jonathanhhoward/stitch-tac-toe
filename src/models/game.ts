@@ -3,11 +3,11 @@ import { Board } from "./board";
 import { Player } from "./player";
 
 export class Game {
-  static nextPlayer(currentPlayer: Player): Player {
+  nextPlayer(currentPlayer: Player): Player {
     return currentPlayer === stitch ? lilo : stitch;
   }
 
-  static status(player: Player, winner: Player | null): string {
+  status(player: Player, winner: Player | null): string {
     return winner
       ? winner === tie
         ? "Tie!"
@@ -15,7 +15,7 @@ export class Game {
       : `${player.name}'s turn`;
   }
 
-  static checkForWinner(board: Board): Player | null {
+  checkForWinner(board: Board): Player | null {
     for (let i = 0; i < 3; ++i) {
       if (this.#isWinnerInRow(board, i) || this.#isWinnerInColumn(board, i)) {
         return board.grid[i][i];
@@ -34,7 +34,7 @@ export class Game {
     return null;
   }
 
-  static #isWinnerInRow(board: Board, row: number) {
+  #isWinnerInRow(board: Board, row: number) {
     return this.#isThreeInARow(
       board.grid[row][0],
       board.grid[row][1],
@@ -42,7 +42,7 @@ export class Game {
     );
   }
 
-  static #isWinnerInColumn(board: Board, col: number) {
+  #isWinnerInColumn(board: Board, col: number) {
     return this.#isThreeInARow(
       board.grid[0][col],
       board.grid[1][col],
@@ -50,7 +50,7 @@ export class Game {
     );
   }
 
-  static #isWinnerInBackDiagonal(board: Board) {
+  #isWinnerInBackDiagonal(board: Board) {
     return this.#isThreeInARow(
       board.grid[0][0],
       board.grid[1][1],
@@ -58,7 +58,7 @@ export class Game {
     );
   }
 
-  static #isWinnerInForwardDiagonal(board: Board) {
+  #isWinnerInForwardDiagonal(board: Board) {
     return this.#isThreeInARow(
       board.grid[0][2],
       board.grid[1][1],
@@ -66,15 +66,11 @@ export class Game {
     );
   }
 
-  static #isFull(board: Board) {
+  #isFull(board: Board) {
     return board.grid.flat().every((square) => !!square);
   }
 
-  static #isThreeInARow(
-    sq1: Player | null,
-    sq2: Player | null,
-    sq3: Player | null,
-  ) {
+  #isThreeInARow(sq1: Player | null, sq2: Player | null, sq3: Player | null) {
     return !!sq1 && sq1 === sq2 && sq1 === sq3;
   }
 }
