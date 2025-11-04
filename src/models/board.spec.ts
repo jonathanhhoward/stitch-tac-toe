@@ -1,7 +1,8 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { lilo, stitch, tie } from "../constants/players";
-import { Coordinate, Grid } from "../types";
+import { Grid } from "../types";
 import { Board } from "./board";
+import { Coordinate } from "./coordinate.ts";
 
 describe("empty", () => {
   it("should return a Board with a null grid", () => {

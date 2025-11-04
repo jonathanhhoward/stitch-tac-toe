@@ -1,6 +1,7 @@
-import { Coordinate, Grid } from "../types";
-import { Player } from "./player";
 import { tie } from "../constants/players";
+import { Grid } from "../types";
+import { Coordinate } from "./coordinate.ts";
+import { Player } from "./player";
 
 export class Board {
   readonly #grid: Grid;

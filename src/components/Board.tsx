@@ -1,6 +1,6 @@
-import { Coordinate } from "../types.ts";
 import Square from "./Square";
 import { Board as GameBoard } from "../models/board.ts";
+import { Coordinate } from "../models/coordinate.ts";
 
 interface BoardProps {
   board: GameBoard;

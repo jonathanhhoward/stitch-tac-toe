@@ -3,7 +3,8 @@ import { describe, expect, it } from "vitest";
 import { initialState } from "../constants/initialState";
 import { lilo, stitch } from "../constants/players";
 import { Board } from "../models/board";
-import { State, Coordinate } from "../types";
+import { Coordinate } from "../models/coordinate.ts";
+import { State } from "../types";
 import { useGame } from "./useGame.ts";
 
 describe("state", () => {

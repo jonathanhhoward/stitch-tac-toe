@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { Coordinate } from "../models/coordinate.ts";
 import { Game } from "../models/game";
-import { Coordinate, State } from "../types";
+import { State } from "../types";
 
 export function useGame(initialState: () => State) {
   const [state, setState] = useState(initialState);
