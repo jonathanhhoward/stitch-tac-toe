@@ -29,18 +29,18 @@ export class Board {
 
   isOccupiedAt(position: Coordinate): boolean {
     const { row, col } = position;
-    return !!this.#getAtRC(row, col);
+    return !!this.#grid[row][col];
   }
 
   winner(): Player | null {
     for (let i = 0; i < 3; ++i) {
       if (this.#isWinnerInRow(i) || this.#isWinnerInColumn(i)) {
-        return this.#getAtRC(i, i);
+        return this.#grid[i][i];
       }
     }
 
     if (this.#isWinnerInBackDiagonal() || this.#isWinnerInForwardDiagonal()) {
-      return this.#getAtRC(1, 1);
+      return this.#grid[1][1];
     }
 
     if (this.#isFull()) {
@@ -50,39 +50,35 @@ export class Board {
     return null;
   }
 
-  #getAtRC(row: number, col: number): Player | null {
-    return this.#grid[row][col];
-  }
-
   #isWinnerInRow(row: number) {
     return this.#isThreeInARow(
-      this.#getAtRC(row, 0),
-      this.#getAtRC(row, 1),
-      this.#getAtRC(row, 2),
+      this.#grid[row][0],
+      this.#grid[row][1],
+      this.#grid[row][2],
     );
   }
 
   #isWinnerInColumn(col: number) {
     return this.#isThreeInARow(
-      this.#getAtRC(0, col),
-      this.#getAtRC(1, col),
-      this.#getAtRC(2, col),
+      this.#grid[0][col],
+      this.#grid[1][col],
+      this.#grid[2][col],
     );
   }
 
   #isWinnerInBackDiagonal() {
     return this.#isThreeInARow(
-      this.#getAtRC(0, 0),
-      this.#getAtRC(1, 1),
-      this.#getAtRC(2, 2),
+      this.#grid[0][0],
+      this.#grid[1][1],
+      this.#grid[2][2],
     );
   }
 
   #isWinnerInForwardDiagonal() {
     return this.#isThreeInARow(
-      this.#getAtRC(0, 2),
-      this.#getAtRC(1, 1),
-      this.#getAtRC(2, 0),
+      this.#grid[0][2],
+      this.#grid[1][1],
+      this.#grid[2][0],
     );
   }
 
