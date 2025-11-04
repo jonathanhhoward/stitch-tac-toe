@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { stitch } from "../constants/players";
-import { Grid, Coordinate } from "../types";
+import { lilo, stitch, tie } from "../constants/players";
+import { Coordinate, Grid } from "../types";
 import { Board } from "./board";
 
 describe("empty", () => {
@@ -50,5 +50,96 @@ describe("isOccupiedAt", () => {
     const isOccupied = board.isOccupiedAt(new Coordinate(0, 0));
 
     expect(isOccupied).toBe(false);
+  });
+});
+
+describe("winner", () => {
+  it.each([
+    {
+      grid: [
+        [stitch, stitch, stitch],
+        [null, null, null],
+        [null, null, null],
+      ],
+    },
+    {
+      grid: [
+        [null, null, null],
+        [stitch, stitch, stitch],
+        [null, null, null],
+      ],
+    },
+    {
+      grid: [
+        [null, null, null],
+        [null, null, null],
+        [stitch, stitch, stitch],
+      ],
+    },
+    {
+      grid: [
+        [stitch, null, null],
+        [stitch, null, null],
+        [stitch, null, null],
+      ],
+    },
+    {
+      grid: [
+        [null, stitch, null],
+        [null, stitch, null],
+        [null, stitch, null],
+      ],
+    },
+    {
+      grid: [
+        [null, null, stitch],
+        [null, null, stitch],
+        [null, null, stitch],
+      ],
+    },
+    {
+      grid: [
+        [stitch, null, null],
+        [null, stitch, null],
+        [null, null, stitch],
+      ],
+    },
+    {
+      grid: [
+        [null, null, stitch],
+        [null, stitch, null],
+        [stitch, null, null],
+      ],
+    },
+  ])("should return a winner for three in a row", (b) => {
+    const board = new Board(b.grid as Grid);
+
+    const winner = board.winner();
+
+    expect(winner).toEqual(stitch);
+  });
+
+  it("should return null for no winner", () => {
+    const board = new Board([
+      [stitch, null, null],
+      [null, null, stitch],
+      [null, stitch, null],
+    ]);
+
+    const winner = board.winner();
+
+    expect(winner).toBeNull();
+  });
+
+  it("should return tie when the board is full with no winner", () => {
+    const board = new Board([
+      [lilo, stitch, lilo],
+      [stitch, stitch, lilo],
+      [stitch, lilo, stitch],
+    ]);
+
+    const winner = board.winner();
+
+    expect(winner).toEqual(tie);
   });
 });
