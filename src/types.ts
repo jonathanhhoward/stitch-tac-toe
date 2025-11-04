@@ -32,4 +32,8 @@ export class Coordinate {
   equals(other: Coordinate): boolean {
     return this.row === other.row && this.col === other.col;
   }
+
+  matches(row: number, col: number): boolean {
+    return this.row === row && this.col === col;
+  }
 }

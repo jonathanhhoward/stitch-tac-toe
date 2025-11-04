@@ -17,6 +17,14 @@ describe("Coordinate", () => {
     expect(a.equals(b)).toBe(false);
   });
 
+  it("matches returns true when row and col match, false otherwise", () => {
+    const c = new Coordinate(2, 1);
+
+    expect(c.matches(2, 1)).toBe(true);
+    expect(c.matches(1, 2)).toBe(false);
+    expect(c.matches(2, 0)).toBe(false);
+  });
+
   it("throws for non-integer coordinates", () => {
     expect(() => new Coordinate(0.5, 0)).toThrow();
     expect(() => new Coordinate(0, 1.2)).toThrow();

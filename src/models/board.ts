@@ -26,7 +26,7 @@ export class Board {
     return new Board(
       this.#grid.map((gridRow, row) =>
         gridRow.map((square, col) =>
-          position.equals(new Coordinate(row, col)) ? player : square,
+          position.matches(row, col) ? player : square,
         ),
       ),
     );
@@ -39,12 +39,12 @@ export class Board {
   winner(): Player | null {
     for (let i = 0; i < 3; ++i) {
       if (this.#isWinnerInRow(i) || this.#isWinnerInColumn(i)) {
-        return this.getAt(new Coordinate(i, i));
+        return this.#getAtRC(i, i);
       }
     }
 
     if (this.#isWinnerInBackDiagonal() || this.#isWinnerInForwardDiagonal()) {
-      return this.getAt(new Coordinate(1, 1));
+      return this.#getAtRC(1, 1);
     }
 
     if (this.#isFull()) {
@@ -54,35 +54,39 @@ export class Board {
     return null;
   }
 
+  #getAtRC(row: number, col: number): Player | null {
+    return this.#grid[row][col];
+  }
+
   #isWinnerInRow(row: number) {
     return this.#isThreeInARow(
-      this.getAt(new Coordinate(row, 0)),
-      this.getAt(new Coordinate(row, 1)),
-      this.getAt(new Coordinate(row, 2)),
+      this.#getAtRC(row, 0),
+      this.#getAtRC(row, 1),
+      this.#getAtRC(row, 2),
     );
   }
 
   #isWinnerInColumn(col: number) {
     return this.#isThreeInARow(
-      this.getAt(new Coordinate(0, col)),
-      this.getAt(new Coordinate(1, col)),
-      this.getAt(new Coordinate(2, col)),
+      this.#getAtRC(0, col),
+      this.#getAtRC(1, col),
+      this.#getAtRC(2, col),
     );
   }
 
   #isWinnerInBackDiagonal() {
     return this.#isThreeInARow(
-      this.getAt(new Coordinate(0, 0)),
-      this.getAt(new Coordinate(1, 1)),
-      this.getAt(new Coordinate(2, 2)),
+      this.#getAtRC(0, 0),
+      this.#getAtRC(1, 1),
+      this.#getAtRC(2, 2),
     );
   }
 
   #isWinnerInForwardDiagonal() {
     return this.#isThreeInARow(
-      this.getAt(new Coordinate(0, 2)),
-      this.getAt(new Coordinate(1, 1)),
-      this.getAt(new Coordinate(2, 0)),
+      this.#getAtRC(0, 2),
+      this.#getAtRC(1, 1),
+      this.#getAtRC(2, 0),
     );
   }
 
