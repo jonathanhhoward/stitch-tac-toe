@@ -18,7 +18,18 @@ export class Coordinate {
   readonly col: Column;
 
   constructor(row: Row, col: Column) {
+    if (!Number.isInteger(row) || !Number.isInteger(col)) {
+      throw new Error("Coordinate row and col must be integers");
+    }
+    if (row < 0 || row > 2 || col < 0 || col > 2) {
+      throw new Error("Coordinate out of bounds");
+    }
+
     this.row = row;
     this.col = col;
+  }
+
+  equals(other: Coordinate): boolean {
+    return this.row === other.row && this.col === other.col;
   }
 }
