@@ -13,7 +13,6 @@ export class Board {
     ];
   }
 
-  // Return a safe copy of the rows so callers don't get direct access
   rows(): Grid {
     return this.#grid.map((row) => [...row]);
   }
@@ -24,11 +23,10 @@ export class Board {
   }
 
   add(player: Player, position: Coordinate): Board {
-    const { row, col } = position;
     return new Board(
-      this.#grid.map((boardRow, iRow) =>
-        boardRow.map((square, iCol) =>
-          row === iRow && col === iCol ? player : square,
+      this.#grid.map((gridRow, row) =>
+        gridRow.map((square, col) =>
+          position.equals(new Coordinate(row, col)) ? player : square,
         ),
       ),
     );
@@ -38,7 +36,6 @@ export class Board {
     return !!this.getAt(position);
   }
 
-  // Determine if there is a winner or a tie on this board
   winner(): Player | null {
     for (let i = 0; i < 3; ++i) {
       if (this.#isWinnerInRow(i) || this.#isWinnerInColumn(i)) {
