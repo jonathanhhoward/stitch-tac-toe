@@ -17,11 +17,6 @@ export class Board {
     return this.#grid.map((row) => [...row]);
   }
 
-  getAt(position: Coordinate): Player | null {
-    const { row, col } = position;
-    return this.#grid[row][col];
-  }
-
   add(player: Player, position: Coordinate): Board {
     return new Board(
       this.#grid.map((gridRow, row) =>
@@ -33,7 +28,8 @@ export class Board {
   }
 
   isOccupiedAt(position: Coordinate): boolean {
-    return !!this.getAt(position);
+    const { row, col } = position;
+    return !!this.#getAtRC(row, col);
   }
 
   winner(): Player | null {
