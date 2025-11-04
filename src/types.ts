@@ -10,14 +10,11 @@ export interface State {
   winner: Player | null;
 }
 
-type Row = number;
-type Column = number;
-
 export class Coordinate {
-  readonly row: Row;
-  readonly col: Column;
+  readonly row: number;
+  readonly col: number;
 
-  constructor(row: Row, col: Column) {
+  constructor(row: number, col: number) {
     if (!Number.isInteger(row) || !Number.isInteger(col)) {
       throw new Error("Coordinate row and col must be integers");
     }
