@@ -15,7 +15,7 @@ export default function Board({ board, onSquareClick }: BoardProps) {
           {squares.map((square, col) => (
             <Square
               key={`square:${row}${col}`}
-              onClick={() => onSquareClick([row, col])}
+              onClick={() => onSquareClick(new Coordinate(row, col))}
               player={square}
             />
           ))}

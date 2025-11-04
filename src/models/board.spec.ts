@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { stitch } from "../constants/players";
-import { Grid } from "../types";
+import { Grid, Coordinate } from "../types";
 import { Board } from "./board";
 
 describe("empty", () => {
@@ -24,7 +24,7 @@ describe("add", () => {
     ];
     const board = new Board();
 
-    const result = board.add(stitch, [0, 0]);
+    const result = board.add(stitch, new Coordinate(0, 0));
 
     expect(result.rows()).toEqual(expected);
   });
@@ -41,13 +41,13 @@ describe("isOccupiedAt", () => {
   });
 
   it("should return true when a square contains a Token", () => {
-    const isOccupied = board.isOccupiedAt([1, 1]);
+    const isOccupied = board.isOccupiedAt(new Coordinate(1, 1));
 
     expect(isOccupied).toBe(true);
   });
 
   it("should return false when a square contains null", () => {
-    const isOccupied = board.isOccupiedAt([0, 0]);
+    const isOccupied = board.isOccupiedAt(new Coordinate(0, 0));
 
     expect(isOccupied).toBe(false);
   });

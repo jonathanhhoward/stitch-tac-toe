@@ -9,7 +9,7 @@ describe("placeToken", () => {
     const board = {
       add: vi.fn() as Mocked<typeof Board.prototype.add>,
     } as Board;
-    const position: Coordinate = [0, 0];
+    const position = new Coordinate(0, 0);
 
     player.selectSquare(board, position);
 

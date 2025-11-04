@@ -1,6 +1,7 @@
 import { lilo, stitch, tie } from "../constants/players";
 import { Board } from "./board";
 import { Player } from "./player";
+import { Coordinate } from "../types";
 
 export class Game {
   nextPlayer(currentPlayer: Player): Player {
@@ -18,13 +19,13 @@ export class Game {
   checkForWinner(board: Board): Player | null {
     for (let i = 0; i < 3; ++i) {
       if (this.#isWinnerInRow(board, i) || this.#isWinnerInColumn(board, i)) {
-        return board.getAt([i, i]);
+        return board.getAt(new Coordinate(i, i));
       }
     }
 
     // prettier-ignore
     if (this.#isWinnerInBackDiagonal(board) || this.#isWinnerInForwardDiagonal(board)) {
-      return board.getAt([1, 1]);
+      return board.getAt(new Coordinate(1, 1));
     }
 
     if (this.#isFull(board)) {
@@ -36,33 +37,33 @@ export class Game {
 
   #isWinnerInRow(board: Board, row: number) {
     return this.#isThreeInARow(
-      board.getAt([row, 0]),
-      board.getAt([row, 1]),
-      board.getAt([row, 2]),
+      board.getAt(new Coordinate(row, 0)),
+      board.getAt(new Coordinate(row, 1)),
+      board.getAt(new Coordinate(row, 2)),
     );
   }
 
   #isWinnerInColumn(board: Board, col: number) {
     return this.#isThreeInARow(
-      board.getAt([0, col]),
-      board.getAt([1, col]),
-      board.getAt([2, col]),
+      board.getAt(new Coordinate(0, col)),
+      board.getAt(new Coordinate(1, col)),
+      board.getAt(new Coordinate(2, col)),
     );
   }
 
   #isWinnerInBackDiagonal(board: Board) {
     return this.#isThreeInARow(
-      board.getAt([0, 0]),
-      board.getAt([1, 1]),
-      board.getAt([2, 2]),
+      board.getAt(new Coordinate(0, 0)),
+      board.getAt(new Coordinate(1, 1)),
+      board.getAt(new Coordinate(2, 2)),
     );
   }
 
   #isWinnerInForwardDiagonal(board: Board) {
     return this.#isThreeInARow(
-      board.getAt([0, 2]),
-      board.getAt([1, 1]),
-      board.getAt([2, 0]),
+      board.getAt(new Coordinate(0, 2)),
+      board.getAt(new Coordinate(1, 1)),
+      board.getAt(new Coordinate(2, 0)),
     );
   }
 

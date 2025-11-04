@@ -12,4 +12,13 @@ export interface State {
 
 type Row = number;
 type Column = number;
-export type Coordinate = [Row, Column];
+
+export class Coordinate {
+  readonly row: Row;
+  readonly col: Column;
+
+  constructor(row: Row, col: Column) {
+    this.row = row;
+    this.col = col;
+  }
+}

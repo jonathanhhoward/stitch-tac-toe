@@ -17,11 +17,13 @@ export class Board {
     return this.#grid.map((row) => [...row]);
   }
 
-  getAt([row, col]: Coordinate): Player | null {
+  getAt(position: Coordinate): Player | null {
+    const { row, col } = position;
     return this.#grid[row][col];
   }
 
-  add(player: Player, [row, col]: Coordinate): Board {
+  add(player: Player, position: Coordinate): Board {
+    const { row, col } = position;
     return new Board(
       this.#grid.map((boardRow, iRow) =>
         boardRow.map((square, iCol) =>
@@ -31,7 +33,7 @@ export class Board {
     );
   }
 
-  isOccupiedAt([row, col]: Coordinate): boolean {
-    return !!this.getAt([row, col]);
+  isOccupiedAt(position: Coordinate): boolean {
+    return !!this.getAt(position);
   }
 }

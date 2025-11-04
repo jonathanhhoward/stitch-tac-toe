@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { initialState } from "../constants/initialState";
 import { lilo, stitch } from "../constants/players";
 import { Board } from "../models/board";
-import { State } from "../types";
+import { State, Coordinate } from "../types";
 import { useGame } from "./useGame.ts";
 
 describe("state", () => {
@@ -18,7 +18,7 @@ describe("executeTurn", () => {
   it("should alternate players", () => {
     const { result } = renderHook(() => useGame(initialState));
 
-    act(() => result.current.executeTurn([0, 0]));
+    act(() => result.current.executeTurn(new Coordinate(0, 0)));
 
     expect(result.current.state.status).toEqual("Lilo's turn");
   });
@@ -37,7 +37,7 @@ describe("executeTurn", () => {
       })),
     );
 
-    act(() => result.current.executeTurn([0, 2]));
+    act(() => result.current.executeTurn(new Coordinate(0, 2)));
 
     expect(result.current.state.status).toEqual("Stitch wins!");
   });
@@ -56,7 +56,7 @@ describe("executeTurn", () => {
       })),
     );
 
-    act(() => result.current.executeTurn([2, 2]));
+    act(() => result.current.executeTurn(new Coordinate(2, 2)));
 
     expect(result.current.state.status).toEqual("Tie!");
   });
@@ -74,7 +74,7 @@ describe("executeTurn", () => {
     });
     const { result } = renderHook(() => useGame(init));
 
-    act(() => result.current.executeTurn([0, 0]));
+    act(() => result.current.executeTurn(new Coordinate(0, 0)));
 
     expect(result.current.state).toEqual(init());
   });
@@ -92,7 +92,7 @@ describe("executeTurn", () => {
     });
     const { result } = renderHook(() => useGame(init));
 
-    act(() => result.current.executeTurn([1, 0]));
+    act(() => result.current.executeTurn(new Coordinate(1, 0)));
 
     expect(result.current.state).toEqual(init());
   });
@@ -103,7 +103,7 @@ describe("startOver", () => {
     const { result } = renderHook(() => useGame(initialState));
 
     act(() => {
-      result.current.executeTurn([0, 0]);
+      result.current.executeTurn(new Coordinate(0, 0));
       result.current.startOver();
     });
 
