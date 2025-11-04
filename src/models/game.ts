@@ -18,13 +18,13 @@ export class Game {
   checkForWinner(board: Board): Player | null {
     for (let i = 0; i < 3; ++i) {
       if (this.#isWinnerInRow(board, i) || this.#isWinnerInColumn(board, i)) {
-        return board.grid[i][i];
+        return board.getAt([i, i]);
       }
     }
 
     // prettier-ignore
     if (this.#isWinnerInBackDiagonal(board) || this.#isWinnerInForwardDiagonal(board)) {
-      return board.grid[1][1];
+      return board.getAt([1, 1]);
     }
 
     if (this.#isFull(board)) {
@@ -36,38 +36,41 @@ export class Game {
 
   #isWinnerInRow(board: Board, row: number) {
     return this.#isThreeInARow(
-      board.grid[row][0],
-      board.grid[row][1],
-      board.grid[row][2],
+      board.getAt([row, 0]),
+      board.getAt([row, 1]),
+      board.getAt([row, 2]),
     );
   }
 
   #isWinnerInColumn(board: Board, col: number) {
     return this.#isThreeInARow(
-      board.grid[0][col],
-      board.grid[1][col],
-      board.grid[2][col],
+      board.getAt([0, col]),
+      board.getAt([1, col]),
+      board.getAt([2, col]),
     );
   }
 
   #isWinnerInBackDiagonal(board: Board) {
     return this.#isThreeInARow(
-      board.grid[0][0],
-      board.grid[1][1],
-      board.grid[2][2],
+      board.getAt([0, 0]),
+      board.getAt([1, 1]),
+      board.getAt([2, 2]),
     );
   }
 
   #isWinnerInForwardDiagonal(board: Board) {
     return this.#isThreeInARow(
-      board.grid[0][2],
-      board.grid[1][1],
-      board.grid[2][0],
+      board.getAt([0, 2]),
+      board.getAt([1, 1]),
+      board.getAt([2, 0]),
     );
   }
 
   #isFull(board: Board) {
-    return board.grid.flat().every((square) => !!square);
+    return board
+      .rows()
+      .flat()
+      .every((square) => !!square);
   }
 
   #isThreeInARow(sq1: Player | null, sq2: Player | null, sq3: Player | null) {

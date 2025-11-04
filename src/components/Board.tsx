@@ -10,7 +10,7 @@ interface BoardProps {
 export default function Board({ board, onSquareClick }: BoardProps) {
   return (
     <div className="Board">
-      {board.grid.map((squares, row) => (
+      {board.rows().map((squares, row) => (
         <div className="row" key={`row:${row}`}>
           {squares.map((square, col) => (
             <Square

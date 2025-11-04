@@ -12,8 +12,13 @@ export class Board {
     ];
   }
 
-  get grid() {
-    return this.#grid;
+  // Return a safe copy of the rows so callers don't get direct access
+  rows(): Grid {
+    return this.#grid.map((row) => [...row]);
+  }
+
+  getAt([row, col]: Coordinate): Player | null {
+    return this.#grid[row][col];
   }
 
   add(player: Player, [row, col]: Coordinate): Board {
@@ -27,6 +32,6 @@ export class Board {
   }
 
   isOccupiedAt([row, col]: Coordinate): boolean {
-    return !!this.grid[row][col];
+    return !!this.getAt([row, col]);
   }
 }

@@ -7,7 +7,7 @@ describe("empty", () => {
   it("should return a Board with a null grid", () => {
     const board = new Board();
 
-    board.grid.forEach((row) => {
+    board.rows().forEach((row) => {
       row.forEach((square) => {
         expect(square).toBeNull();
       });
@@ -26,7 +26,7 @@ describe("add", () => {
 
     const result = board.add(stitch, [0, 0]);
 
-    expect(result.grid).toEqual(expected);
+    expect(result.rows()).toEqual(expected);
   });
 });
 
