@@ -1,10 +1,12 @@
-import { lilo, stitch, tie } from "../constants/players";
+import { tie } from "../constants/players";
 import { Board } from "./board";
+import { Coordinate } from "./coordinate";
+import { GameResult } from "./gameResult";
 import { Player } from "./player";
 
 export class Game {
   nextPlayer(currentPlayer: Player): Player {
-    return currentPlayer === stitch ? lilo : stitch;
+    return currentPlayer.opponent();
   }
 
   status(player: Player, winner: Player | null): string {
@@ -17,5 +19,23 @@ export class Game {
 
   checkForWinner(board: Board): Player | null {
     return board.winner();
+  }
+
+  // Play a turn: return GameResult when a move is made, or null when no-op
+  playTurn(
+    board: Board,
+    player: Player,
+    position: Coordinate,
+  ): GameResult | null {
+    if (board.isOccupiedAt(position) || board.winner()) {
+      return null;
+    }
+
+    const newBoard = player.selectSquare(board, position);
+    const winner = newBoard.winner();
+    const nextPlayer = player.opponent();
+    const status = newBoard.statusFor(nextPlayer);
+
+    return new GameResult(newBoard, nextPlayer, winner, status);
   }
 }

@@ -1,4 +1,5 @@
 import { describe, expect, it, Mocked, vi } from "vitest";
+import { lilo, stitch } from "../constants/players";
 import { Board } from "./board";
 import { Coordinate } from "./coordinate.ts";
 import { Player } from "./player";
@@ -14,5 +15,17 @@ describe("placeToken", () => {
     player.selectSquare(board, position);
 
     expect(board.add).toHaveBeenCalledWith(player, position);
+  });
+});
+
+describe("opponent", () => {
+  it("lilo and stitch should be opponents", () => {
+    expect(lilo.opponent()).toBe(stitch);
+    expect(stitch.opponent()).toBe(lilo);
+  });
+
+  it("calling opponent on an unconfigured player should throw", () => {
+    const p = new Player("X", "img");
+    expect(() => p.opponent()).toThrow();
   });
 });

@@ -51,6 +51,16 @@ export class Board {
     return null;
   }
 
+  // Return a user-friendly status string for the given next player
+  statusFor(player: Player): string {
+    const winner = this.winner();
+    return winner
+      ? winner === tie
+        ? "Tie!"
+        : `${winner.name} wins!`
+      : `${player.name}'s turn`;
+  }
+
   #isWinnerInRow(row: number) {
     return this.#isThreeInARow(
       this.#grid[row][0],

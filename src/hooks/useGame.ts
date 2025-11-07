@@ -7,17 +7,17 @@ export function useGame(initialState: () => State) {
   const [state, setState] = useState(initialState);
 
   function executeTurn(position: Coordinate): void {
-    if (state.board.isOccupiedAt(position) || state.winner) {
-      return;
-    }
-
-    const board = state.player.selectSquare(state.board, position);
     const game = new Game();
-    const player = game.nextPlayer(state.player);
-    const winner = game.checkForWinner(board);
-    const status = game.status(player, winner);
+    const result = game.playTurn(state.board, state.player, position);
 
-    setState({ board, status, player, winner });
+    if (!result) return;
+
+    setState({
+      board: result.board,
+      status: result.status,
+      player: result.nextPlayer,
+      winner: result.winner,
+    });
   }
 
   function startOver(): void {
