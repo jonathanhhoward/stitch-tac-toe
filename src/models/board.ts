@@ -51,15 +51,6 @@ export class Board {
     return null;
   }
 
-  statusFor(player: Player): string {
-    const winner = this.winner();
-    return winner
-      ? winner === tie
-        ? "Tie!"
-        : `${winner.name} wins!`
-      : `${player.name}'s turn`;
-  }
-
   #isWinnerInRow(row: number) {
     return this.#isThreeInARow(
       this.#grid[row][0],

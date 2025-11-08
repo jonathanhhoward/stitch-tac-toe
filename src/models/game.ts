@@ -9,10 +9,6 @@ export class Game {
     return currentPlayer.opponent();
   }
 
-  statusForBoard(board: Board, player: Player): string {
-    return board.statusFor(player);
-  }
-
   playTurn(board: Board, player: Player, position: Coordinate): GameResult {
     const currentWinner = board.winner();
 
