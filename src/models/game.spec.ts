@@ -16,7 +16,8 @@ describe("nextPlayer", () => {
   });
 });
 
-describe("status", () => {
+// Replace legacy status tests with tests that call statusForBoard
+describe("statusForBoard (behavior)", () => {
   it.each([
     [lilo, stitch, "Stitch wins!"],
     [stitch, lilo, "Lilo wins!"],
@@ -24,8 +25,27 @@ describe("status", () => {
     [stitch, null, "Stitch's turn"],
   ])("should return the correct status", (player, winner, status) => {
     const game = new Game();
+    let board: Board;
 
-    const result = game.status(player, winner);
+    if (winner === null) {
+      board = new Board();
+    } else if (winner === tie) {
+      board = new Board([
+        [lilo, stitch, lilo],
+        [stitch, stitch, lilo],
+        [stitch, lilo, stitch],
+      ]);
+    } else {
+      // winner is stitch or lilo: construct a simple 3-in-a-row for that winner
+      const win = winner;
+      board = new Board([
+        [win, win, win],
+        [null, null, null],
+        [null, null, null],
+      ]);
+    }
+
+    const result = game.statusForBoard(board, player);
 
     expect(result).toEqual(status);
   });
