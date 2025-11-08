@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { lilo, stitch, tie } from "../constants/players";
-import { Game } from "./game";
+import { lilo, stitch } from "../constants/players";
 import { Board } from "./board";
+import { Game } from "./game";
+import { Player } from "./player.ts";
 
 describe("nextPlayer", () => {
   it.each([
@@ -16,39 +17,49 @@ describe("nextPlayer", () => {
   });
 });
 
-// Replace legacy status tests with tests that call statusForBoard
+// Replace legacy status tests with tests that call statusForBoard without conditionals
 describe("statusForBoard (behavior)", () => {
-  it.each([
-    [lilo, stitch, "Stitch wins!"],
-    [stitch, lilo, "Lilo wins!"],
-    [lilo, tie, "Tie!"],
-    [stitch, null, "Stitch's turn"],
-  ])("should return the correct status", (player, winner, status) => {
-    const game = new Game();
-    let board: Board;
-
-    if (winner === null) {
-      board = new Board();
-    } else if (winner === tie) {
-      board = new Board([
+  const cases: Array<[Player, Board, string]> = [
+    [
+      lilo,
+      new Board([
+        [stitch, stitch, stitch],
+        [null, null, null],
+        [null, null, null],
+      ]),
+      "Stitch wins!",
+    ],
+    [
+      stitch,
+      new Board([
+        [lilo, lilo, lilo],
+        [null, null, null],
+        [null, null, null],
+      ]),
+      "Lilo wins!",
+    ],
+    [
+      lilo,
+      new Board([
         [lilo, stitch, lilo],
         [stitch, stitch, lilo],
         [stitch, lilo, stitch],
-      ]);
-    } else {
-      // winner is stitch or lilo: construct a simple 3-in-a-row for that winner
-      const win = winner;
-      board = new Board([
-        [win, win, win],
-        [null, null, null],
-        [null, null, null],
-      ]);
-    }
+      ]),
+      "Tie!",
+    ],
+    [stitch, new Board(), "Stitch's turn"],
+  ];
 
-    const result = game.statusForBoard(board, player);
+  it.each(cases)(
+    "should return the correct status",
+    (player, board, status) => {
+      const game = new Game();
 
-    expect(result).toEqual(status);
-  });
+      const result = game.statusForBoard(board, player);
+
+      expect(result).toEqual(status);
+    },
+  );
 });
 
 // New tests to assert modern API delegates to Board
