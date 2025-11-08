@@ -1,5 +1,5 @@
 ﻿import { describe, expect, it } from "vitest";
-import { Coordinate } from "./coordinate.ts";
+import { Coordinate } from "./coordinate";
 
 describe("ctor validation", () => {
   it("throws for non-integer coordinates", () => {

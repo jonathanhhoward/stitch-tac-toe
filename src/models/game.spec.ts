@@ -3,7 +3,7 @@ import { lilo, stitch } from "../constants/players";
 import { Board } from "./board";
 import { Coordinate } from "./coordinate";
 import { Game } from "./game";
-import { Player } from "./player.ts";
+import { Player } from "./player";
 
 describe("nextPlayer", () => {
   it.each([
@@ -18,7 +18,6 @@ describe("nextPlayer", () => {
   });
 });
 
-// Replace legacy status tests with tests that call statusForBoard without conditionals
 describe("statusForBoard (behavior)", () => {
   const cases: Array<[Player, Board, string]> = [
     [
@@ -63,7 +62,6 @@ describe("statusForBoard (behavior)", () => {
   );
 });
 
-// New tests to assert modern API delegates to Board
 describe("statusForBoard (delegation)", () => {
   it("should return the same status as Board.statusFor for an empty board", () => {
     const game = new Game();

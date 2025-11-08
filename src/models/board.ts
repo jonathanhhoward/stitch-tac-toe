@@ -1,6 +1,6 @@
 import { tie } from "../constants/players";
 import { Grid } from "../types";
-import { Coordinate } from "./coordinate.ts";
+import { Coordinate } from "./coordinate";
 import { Player } from "./player";
 
 export class Board {
@@ -51,7 +51,6 @@ export class Board {
     return null;
   }
 
-  // Return a user-friendly status string for the given next player
   statusFor(player: Player): string {
     const winner = this.winner();
     return winner

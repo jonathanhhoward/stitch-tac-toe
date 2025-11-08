@@ -1,5 +1,5 @@
 import { Board } from "./board";
-import { Coordinate } from "./coordinate.ts";
+import { Coordinate } from "./coordinate";
 
 export class Player {
   readonly name: string;

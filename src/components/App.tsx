@@ -1,6 +1,6 @@
 import "./App.css";
 import { initialState } from "../constants/initialState";
-import { useGame } from "../hooks/useGame.ts";
+import { useGame } from "../hooks/useGame";
 import Board from "./Board";
 import Header from "./Header";
 
