@@ -1,5 +1,5 @@
-import { Player } from "../models/player";
 import { GameStatus } from "../models/gameStatus";
+import { Player } from "../models/player";
 
 interface HeaderProps {
   gameStatus: GameStatus;

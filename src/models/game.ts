@@ -1,8 +1,8 @@
 import { Board } from "./board";
-import { Player } from "./player";
 import { Coordinate } from "./coordinate";
 import { GameResult } from "./gameResult";
 import { GameStatus } from "./gameStatus";
+import { Player } from "./player";
 
 export class Game {
   nextPlayer(currentPlayer: Player): Player {

@@ -1,6 +1,6 @@
 ﻿import { Board } from "./board";
-import { Player } from "./player";
 import { GameStatus } from "./gameStatus";
+import { Player } from "./player";
 
 export class GameResult {
   readonly board: Board;

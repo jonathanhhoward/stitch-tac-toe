@@ -4,9 +4,9 @@ import { initialState } from "../constants/initialState";
 import { lilo, stitch } from "../constants/players";
 import { Board } from "../models/board";
 import { Coordinate } from "../models/coordinate.ts";
+import { GameStatus } from "../models/gameStatus";
 import { State } from "../types";
 import { useGame } from "./useGame.ts";
-import { GameStatus } from "../models/gameStatus";
 
 describe("state", () => {
   it("should start with the state passed in", () => {

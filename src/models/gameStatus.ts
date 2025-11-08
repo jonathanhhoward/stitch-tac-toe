@@ -1,7 +1,7 @@
 ﻿// ...existing code...
-import { Player } from "./player";
-import { Board } from "./board";
 import { tie } from "../constants/players";
+import { Board } from "./board";
+import { Player } from "./player";
 
 export class GameStatus {
   readonly winner: Player | null;

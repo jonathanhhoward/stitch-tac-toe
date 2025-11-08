@@ -1,8 +1,8 @@
 import "./App.css";
-import Board from "./Board";
-import Header from "./Header";
 import { initialState } from "../constants/initialState";
 import { useGame } from "../hooks/useGame.ts";
+import Board from "./Board";
+import Header from "./Header";
 
 export default function App() {
   const { state, executeTurn, startOver } = useGame(initialState);

@@ -1,7 +1,7 @@
 import { Board } from "../models/board";
+import { GameStatus } from "../models/gameStatus";
 import { State } from "../types";
 import { stitch } from "./players";
-import { GameStatus } from "../models/gameStatus";
 
 export const initialState = (): State => {
   const board = new Board();
