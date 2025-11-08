@@ -18,10 +18,13 @@ export class Game {
     }
 
     const newBoard = player.selectSquare(board, position);
-    const winner = newBoard.winner();
-    const nextPlayer = player.opponent();
-    const status = GameStatus.fromBoard(newBoard);
 
-    return new GameResult(newBoard, nextPlayer, winner, status, true);
+    return new GameResult(
+      newBoard,
+      player.opponent(),
+      newBoard.winner(),
+      GameStatus.fromBoard(newBoard),
+      true,
+    );
   }
 }
