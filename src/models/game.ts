@@ -15,21 +15,22 @@ export class Game {
     return board.statusFor(player);
   }
 
-  // Play a turn: return GameResult when a move is made, or null when no-op
-  playTurn(
-    board: Board,
-    player: Player,
-    position: Coordinate,
-  ): GameResult | null {
-    if (board.isOccupiedAt(position) || board.winner()) {
-      return null;
+  // Play a turn: always return a GameResult with a `changed` flag indicating whether the board was updated.
+  playTurn(board: Board, player: Player, position: Coordinate): GameResult {
+    const currentWinner = board.winner();
+
+    // No-op: if position is occupied or there's already a winner, return unchanged result
+    if (board.isOccupiedAt(position) || currentWinner) {
+      const status = GameStatus.fromBoard(board);
+      return new GameResult(board, player, currentWinner, status, false);
     }
 
+    // Apply move
     const newBoard = player.selectSquare(board, position);
     const winner = newBoard.winner();
     const nextPlayer = player.opponent();
     const status = GameStatus.fromBoard(newBoard);
 
-    return new GameResult(newBoard, nextPlayer, winner, status);
+    return new GameResult(newBoard, nextPlayer, winner, status, true);
   }
 }

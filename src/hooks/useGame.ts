@@ -10,7 +10,7 @@ export function useGame(initialState: () => State) {
     const game = new Game();
     const result = game.playTurn(state.board, state.player, position);
 
-    if (!result) return;
+    if (!result.changed) return;
 
     setState({
       board: result.board,
