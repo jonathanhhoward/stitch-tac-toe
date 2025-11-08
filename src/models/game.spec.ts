@@ -4,20 +4,7 @@ import { Board } from "./board";
 import { Coordinate } from "./coordinate";
 import { Game } from "./game";
 
-describe("nextPlayer", () => {
-  it.each([
-    [stitch, lilo],
-    [lilo, stitch],
-  ])("should alternate players", (player1, player2) => {
-    const game = new Game();
-
-    const next = game.nextPlayer(player1);
-
-    expect(next).toEqual(player2);
-  });
-});
-
-describe("playTurn (changed flag)", () => {
+describe("playTurn", () => {
   it("returns changed=false when the selected position is already occupied", () => {
     const game = new Game();
     const board = new Board([

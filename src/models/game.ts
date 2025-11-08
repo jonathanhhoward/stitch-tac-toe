@@ -5,10 +5,6 @@ import { GameStatus } from "./gameStatus";
 import { Player } from "./player";
 
 export class Game {
-  nextPlayer(currentPlayer: Player): Player {
-    return currentPlayer.opponent();
-  }
-
   playTurn(board: Board, player: Player, position: Coordinate): GameResult {
     const currentWinner = board.winner();
 
