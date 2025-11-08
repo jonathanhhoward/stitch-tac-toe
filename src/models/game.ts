@@ -2,6 +2,7 @@ import { Board } from "./board";
 import { Player } from "./player";
 import { Coordinate } from "./coordinate";
 import { GameResult } from "./gameResult";
+import { GameStatus } from "./gameStatus";
 
 export class Game {
   nextPlayer(currentPlayer: Player): Player {
@@ -27,7 +28,7 @@ export class Game {
     const newBoard = player.selectSquare(board, position);
     const winner = newBoard.winner();
     const nextPlayer = player.opponent();
-    const status = newBoard.statusFor(nextPlayer);
+    const status = GameStatus.fromBoard(newBoard);
 
     return new GameResult(newBoard, nextPlayer, winner, status);
   }
