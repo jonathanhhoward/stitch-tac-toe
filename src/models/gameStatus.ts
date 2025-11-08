@@ -13,13 +13,9 @@ export class GameStatus {
     return new GameStatus(board.winner());
   }
 
-  isTie(): boolean {
-    return this.winner === tie;
-  }
-
   toString(nextPlayer?: Player): string {
     if (this.winner) {
-      return this.isTie() ? "Tie!" : `${this.winner.name} wins!`;
+      return this.winner === tie ? "Tie!" : `${this.winner.name} wins!`;
     }
 
     if (!nextPlayer) {
