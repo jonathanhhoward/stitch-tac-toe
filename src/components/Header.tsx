@@ -1,11 +1,16 @@
+import { Player } from "../models/player";
+import { GameStatus } from "../models/gameStatus";
+
 interface HeaderProps {
-  gameStatus: string;
+  gameStatus: GameStatus;
+  player: Player;
   onResetClick: () => void;
   showReset: boolean;
 }
 
 export default function Header({
   gameStatus,
+  player,
   onResetClick,
   showReset,
 }: HeaderProps) {
@@ -17,7 +22,7 @@ export default function Header({
 
   return (
     <div className="Header">
-      <div className="gameStatus">{gameStatus}</div>
+      <div className="gameStatus">{gameStatus.toString(player)}</div>
       {showReset ? resetButton : null}
     </div>
   );

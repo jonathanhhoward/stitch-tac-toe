@@ -6,6 +6,7 @@ import { Board } from "../models/board";
 import { Coordinate } from "../models/coordinate.ts";
 import { State } from "../types";
 import { useGame } from "./useGame.ts";
+import { GameStatus } from "../models/gameStatus";
 
 describe("state", () => {
   it("should start with the state passed in", () => {
@@ -21,7 +22,9 @@ describe("executeTurn", () => {
 
     act(() => result.current.executeTurn(new Coordinate(0, 0)));
 
-    expect(result.current.state.status).toEqual("Lilo's turn");
+    expect(
+      result.current.state.status.toString(result.current.state.player),
+    ).toEqual("Lilo's turn");
   });
 
   it("should determine when there is a winner", () => {
@@ -32,7 +35,13 @@ describe("executeTurn", () => {
           [null, null, null],
           [null, null, null],
         ]),
-        status: "Stitch's turn",
+        status: GameStatus.fromBoard(
+          new Board([
+            [stitch, stitch, null],
+            [null, null, null],
+            [null, null, null],
+          ]),
+        ),
         player: stitch,
         winner: null,
       })),
@@ -40,7 +49,9 @@ describe("executeTurn", () => {
 
     act(() => result.current.executeTurn(new Coordinate(0, 2)));
 
-    expect(result.current.state.status).toEqual("Stitch wins!");
+    expect(
+      result.current.state.status.toString(result.current.state.player),
+    ).toEqual("Stitch wins!");
   });
 
   it("should determine when there is a tie", () => {
@@ -51,7 +62,13 @@ describe("executeTurn", () => {
           [stitch, stitch, lilo],
           [lilo, lilo, null],
         ]),
-        status: "Stitch's turn",
+        status: GameStatus.fromBoard(
+          new Board([
+            [lilo, stitch, stitch],
+            [stitch, stitch, lilo],
+            [lilo, lilo, null],
+          ]),
+        ),
         player: stitch,
         winner: null,
       })),
@@ -59,7 +76,9 @@ describe("executeTurn", () => {
 
     act(() => result.current.executeTurn(new Coordinate(2, 2)));
 
-    expect(result.current.state.status).toEqual("Tie!");
+    expect(
+      result.current.state.status.toString(result.current.state.player),
+    ).toEqual("Tie!");
   });
 
   it("should not update state when a position is occupied", () => {
@@ -69,7 +88,13 @@ describe("executeTurn", () => {
         [null, null, null],
         [null, null, null],
       ]),
-      status: "Stitch's turn",
+      status: GameStatus.fromBoard(
+        new Board([
+          [stitch, null, null],
+          [null, null, null],
+          [null, null, null],
+        ]),
+      ),
       player: stitch,
       winner: null,
     });
@@ -87,7 +112,13 @@ describe("executeTurn", () => {
         [null, null, null],
         [null, null, null],
       ]),
-      status: "Stitch wins!",
+      status: GameStatus.fromBoard(
+        new Board([
+          [stitch, stitch, stitch],
+          [null, null, null],
+          [null, null, null],
+        ]),
+      ),
       player: stitch,
       winner: stitch,
     });
