@@ -4,7 +4,7 @@ import { initialState } from "../constants/initialState";
 import { lilo, stitch } from "../constants/players";
 import { Board } from "../models/board";
 import { Coordinate } from "../models/coordinate.ts";
-import { GameStatus } from "../models/gameStatus";
+import { TurnStatus } from "../models/turnStatus.ts";
 import { State } from "../types";
 import { useGame } from "./useGame.ts";
 
@@ -35,7 +35,7 @@ describe("executeTurn", () => {
           [null, null, null],
           [null, null, null],
         ]),
-        status: GameStatus.fromBoard(
+        status: TurnStatus.fromBoard(
           new Board([
             [stitch, stitch, null],
             [null, null, null],
@@ -62,7 +62,7 @@ describe("executeTurn", () => {
           [stitch, stitch, lilo],
           [lilo, lilo, null],
         ]),
-        status: GameStatus.fromBoard(
+        status: TurnStatus.fromBoard(
           new Board([
             [lilo, stitch, stitch],
             [stitch, stitch, lilo],
@@ -88,7 +88,7 @@ describe("executeTurn", () => {
         [null, null, null],
         [null, null, null],
       ]),
-      status: GameStatus.fromBoard(
+      status: TurnStatus.fromBoard(
         new Board([
           [stitch, null, null],
           [null, null, null],
@@ -112,7 +112,7 @@ describe("executeTurn", () => {
         [null, null, null],
         [null, null, null],
       ]),
-      status: GameStatus.fromBoard(
+      status: TurnStatus.fromBoard(
         new Board([
           [stitch, stitch, stitch],
           [null, null, null],

@@ -1,8 +1,8 @@
-import { GameStatus } from "../models/gameStatus";
+import { TurnStatus } from "../models/turnStatus.ts";
 import { Player } from "../models/player";
 
 interface HeaderProps {
-  gameStatus: GameStatus;
+  gameStatus: TurnStatus;
   player: Player;
   onResetClick: () => void;
   showReset: boolean;

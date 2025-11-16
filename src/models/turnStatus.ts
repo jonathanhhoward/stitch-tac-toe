@@ -2,15 +2,15 @@
 import { Board } from "./board";
 import { Player } from "./player";
 
-export class GameStatus {
+export class TurnStatus {
   readonly winner: Player | null;
 
   constructor(winner: Player | null) {
     this.winner = winner;
   }
 
-  static fromBoard(board: Board): GameStatus {
-    return new GameStatus(board.winner());
+  static fromBoard(board: Board): TurnStatus {
+    return new TurnStatus(board.winner());
   }
 
   toString(nextPlayer?: Player): string {

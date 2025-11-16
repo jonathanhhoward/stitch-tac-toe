@@ -1,7 +1,7 @@
 import { Board } from "./board";
 import { Coordinate } from "./coordinate";
-import { GameResult } from "./gameResult";
-import { GameStatus } from "./gameStatus";
+import { TurnResult } from "./turnResult.ts";
+import { TurnStatus } from "./turnStatus.ts";
 import { Player } from "./player";
 
 export class GameTurn {
@@ -15,12 +15,12 @@ export class GameTurn {
     this.#position = position;
   }
 
-  result(): GameResult {
+  result(): TurnResult {
     const currentWinner = this.#board.winner();
 
     if (this.#board.isOccupiedAt(this.#position) || currentWinner) {
-      const status = GameStatus.fromBoard(this.#board);
-      return new GameResult(
+      const status = TurnStatus.fromBoard(this.#board);
+      return new TurnResult(
         this.#board,
         this.#player,
         currentWinner,
@@ -31,11 +31,11 @@ export class GameTurn {
 
     const newBoard = this.#player.selectSquare(this.#board, this.#position);
 
-    return new GameResult(
+    return new TurnResult(
       newBoard,
       this.#player.opponent(),
       newBoard.winner(),
-      GameStatus.fromBoard(newBoard),
+      TurnStatus.fromBoard(newBoard),
       true,
     );
   }
