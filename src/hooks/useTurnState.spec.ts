@@ -6,11 +6,11 @@ import { Board } from "../models/board";
 import { Coordinate } from "../models/coordinate.ts";
 import { TurnStatus } from "../models/turnStatus.ts";
 import { State } from "../types";
-import { useGame } from "./useGame.ts";
+import { useTurnState } from "./useTurnState.ts";
 
 describe("state", () => {
   it("should start with the state passed in", () => {
-    const { result } = renderHook(() => useGame(initialState));
+    const { result } = renderHook(() => useTurnState(initialState));
 
     expect(result.current.state).toEqual(initialState());
   });
@@ -18,7 +18,7 @@ describe("state", () => {
 
 describe("executeTurn", () => {
   it("should alternate players", () => {
-    const { result } = renderHook(() => useGame(initialState));
+    const { result } = renderHook(() => useTurnState(initialState));
 
     act(() => result.current.executeTurn(new Coordinate(0, 0)));
 
@@ -29,7 +29,7 @@ describe("executeTurn", () => {
 
   it("should determine when there is a winner", () => {
     const { result } = renderHook(() =>
-      useGame(() => ({
+      useTurnState(() => ({
         board: new Board([
           [stitch, stitch, null],
           [null, null, null],
@@ -56,7 +56,7 @@ describe("executeTurn", () => {
 
   it("should determine when there is a tie", () => {
     const { result } = renderHook(() =>
-      useGame(() => ({
+      useTurnState(() => ({
         board: new Board([
           [lilo, stitch, stitch],
           [stitch, stitch, lilo],
@@ -98,7 +98,7 @@ describe("executeTurn", () => {
       player: stitch,
       winner: null,
     });
-    const { result } = renderHook(() => useGame(init));
+    const { result } = renderHook(() => useTurnState(init));
 
     act(() => result.current.executeTurn(new Coordinate(0, 0)));
 
@@ -122,7 +122,7 @@ describe("executeTurn", () => {
       player: stitch,
       winner: stitch,
     });
-    const { result } = renderHook(() => useGame(init));
+    const { result } = renderHook(() => useTurnState(init));
 
     act(() => result.current.executeTurn(new Coordinate(1, 0)));
 
@@ -132,7 +132,7 @@ describe("executeTurn", () => {
 
 describe("startOver", () => {
   it("should set state to initialState", () => {
-    const { result } = renderHook(() => useGame(initialState));
+    const { result } = renderHook(() => useTurnState(initialState));
 
     act(() => {
       result.current.executeTurn(new Coordinate(0, 0));

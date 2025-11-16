@@ -1,11 +1,11 @@
 import "./App.css";
 import { initialState } from "../constants/initialState";
-import { useGame } from "../hooks/useGame";
+import { useTurnState } from "../hooks/useTurnState.ts";
 import Board from "./Board";
 import Header from "./Header";
 
 export default function App() {
-  const { state, executeTurn, startOver } = useGame(initialState);
+  const { state, executeTurn, startOver } = useTurnState(initialState);
 
   return (
     <div className="App">

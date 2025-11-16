@@ -3,12 +3,12 @@ import { Coordinate } from "../models/coordinate.ts";
 import { GameTurn } from "../models/gameTurn.ts";
 import { State } from "../types";
 
-export function useGame(initialState: () => State) {
+export function useTurnState(initialState: () => State) {
   const [state, setState] = useState(initialState);
 
   function executeTurn(position: Coordinate): void {
-    const turn = new GameTurn(state.board, state.player, position);
-    const result = turn.result();
+    const gameTurn = new GameTurn(state.board, state.player, position);
+    const result = gameTurn.result();
 
     if (!result.changed) return;
 
