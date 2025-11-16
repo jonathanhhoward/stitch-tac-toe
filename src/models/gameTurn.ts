@@ -15,7 +15,7 @@ export class GameTurn {
     this.#position = position;
   }
 
-  execute(): GameResult {
+  result(): GameResult {
     const currentWinner = this.#board.winner();
 
     if (this.#board.isOccupiedAt(this.#position) || currentWinner) {

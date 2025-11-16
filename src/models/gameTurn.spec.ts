@@ -13,7 +13,7 @@ describe("playTurn", () => {
     ]);
     const gameTurn = new GameTurn(board, stitch, new Coordinate(0, 0));
 
-    const result = gameTurn.execute();
+    const result = gameTurn.result();
 
     expect(result.changed).toBe(false);
     expect(result.board).toBe(board);
@@ -28,7 +28,7 @@ describe("playTurn", () => {
     ]);
     const gameTurn = new GameTurn(board, stitch, new Coordinate(1, 0));
 
-    const result = gameTurn.execute();
+    const result = gameTurn.result();
 
     expect(result.changed).toBe(false);
     expect(result.board).toBe(board);
@@ -39,7 +39,7 @@ describe("playTurn", () => {
     const board = new Board();
     const gameTurn = new GameTurn(board, stitch, new Coordinate(0, 0));
 
-    const result = gameTurn.execute();
+    const result = gameTurn.result();
 
     expect(result.changed).toBe(true);
     expect(result.board).not.toBe(board);
