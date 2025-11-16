@@ -4,7 +4,7 @@ import { GameResult } from "./gameResult";
 import { GameStatus } from "./gameStatus";
 import { Player } from "./player";
 
-export class Game {
+export class GameTurn {
   playTurn(board: Board, player: Player, position: Coordinate): GameResult {
     const currentWinner = board.winner();
 

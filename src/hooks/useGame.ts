@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Coordinate } from "../models/coordinate.ts";
-import { Game } from "../models/game";
+import { GameTurn } from "../models/gameTurn.ts";
 import { State } from "../types";
 
 export function useGame(initialState: () => State) {
   const [state, setState] = useState(initialState);
 
   function executeTurn(position: Coordinate): void {
-    const game = new Game();
-    const result = game.playTurn(state.board, state.player, position);
+    const gameTurn = new GameTurn();
+    const result = gameTurn.playTurn(state.board, state.player, position);
 
     if (!result.changed) return;
 
