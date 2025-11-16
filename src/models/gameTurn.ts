@@ -5,19 +5,35 @@ import { GameStatus } from "./gameStatus";
 import { Player } from "./player";
 
 export class GameTurn {
-  execute(board: Board, player: Player, position: Coordinate): GameResult {
-    const currentWinner = board.winner();
+  readonly #board: Board;
+  readonly #player: Player;
+  readonly #position: Coordinate;
 
-    if (board.isOccupiedAt(position) || currentWinner) {
-      const status = GameStatus.fromBoard(board);
-      return new GameResult(board, player, currentWinner, status, false);
+  constructor(board: Board, player: Player, position: Coordinate) {
+    this.#board = board;
+    this.#player = player;
+    this.#position = position;
+  }
+
+  execute(): GameResult {
+    const currentWinner = this.#board.winner();
+
+    if (this.#board.isOccupiedAt(this.#position) || currentWinner) {
+      const status = GameStatus.fromBoard(this.#board);
+      return new GameResult(
+        this.#board,
+        this.#player,
+        currentWinner,
+        status,
+        false,
+      );
     }
 
-    const newBoard = player.selectSquare(board, position);
+    const newBoard = this.#player.selectSquare(this.#board, this.#position);
 
     return new GameResult(
       newBoard,
-      player.opponent(),
+      this.#player.opponent(),
       newBoard.winner(),
       GameStatus.fromBoard(newBoard),
       true,

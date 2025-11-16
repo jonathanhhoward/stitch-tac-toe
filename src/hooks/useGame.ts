@@ -7,8 +7,8 @@ export function useGame(initialState: () => State) {
   const [state, setState] = useState(initialState);
 
   function executeTurn(position: Coordinate): void {
-    const gameTurn = new GameTurn();
-    const result = gameTurn.execute(state.board, state.player, position);
+    const gameTurn = new GameTurn(state.board, state.player, position);
+    const result = gameTurn.execute();
 
     if (!result.changed) return;
 
