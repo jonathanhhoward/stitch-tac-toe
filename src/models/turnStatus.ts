@@ -3,10 +3,10 @@ import { Board } from "./board";
 import { Player } from "./player";
 
 export class TurnStatus {
-  readonly winner: Player | null;
+  readonly #winner: Player | null;
 
   constructor(winner: Player | null) {
-    this.winner = winner;
+    this.#winner = winner;
   }
 
   static fromBoard(board: Board): TurnStatus {
@@ -14,8 +14,8 @@ export class TurnStatus {
   }
 
   toString(nextPlayer?: Player): string {
-    if (this.winner) {
-      return this.winner === tie ? "Tie!" : `${this.winner.name} wins!`;
+    if (this.#winner) {
+      return this.#winner === tie ? "Tie!" : `${this.#winner.name} wins!`;
     }
 
     if (!nextPlayer) {
