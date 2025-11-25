@@ -20,12 +20,7 @@ export class GameTurn {
 
   result(): TurnResult {
     if (this.#board.isOccupiedAt(this.#position) || this.#state.winner) {
-      return new TurnResult(
-        this.#state.board,
-        this.#state.player,
-        this.#state.winner,
-        this.#state.status,
-      );
+      return this.#state;
     }
 
     const newBoard = this.#player.selectSquare(this.#board, this.#position);
