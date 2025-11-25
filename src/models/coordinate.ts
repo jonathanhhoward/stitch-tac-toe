@@ -12,6 +12,7 @@
 
     this.row = row;
     this.col = col;
+    Object.freeze(this);
   }
 
   matches(row: number, col: number): boolean {

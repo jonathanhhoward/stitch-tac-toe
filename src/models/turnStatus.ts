@@ -7,6 +7,7 @@ export class TurnStatus {
 
   constructor(winner: Player | null) {
     this.#winner = winner;
+    Object.freeze(this);
   }
 
   static fromBoard(board: Board): TurnStatus {

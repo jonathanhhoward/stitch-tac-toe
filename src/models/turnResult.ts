@@ -18,5 +18,6 @@ export class TurnResult {
     this.winner = winner;
     this.player = player;
     this.board = board;
+    Object.freeze(this);
   }
 }

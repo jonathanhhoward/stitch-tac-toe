@@ -10,6 +10,7 @@ export class GameTurn {
   constructor(state: State, position: Coordinate) {
     this.#state = state;
     this.#position = position;
+    Object.freeze(this);
   }
 
   result(): TurnResult {

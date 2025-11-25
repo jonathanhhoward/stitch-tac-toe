@@ -12,6 +12,7 @@ export class Board {
       [null, null, null],
       [null, null, null],
     ];
+    Object.freeze(this);
   }
 
   rows(): Grid {
