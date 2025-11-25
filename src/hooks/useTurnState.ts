@@ -8,14 +8,8 @@ export function useTurnState(initialState: () => State) {
 
   function executeTurn(position: Coordinate): void {
     const gameTurn = new GameTurn(state, position);
-    const result = gameTurn.result();
 
-    setState({
-      board: result.board,
-      status: result.status,
-      player: result.player,
-      winner: result.winner,
-    });
+    setState(gameTurn.result());
   }
 
   function startOver(): void {
