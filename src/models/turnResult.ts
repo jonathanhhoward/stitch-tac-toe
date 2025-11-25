@@ -10,13 +10,13 @@ export class TurnResult {
 
   constructor(
     board: Board,
-    nextPlayer: Player,
+    player: Player,
     winner: Player | null,
     status: TurnStatus,
   ) {
     this.status = status;
     this.winner = winner;
-    this.player = nextPlayer;
+    this.player = player;
     this.board = board;
   }
 }
