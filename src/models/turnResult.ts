@@ -1,25 +1,22 @@
 ﻿import { Board } from "./board";
-import { TurnStatus } from "./turnStatus.ts";
 import { Player } from "./player";
+import { TurnStatus } from "./turnStatus.ts";
 
 export class TurnResult {
   readonly board: Board;
-  readonly nextPlayer: Player;
+  readonly player: Player;
   readonly winner: Player | null;
   readonly status: TurnStatus;
-  readonly changed: boolean;
 
   constructor(
     board: Board,
     nextPlayer: Player,
     winner: Player | null,
     status: TurnStatus,
-    changed = true,
   ) {
     this.status = status;
     this.winner = winner;
-    this.nextPlayer = nextPlayer;
+    this.player = nextPlayer;
     this.board = board;
-    this.changed = changed;
   }
 }

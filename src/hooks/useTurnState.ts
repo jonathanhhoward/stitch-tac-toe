@@ -7,15 +7,13 @@ export function useTurnState(initialState: () => State) {
   const [state, setState] = useState(initialState);
 
   function executeTurn(position: Coordinate): void {
-    const gameTurn = new GameTurn(state.board, state.player, position);
+    const gameTurn = new GameTurn(state, position);
     const result = gameTurn.result();
-
-    if (!result.changed) return;
 
     setState({
       board: result.board,
       status: result.status,
-      player: result.nextPlayer,
+      player: result.player,
       winner: result.winner,
     });
   }

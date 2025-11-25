@@ -1,49 +1,58 @@
 import { describe, expect, it } from "vitest";
 import { lilo, stitch } from "../constants/players";
+import { State } from "../types.ts";
 import { Board } from "./board";
 import { Coordinate } from "./coordinate";
 import { GameTurn } from "./gameTurn.ts";
+import { TurnStatus } from "./turnStatus.ts";
 
-describe("playTurn", () => {
-  it("returns changed=false when the selected position is already occupied", () => {
+describe("result", () => {
+  it("returns state unchanged when the selected position is already occupied", () => {
     const board = new Board([
       [stitch, null, null],
       [null, null, null],
       [null, null, null],
     ]);
-    const gameTurn = new GameTurn(board, stitch, new Coordinate(0, 0));
+    const state: State = {
+      board,
+      player: lilo,
+      winner: null,
+      status: TurnStatus.fromBoard(board),
+    };
+    const gameTurn = new GameTurn(state, new Coordinate(0, 0));
 
     const result = gameTurn.result();
 
-    expect(result.changed).toBe(false);
-    expect(result.board).toBe(board);
-    expect(result.nextPlayer).toBe(stitch);
+    expect(result).toEqual(state);
   });
 
-  it("returns changed=false when the board already has a winner", () => {
-    const board = new Board([
-      [stitch, stitch, stitch],
-      [null, null, null],
-      [null, null, null],
-    ]);
-    const gameTurn = new GameTurn(board, stitch, new Coordinate(1, 0));
-
-    const result = gameTurn.result();
-
-    expect(result.changed).toBe(false);
-    expect(result.board).toBe(board);
-    expect(result.winner).toBe(stitch);
-  });
-
-  it("returns changed=true and updates board for a normal move", () => {
+  it("returns state unchanged when there is already a winner", () => {
     const board = new Board();
-    const gameTurn = new GameTurn(board, stitch, new Coordinate(0, 0));
+    const state: State = {
+      board,
+      player: stitch,
+      winner: lilo,
+      status: TurnStatus.fromBoard(board),
+    };
+    const gameTurn = new GameTurn(state, new Coordinate(0, 0));
 
     const result = gameTurn.result();
 
-    expect(result.changed).toBe(true);
-    expect(result.board).not.toBe(board);
-    expect(result.board.rows()[0][0]).toBe(stitch);
-    expect(result.nextPlayer).toBe(lilo);
+    expect(result).toEqual(state);
+  });
+
+  it("returns updated state for a normal move", () => {
+    const board = new Board();
+    const state: State = {
+      board,
+      player: stitch,
+      winner: null,
+      status: TurnStatus.fromBoard(board),
+    };
+    const gameTurn = new GameTurn(state, new Coordinate(0, 0));
+
+    const result = gameTurn.result();
+
+    expect(result).not.toEqual(state);
   });
 });

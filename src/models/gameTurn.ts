@@ -1,31 +1,30 @@
+import { State } from "../types.ts";
 import { Board } from "./board";
 import { Coordinate } from "./coordinate";
+import { Player } from "./player";
 import { TurnResult } from "./turnResult.ts";
 import { TurnStatus } from "./turnStatus.ts";
-import { Player } from "./player";
 
 export class GameTurn {
+  readonly #state: State;
   readonly #board: Board;
   readonly #player: Player;
   readonly #position: Coordinate;
 
-  constructor(board: Board, player: Player, position: Coordinate) {
-    this.#board = board;
-    this.#player = player;
+  constructor(state: State, position: Coordinate) {
+    this.#state = state;
+    this.#board = state.board;
+    this.#player = state.player;
     this.#position = position;
   }
 
   result(): TurnResult {
-    const currentWinner = this.#board.winner();
-
-    if (this.#board.isOccupiedAt(this.#position) || currentWinner) {
-      const status = TurnStatus.fromBoard(this.#board);
+    if (this.#board.isOccupiedAt(this.#position) || this.#state.winner) {
       return new TurnResult(
-        this.#board,
-        this.#player,
-        currentWinner,
-        status,
-        false,
+        this.#state.board,
+        this.#state.player,
+        this.#state.winner,
+        this.#state.status,
       );
     }
 
@@ -36,7 +35,6 @@ export class GameTurn {
       this.#player.opponent(),
       newBoard.winner(),
       TurnStatus.fromBoard(newBoard),
-      true,
     );
   }
 }
