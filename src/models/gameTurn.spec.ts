@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { lilo, stitch } from "../constants/players";
-import { State } from "../types.ts";
+import type { State } from "../types.ts";
 import { Board } from "./board";
 import { Coordinate } from "./coordinate";
 import { GameTurn } from "./gameTurn.ts";

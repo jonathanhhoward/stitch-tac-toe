@@ -1,4 +1,4 @@
-import { State } from "../types.ts";
+import type { State } from "../types.ts";
 import { Coordinate } from "./coordinate";
 import { TurnResult } from "./turnResult.ts";
 import { TurnStatus } from "./turnStatus.ts";

@@ -1,5 +1,5 @@
 import { tie } from "../constants/players";
-import { Grid } from "../types";
+import type { Grid } from "../types";
 import { Coordinate } from "./coordinate";
 import { Player } from "./player";
 

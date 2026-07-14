@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { lilo, stitch, tie } from "../constants/players";
-import { Grid } from "../types";
+import type { Grid } from "../types";
 import { Board } from "./board";
 import { Coordinate } from "./coordinate";
 

@@ -1,6 +1,6 @@
 import { Board } from "../models/board";
 import { TurnStatus } from "../models/turnStatus.ts";
-import { State } from "../types";
+import type { State } from "../types";
 import { stitch } from "./players";
 
 export const initialState = (): State => {

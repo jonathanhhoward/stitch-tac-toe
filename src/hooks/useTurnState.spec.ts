@@ -5,7 +5,7 @@ import { lilo, stitch } from "../constants/players";
 import { Board } from "../models/board";
 import { Coordinate } from "../models/coordinate.ts";
 import { TurnStatus } from "../models/turnStatus.ts";
-import { State } from "../types";
+import type { State } from "../types";
 import { useTurnState } from "./useTurnState.ts";
 
 describe("state", () => {

@@ -1,4 +1,4 @@
-import { describe, expect, it, Mocked, vi } from "vitest";
+import { describe, expect, it, type Mocked, vi } from "vitest";
 import { lilo, stitch } from "../constants/players";
 import { Board } from "./board";
 import { Coordinate } from "./coordinate.ts";
